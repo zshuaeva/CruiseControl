@@ -1,5 +1,5 @@
 # Module3 Project Gamma
-volume create cruisecontrolvolume
+docker volume create cruisecontrolvolume
 
 ## Getting started
 

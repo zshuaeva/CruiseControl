@@ -5,7 +5,7 @@ services:
   fastapi:
     build:
       context: ./cruisecontrol
-      dockerfile: Dockerfile.dev
+      dockerfile: ./Dockerfile.dev
     ports:
       - 8000:8000
     volumes:
