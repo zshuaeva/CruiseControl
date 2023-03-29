@@ -12,6 +12,7 @@ services:
       - ./cruisecontrol:/app
     environment:
       DATABASE_URL: postgresql://user:user@db/cruisecontrolpostgres
+      WAIT_HOST: db:5432
   db:
     image: postgres:latest
     volumes:
