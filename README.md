@@ -1,6 +1,8 @@
 # Module3 Project Gamma
+docker volume create cruisecontrolvolume
 
 ## Getting started
+
 
 You have a project repository, now what? The next section
 lists all of the deliverables that are due at the end of the
@@ -96,7 +98,7 @@ deployment, but it just consists of these steps:
 * make sure this project is in a group. If it isn't, stop
   now and move it to a GitLab group
 * remove the fork relationship: In GitLab go to:
-  
+
   Settings -> General -> Advanced -> Remove fork relationship
 
 * add these GitLab CI/CD variables:
