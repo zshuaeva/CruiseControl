@@ -2,9 +2,11 @@ from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
 from routers import querytest
 import os
-
+from authenticator import AccountAuthenticator
+from fastapi import APIRouter
 app = FastAPI()
 app.include_router(querytest.router)
+app.include_router(AccountAuthenticator.router)
 
 app.add_middleware(
     CORSMiddleware,

@@ -11,7 +11,10 @@ services:
     volumes:
       - ./cruisecontrol:/app
     environment:
+      SIGNING_KEY: backshotmasterispleased
       DATABASE_URL: postgresql://user:user@db/cruisecontrolpostgres
+      WAIT_BEFORE: 5
+      WAIT_TIMEOUT: 60
       WAIT_HOST: db:5432
   db:
     image: postgres:latest
