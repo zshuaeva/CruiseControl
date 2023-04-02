@@ -8,7 +8,7 @@ from fastapi import (
     Request,
 )
 from jwtdown_fastapi.authentication import Token
-from authenticator import AccountAuthenticator
+from authenticator import authenticator
 
 from pydantic import BaseModel
 
@@ -36,23 +36,41 @@ class HttpError(BaseModel):
 router = APIRouter()
 
 
-@router.post("/api/accounts", response_model=AccountToken | HttpError)
-async def create_account(
+@router.post("/api/clientsignup", response_model=AccountToken | HttpError)
+async def create_client_account(
     info: AccountIn,
     request: Request,
     response: Response,
-    accounts: AccountQueries = Depends(),
+    repo: AccountQueries = Depends(),
 ):
-    print("test:::::::::::::", info.password)
-    hashed_password = AccountAuthenticator.hash_password(info.password)
-
+    hashed_password = authenticator.hash_password(info.password)
     try:
-        account = accounts.create(info, hashed_password)
+        account = repo.create_client(info, hashed_password)
     except DuplicateAccountError:
         raise HTTPException(
             status_code=status.HTTP_400_BAD_REQUEST,
             detail="Cannot create an account with those credentials",
         )
-    form = AccountForm(username=info.email, password=info.password)
-    token = await AccountAuthenticator.login(response, request, form, accounts)
+    form = AccountForm(username=info.username, password=info.password)
+    token = await authenticator.login(response, request, form, repo)
+    return AccountToken(account=account, **token.dict())
+
+
+@router.post("/api/techniciansignup", response_model=AccountToken | HttpError)
+async def create_technician_account(
+    info: AccountIn,
+    request: Request,
+    response: Response,
+    repo: AccountQueries = Depends(),
+):
+    hashed_password = authenticator.hash_password(info.password)
+    try:
+        account = repo.create_technician(info, hashed_password)
+    except DuplicateAccountError:
+        raise HTTPException(
+            status_code=status.HTTP_400_BAD_REQUEST,
+            detail="Cannot create an account with those credentials",
+        )
+    form = AccountForm(username=info.username, password=info.password)
+    token = await authenticator.login(response, request, form, repo)
     return AccountToken(account=account, **token.dict())
