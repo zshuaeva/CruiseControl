@@ -1,7 +1,9 @@
-import { useEffect, useState } from 'react';
-import DummyList from './Construct.js'
-import ErrorNotification from './ErrorNotification';
-import './App.css';
+import { useEffect, useState } from "react";
+import { BrowserRouter, Routes, Route } from "react-router-dom";
+import DummyList from "./Construct.js";
+import ErrorNotification from "./ErrorNotification";
+import TechnicianForm from "./Technician/TechnicianForm.js";
+import "./App.css";
 
 function App() {
   // const [launch_info, setLaunchInfo] = useState([]);
@@ -27,14 +29,18 @@ function App() {
   // }, [])
   // error={error}
 
-
   return (
-    <>
+    <BrowserRouter>
       <div>
-        <ErrorNotification />
-        <DummyList />
+        <Routes>
+          <Route path="technician">
+            <Route path="new" element={<TechnicianForm />} />
+          </Route>
+          {/* <ErrorNotification />
+          <DummyList /> */}
+        </Routes>
       </div>
-    </>
+    </BrowserRouter>
   );
 }
 
