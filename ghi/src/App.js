@@ -1,16 +1,22 @@
-import { useEffect, useState } from 'react';
-import DummyList from './Construct.js'
-import ErrorNotification from './ErrorNotification';
-import './App.css';
+import { useEffect, useState } from "react";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
-import ClientSignUpForm from './ClientSignUp.js';
-
+import DummyList from "./Construct.js";
+import ErrorNotification from "./ErrorNotification";
+import TechnicianForm from "./Technician/TechnicianForm.js";
+import ClientSignUpForm from "./ClientSignUp.js";
 
 function App() {
-
-
   return (
     <BrowserRouter>
+      <div>
+        <Routes>
+          <Route path="technician">
+            <Route path="new" element={<TechnicianForm />} />
+          </Route>
+          {/* <ErrorNotification />
+          <DummyList /> */}
+        </Routes>
+      </div>
       <Routes>
         <Route path="clientsignup" element={<ClientSignUpForm />} />
       </Routes>
