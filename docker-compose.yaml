@@ -11,12 +11,15 @@ services:
     volumes:
       - ./cruisecontrol:/app
     environment:
+      SIGNING_KEY: 1dba62137447861b2b2eb81e5886fa98d021007b
       DATABASE_URL: postgresql://user:user@db/cruisecontrolpostgres
+      WAIT_BEFORE: 5
+      WAIT_TIMEOUT: 60
       WAIT_HOST: db:5432
   db:
     image: postgres:latest
     volumes:
-    - cruisecontrolvolume:/var/lib/postgresql/data
+      - cruisecontrolvolume:/var/lib/postgresql/data
     environment:
       POSTGRES_DB: cruisecontrolpostgres
       POSTGRES_USER: user
