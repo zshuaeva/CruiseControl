@@ -68,7 +68,7 @@ async def create_client_account(
     return AccountToken(account=account, **token.dict())
 
 
-@router.post("/api/techniciansignup", response_model=AccountToken | HttpError)
+@router.post("/api/technician", response_model=AccountToken | HttpError)
 async def create_technician_account(
     info: AccountIn,
     request: Request,
