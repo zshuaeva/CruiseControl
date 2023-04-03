@@ -2,10 +2,11 @@ steps = [
     [
         """
         CREATE table accounts (
-        id SERIAL PRIMARY KEY NOT NULL, 
+        id SERIAL PRIMARY KEY NOT NULL,
         username VARCHAR(30) NOT NULL UNIQUE,
         hashed_password TEXT NOT NULL,
-        employee_id INT NULL, 
+        business_name TEXT NULL,
+        employee_id INT NULL,
         first_name VARCHAR(30) NULL,
         last_name VARCHAR(30) NULL,
         website TEXT,
