@@ -6,10 +6,14 @@ import TechnicianForm from "./Technician/TechnicianForm.js";
 import ClientSignUpForm from "./ClientSignUp.js";
 import HeroPage from "./HeroPage.js";
 import ClientLanding from "./ClientLanding.js";
+import TechnicianLanding from "./TechnicianLanding.js";
+import Nav from "./Nav.js";
 
 function App() {
   return (
+    <>
     <BrowserRouter>
+    <Nav />
       <div>
         <Routes>
           <Route path="" element={<HeroPage /> } />
@@ -21,15 +25,18 @@ function App() {
         <Routes>
           <Route path="technician">
             <Route path="new" element={<TechnicianForm />} />
+            <Route path="landing" element={< TechnicianLanding />} />
           </Route>
           {/* <ErrorNotification />
           <DummyList /> */}
         </Routes>
-      </div>
+
       <Routes>
         <Route path="clientsignup" element={<ClientSignUpForm />} />
       </Routes>
+      </div>
     </BrowserRouter>
+    </>
   );
 }
 
