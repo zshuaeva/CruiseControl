@@ -8,6 +8,7 @@ import HeroPage from "./HeroPage.js";
 import ClientLanding from "./ClientLanding.js";
 import TechnicianLanding from "./TechnicianLanding.js";
 import Nav from "./Nav.js";
+import "bootstrap/dist/css/bootstrap.css";
 
 function App() {
   return (
