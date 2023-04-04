@@ -4,11 +4,16 @@ import DummyList from "./Construct.js";
 import ErrorNotification from "./ErrorNotification";
 import TechnicianForm from "./Technician/TechnicianForm.js";
 import ClientSignUpForm from "./ClientSignUp.js";
+import HeroPage from "./HeroPage.js";
 
 function App() {
   return (
     <BrowserRouter>
       <div>
+        <Routes>
+          <Route path="" element={<HeroPage /> } />
+        </Routes>
+
         <Routes>
           <Route path="technician">
             <Route path="new" element={<TechnicianForm />} />
