@@ -13,14 +13,14 @@ function App() {
     <BrowserRouter>
       <AuthProvider>
 
+        <Routes>
+          <Route path="technician">
+            <Route path="new" element={<TechnicianForm />} />
+          </Route>
+          <Route path="clientsignup" element={<ClientSignUpForm />} />
+          <Route path="Login" element={<LoginForm />} />
+        </Routes>
       </AuthProvider>
-      <Routes>
-        <Route path="technician">
-          <Route path="new" element={<TechnicianForm />} />
-        </Route>
-        <Route path="clientsignup" element={<ClientSignUpForm />} />
-        <Route path="Login" element={<LoginForm />} />
-      </Routes>
     </BrowserRouter>
   );
 }
