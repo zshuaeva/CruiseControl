@@ -40,7 +40,7 @@ function TechnicianForm() {
                 <input
                   type="text"
                   className="form-control"
-                  id="name"
+                  id="username"
                   value={username}
                   onChange={(event) => setUsername(event.target.value)}
                   required
