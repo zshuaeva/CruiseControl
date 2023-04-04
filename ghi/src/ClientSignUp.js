@@ -33,6 +33,8 @@ function ClientSignUpForm() {
         }
     };
     return (
+        <>
+        <a className="btn btn-primary" href="/clientlanding" role="button">Temporary Link to Client Landing</a>
         <div className="container-fluid">
             <div className="row">
                 <div className="col-12 col-md-4">
@@ -80,6 +82,7 @@ function ClientSignUpForm() {
                 </div>
             </div>
         </div>
+        </>
     )
 }
 

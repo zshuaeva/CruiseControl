@@ -5,6 +5,7 @@ import ErrorNotification from "./ErrorNotification";
 import TechnicianForm from "./Technician/TechnicianForm.js";
 import ClientSignUpForm from "./ClientSignUp.js";
 import HeroPage from "./HeroPage.js";
+import ClientLanding from "./ClientLanding.js";
 
 function App() {
   return (
@@ -12,6 +13,9 @@ function App() {
       <div>
         <Routes>
           <Route path="" element={<HeroPage /> } />
+        </Routes>
+        <Routes>
+          <Route path="clientlanding" element={<ClientLanding /> } />
         </Routes>
 
         <Routes>
