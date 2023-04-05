@@ -40,7 +40,7 @@ function TechnicianForm() {
                 <input
                   type="text"
                   className="form-control"
-                  id="name"
+                  id="username"
                   value={username}
                   onChange={(event) => setUsername(event.target.value)}
                   required
@@ -60,7 +60,7 @@ function TechnicianForm() {
                 />
                 <label htmlFor="password">Password</label>
               </div>
-              <div className="form-floating mb-3">
+              {/* <div className="form-floating mb-3">
                 <input
                   type="text"
                   className="form-control"
@@ -70,7 +70,7 @@ function TechnicianForm() {
                   placeholder="businessName"
                 />
                 <label htmlFor="businessName">Business Name</label>
-              </div>
+              </div> */}
               <button className="btn btn-primary">Create</button>
             </form>
           </div>

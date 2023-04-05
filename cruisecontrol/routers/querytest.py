@@ -2,6 +2,8 @@ from fastapi import APIRouter, Depends, Response
 from queries.querytest import DummyIn, DummyOut, DummyRepository
 from typing import List, Optional
 
+# from jwtdown_fastapi.authentication import Token
+from authenticator import authenticator
 
 # from querytest.py import
 
@@ -27,6 +29,7 @@ def get_one(
     dummy_id: int,
     response: Response,
     repo: DummyRepository = Depends(),
+    account_data: dict = Depends(authenticator.get_current_account_data),
 ) -> DummyOut:
     dummy = repo.get_one(dummy_id)
     if dummy is None:
