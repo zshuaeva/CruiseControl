@@ -10,6 +10,7 @@ import HeroPage from "./HeroPage.js";
 import ClientLanding from "./ClientLanding.js";
 import TechnicianLanding from "./TechnicianLanding.js";
 import Nav from "./Nav.js";
+import Logout from "./Logout.js";
 import "bootstrap/dist/css/bootstrap.css";
 
 function App() {
@@ -28,6 +29,7 @@ function App() {
           </Route>
           <Route path="clientsignup" element={<ClientSignUpForm />} />
           <Route path="Login" element={<LoginForm />} />
+          <Route path="logout" element={<Logout />} />
         </Routes>
       </AuthProvider>
     </BrowserRouter>
