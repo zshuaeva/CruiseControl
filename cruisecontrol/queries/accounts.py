@@ -11,11 +11,29 @@ class DuplicateAccountError(ValueError):
 class AccountIn(BaseModel):
     username: str
     password: str
+    employee_id: Optional[int]
+    business_name: Optional[str]
+    first_name: Optional[str]
+    last_name: Optional[str]
+    website: Optional[str]
+    email: Optional[str]
+    address: Optional[str]
+    phone_number: Optional[str]
 
 
 class AccountOut(BaseModel):
     id: str
     username: str
+    business_id: Optional[int]
+    employee_id: Optional[int]
+    first_name: Optional[str]
+    last_name: Optional[str]
+    website: Optional[str]
+    email: Optional[str]
+    address: Optional[str]
+    phone_number: Optional[str]
+    is_client: Optional[bool]
+    is_technician: Optional[bool]
 
 
 class AccountOutWithPassword(AccountOut):
@@ -24,7 +42,7 @@ class AccountOutWithPassword(AccountOut):
 
 class AccountQueries:
     # Client SignUp / LogIn
-    def get(self, username: str) -> AccountOutWithPassword:
+    def get(self, username: str) -> Optional[AccountOutWithPassword]:
         with pool.connection() as conn:
             with conn.cursor() as db:
                 result = db.execute(
@@ -32,6 +50,16 @@ class AccountQueries:
                 select id
                     , username
                     , hashed_password
+                    , business_id
+                    , employee_id
+                    , first_name
+                    , last_name
+                    , website
+                    , email
+                    , address
+                    , phone_number
+                    , is_client
+                    , is_technician
                 from accounts
                 where username = %s
                 """,
@@ -40,51 +68,127 @@ class AccountQueries:
                 record = result.fetchone()
                 if record is None:
                     return None
-                return AccountOutWithPassword(
-                    id=record[0], username=record[1], hashed_password=record[2]
+                Account = AccountOutWithPassword(
+                    id=record[0],
+                    username=record[1],
+                    hashed_password=record[2],
+                    business_id=record[3],
+                    employee_id=record[4],
+                    first_name=record[5],
+                    last_name=record[6],
+                    website=record[7],
+                    email=record[8],
+                    address=record[9],
+                    phone_number=record[10],
+                    is_client=record[11],
+                    is_technician=record[12],
                 )
+                print(Account)
+                return Account
 
     def create_client(
         self, account: AccountIn, hashed_password: str
     ) -> AccountOutWithPassword:
         with pool.connection() as conn:
             with conn.cursor() as db:
+                db.execute(
+                    """
+                    insert into businesses (business_name) 
+                    values (%s) 
+                    """,
+                    [account.business_name],
+                )
+                db.execute(
+                    """
+                    select id 
+                    from businesses 
+                    where business_name = %s
+                    """,
+                    [account.business_name],
+                )
+
+                business_id = db.fetchone()[0]
                 result = db.execute(
                     """
                     insert into accounts 
-                        (username, hashed_password, is_client)
-                        values (%s, %s, TRUE)
+                        (
+                        username
+                        , hashed_password
+                        , business_id
+                        , employee_id
+                        , first_name
+                        , last_name
+                        , website
+                        , email
+                        , address
+                        , phone_number
+                        , is_client
+                        )
+
+                        values (%s, %s, %s, %s, %s, %s, %s, %s, %s, %s, TRUE)
                         returning id
                     """,
                     [
                         account.username,
                         hashed_password,
+                        business_id,
+                        account.employee_id,
+                        account.first_name,
+                        account.last_name,
+                        account.website,
+                        account.email,
+                        account.address,
+                        account.phone_number,
                     ],
                 )
                 id = result.fetchone()[0]
                 old_data = account.dict()
                 old_data["hashed_password"] = hashed_password
+                old_data["business_id"] = business_id
+                old_data["is_client"] = True
                 return AccountOutWithPassword(id=id, **old_data)
 
     # Tech
     def create_technician(
-        self, account: AccountIn, hashed_password: str
+        self, account: AccountIn, hashed_password: str, business_id: int
     ) -> AccountOutWithPassword:
         with pool.connection() as conn:
             with conn.cursor() as db:
                 result = db.execute(
                     """
                     insert into accounts
-                        (username, hashed_password, is_technician)
-                        values (%s, %s, TRUE)
+                        (
+                        username
+                        , hashed_password
+                        , business_id
+                        , employee_id
+                        , first_name
+                        , last_name
+                        , website
+                        , email
+                        , address
+                        , phone_number
+                        , is_technician
+                        )
+                        values (%s, %s, %s, %s, %s, %s, %s, %s, %s, %s, TRUE)
                         returning id
                     """,
                     [
                         account.username,
                         hashed_password,
+                        business_id,
+                        account.employee_id,
+                        account.first_name,
+                        account.last_name,
+                        account.website,
+                        account.email,
+                        account.address,
+                        account.phone_number,
                     ],
                 )
                 id = result.fetchone()[0]
                 old_data = account.dict()
                 old_data["hashed_password"] = hashed_password
+                old_data["business_id"] = business_id
+                old_data["is_technician"] = True
                 return AccountOutWithPassword(id=id, **old_data)
