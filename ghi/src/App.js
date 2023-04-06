@@ -23,7 +23,7 @@ function App() {
         <Route path="/" element={<HeroPage />} />
         <Route path="clientlanding" element={<ClientLanding />} />
         <Route path="technician">
-          <Route path="new" element={<TechnicianForm token={token} />} />
+          <Route path="new" element={<TechnicianForm />} />
           <Route path="landing" element={<TechnicianLanding />} />
         </Route>
         <Route path="clientsignup" element={<ClientSignUpForm />} />

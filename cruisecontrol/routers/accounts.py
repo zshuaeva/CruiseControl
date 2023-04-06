@@ -75,8 +75,8 @@ async def create_technician_account(
     info: AccountIn,
     request: Request,
     response: Response,
-    account_data: dict = Depends(authenticator.get_current_account_data),
     repo: AccountQueries = Depends(),
+    account_data: dict = Depends(authenticator.get_current_account_data),
 ):
     client_username = account_data["username"]
     client_account = repo.get(client_username)
