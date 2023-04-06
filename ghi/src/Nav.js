@@ -1,8 +1,10 @@
+import { useContext } from "react";
 import { NavLink } from "react-router-dom";
-import useToken from "@galvanize-inc/jwtdown-for-react";
+import useToken, { AuthContext } from "@galvanize-inc/jwtdown-for-react";
 
 function Nav() {
   const { logout } = useToken();
+  // const { token } = useContext(AuthContext);
   return (
     <nav className="navbar navbar-expand-lg navbar-light bg-info">
       <div className="container-fluid">
