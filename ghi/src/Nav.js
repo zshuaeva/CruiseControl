@@ -1,13 +1,40 @@
 import { NavLink } from "react-router-dom";
 import useToken from "@galvanize-inc/jwtdown-for-react";
+import { useState, useEffect } from "react";
+
 
 function Nav() {
   const { logout } = useToken();
+  //grabbing logged in user name
+  const [username, setUsername] = useState("")
+  const fetchData = async () => {
+    const accountUrl = 'http://localhost:8000/accounts'
+    try{
+      const response = await fetch(accountUrl)
+        if(response.ok){
+          const data = await response.json()
+          console.log(data)
+          setUsername(data.username)
+
+      }
+    } catch(e){
+      console.error(e)
+      }
+    }
+          useEffect(() =>{
+          fetchData()
+      }, [])
+//end
   return (
     <nav className="navbar navbar-expand-lg navbar-light bg-info">
       <div className="container-fluid">
         <NavLink className="navbar-brand" to="/">
+          <div>
           Cruise Control
+          </div>
+          <div>
+          you are signed in as { username }
+          </div>
         </NavLink>
         <button
           className="navbar-toggler"
