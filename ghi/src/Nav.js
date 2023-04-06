@@ -1,26 +1,9 @@
 import { NavLink } from "react-router-dom";
-import { AuthContext } from "@galvanize-inc/jwtdown-for-react";
-import { useContext } from "react";
-import { useNavigate } from 'react-router-dom';
+import useToken from "@galvanize-inc/jwtdown-for-react";
+
 
 function Nav() {
-
-  const { setToken } = useContext(AuthContext);
-  const navigate = useNavigate();
-
-  const handleLogout = async () => {
-    try {
-      await fetch(`${process.env.REACT_APP_USER_SERVICE_API_HOST}/token`, {
-        method: 'DELETE',
-        credentials: 'include',
-      });
-      setToken(null);
-      document.cookie = 'fastapi_token=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;';
-      navigate("/");
-    } catch (error) {
-      console.error(error);
-    }
-  };
+  const { logout } = useToken()
   return (
     <nav className="navbar navbar-expand-lg navbar-light bg-info">
       <div className="container-fluid">
@@ -73,7 +56,7 @@ function Nav() {
 
             <li>
               <NavLink>
-              <button button type="button" className="btn btn-warning" onClick={handleLogout}>Logout</button>
+              <button button type="button" className="btn btn-warning" onClick={ logout }>Logout</button>
               </NavLink>
             </li>
 
