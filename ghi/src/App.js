@@ -1,10 +1,10 @@
-import { useEffect, useState } from "react";
+import { useEffect, useState, useContext } from "react";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import DummyList from "./Construct.js";
 import ErrorNotification from "./ErrorNotification";
 import TechnicianForm from "./Technician/TechnicianForm.js";
 import ClientSignUpForm from "./ClientSignUp.js";
-import { AuthProvider } from "@galvanize-inc/jwtdown-for-react";
+import { AuthContext, AuthProvider } from "@galvanize-inc/jwtdown-for-react";
 import LoginForm from "./Login.js";
 import HeroPage from "./HeroPage.js";
 import ClientLanding from "./ClientLanding.js";
@@ -13,6 +13,8 @@ import Nav from "./Nav.js";
 import "bootstrap/dist/css/bootstrap.css";
 
 function App() {
+  // const { token } = useContext(AuthContext);
+  // console.log(token);
   return (
     <BrowserRouter>
       <AuthProvider
