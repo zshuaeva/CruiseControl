@@ -28,7 +28,6 @@ function App() {
           </Route>
           <Route path="clientsignup" element={<ClientSignUpForm />} />
           <Route path="Login" element={<LoginForm />} />
-          <Route path="logout" element={<Logout />} />
         </Routes>
       </AuthProvider>
     </BrowserRouter>
