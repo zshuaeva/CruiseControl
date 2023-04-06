@@ -1,15 +1,31 @@
 import { NavLink } from "react-router-dom";
 import { AuthContext } from "@galvanize-inc/jwtdown-for-react";
 import { useContext } from "react";
+import { useNavigate } from 'react-router-dom';
 
 function Nav() {
-  // const { token } = useContext(AuthContext);
-  // console.log(token);
+
+  const { setToken } = useContext(AuthContext);
+  const navigate = useNavigate();
+
+  const handleLogout = async () => {
+    try {
+      await fetch(`${process.env.REACT_APP_USER_SERVICE_API_HOST}/token`, {
+        method: 'DELETE',
+        credentials: 'include',
+      });
+      setToken(null);
+      document.cookie = 'fastapi_token=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;';
+      navigate("/");
+    } catch (error) {
+      console.error(error);
+    }
+  };
   return (
     <nav className="navbar navbar-expand-lg navbar-light bg-info">
       <div className="container-fluid">
         <NavLink className="navbar-brand" to="/">
-          Cruise Control HERO/HOME
+          Cruise Control
         </NavLink>
         <button
           className="navbar-toggler"
@@ -24,15 +40,16 @@ function Nav() {
         </button>
         <div className="collapse navbar-collapse" id="navbarSupportedContent">
           <ul className="navbar-nav me-auto mb-2 mb-lg-0">
-            <li className="nav-item">
-              <NavLink className="nav-link" to="/clientsignup">
-                Sign Up as CLIENT
+
+            <li>
+              <NavLink to="/Login">
+                <button button type="button" className="btn btn-warning">Login</button>
               </NavLink>
             </li>
 
             <li className="nav-item">
-              <NavLink className="nav-link" to="/Login">
-                Sign In
+              <NavLink className="nav-link" to="/clientsignup">
+                Client Sign Up
               </NavLink>
             </li>
 
@@ -54,11 +71,12 @@ function Nav() {
               </NavLink>
             </li>
 
-            <li className="nav-item">
-              <NavLink className="nav-link" to="/logout">
-                Logout
+            <li>
+              <NavLink>
+              <button button type="button" className="btn btn-warning" onClick={handleLogout}>Logout</button>
               </NavLink>
             </li>
+
           </ul>
         </div>
       </div>

@@ -10,10 +10,13 @@ import HeroPage from "./HeroPage.js";
 import ClientLanding from "./ClientLanding.js";
 import TechnicianLanding from "./TechnicianLanding.js";
 import Nav from "./Nav.js";
-import Logout from "./Logout.js";
 import "bootstrap/dist/css/bootstrap.css";
+import { useNavigate } from 'react-router-dom';
 
 function App() {
+  const { setToken } = useContext(AuthContext);
+  const navigate = useNavigate();
+
   const { token } = useContext(AuthContext);
   console.log(token);
   return (
@@ -28,7 +31,6 @@ function App() {
         </Route>
         <Route path="clientsignup" element={<ClientSignUpForm />} />
         <Route path="Login" element={<LoginForm />} />
-        <Route path="logout" element={<Logout />} />
       </Routes>
     </>
   );
