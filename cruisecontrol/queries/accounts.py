@@ -83,7 +83,6 @@ class AccountQueries:
                     is_client=record[11],
                     is_technician=record[12],
                 )
-                print(Account)
                 return Account
 
     def create_client(
@@ -93,15 +92,15 @@ class AccountQueries:
             with conn.cursor() as db:
                 db.execute(
                     """
-                    insert into businesses (business_name) 
-                    values (%s) 
+                    insert into businesses (business_name)
+                    values (%s)
                     """,
                     [account.business_name],
                 )
                 db.execute(
                     """
-                    select id 
-                    from businesses 
+                    select id
+                    from businesses
                     where business_name = %s
                     """,
                     [account.business_name],
@@ -110,7 +109,7 @@ class AccountQueries:
                 business_id = db.fetchone()[0]
                 result = db.execute(
                     """
-                    insert into accounts 
+                    insert into accounts
                         (
                         username
                         , hashed_password
@@ -192,3 +191,47 @@ class AccountQueries:
                 old_data["business_id"] = business_id
                 old_data["is_technician"] = True
                 return AccountOutWithPassword(id=id, **old_data)
+
+    # Get all
+    def get_all(self, business_id: int ) -> List[AccountOutWithPassword]:
+        with pool.connection() as conn:
+            with conn.cursor() as db:
+                results = db.execute(
+                    """
+                select id
+                    , username
+                    , hashed_password
+                    , business_id
+                    , employee_id
+                    , first_name
+                    , last_name
+                    , website
+                    , email
+                    , address
+                    , phone_number
+                    , is_client
+                    , is_technician
+                from accounts
+                where business_id = %s
+                """,
+                    [business_id],
+                )
+                results = []
+                for record in db:
+                    Account = AccountOutWithPassword(
+                        id=record[0],
+                        username=record[1],
+                        hashed_password=record[2],
+                        business_id=record[3],
+                        employee_id=record[4],
+                        first_name=record[5],
+                        last_name=record[6],
+                        website=record[7],
+                        email=record[8],
+                        address=record[9],
+                        phone_number=record[10],
+                        is_client=record[11],
+                        is_technician=record[12],
+                    )
+                    results.append(Account)
+                return results

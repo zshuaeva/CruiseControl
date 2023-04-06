@@ -1,3 +1,4 @@
+import { useContext } from "react";
 import { NavLink } from "react-router-dom";
 import useToken from "@galvanize-inc/jwtdown-for-react";
 import { useState, useEffect } from "react";
