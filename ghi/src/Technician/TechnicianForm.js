@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 
-function TechnicianForm() {
+function TechnicianForm(token) {
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
   const [businessName, setBusinessName] = useState("");
@@ -16,7 +16,7 @@ function TechnicianForm() {
       method: "POST",
       body: JSON.stringify(data),
       headers: {
-        Authorization: `Bearer ${token}`,
+        Authorization: `bearer${token}`,
         "Content-Type": "application/json",
       },
     };

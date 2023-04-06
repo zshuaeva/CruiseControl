@@ -3,8 +3,8 @@ import { AuthContext } from "@galvanize-inc/jwtdown-for-react";
 import { useContext } from "react";
 
 function Nav() {
-  const { token } = useContext(AuthContext);
-  console.log(token);
+  // const { token } = useContext(AuthContext);
+  // console.log(token);
   return (
     <nav className="navbar navbar-expand-lg navbar-light bg-info">
       <div className="container-fluid">
