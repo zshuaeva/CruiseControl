@@ -14,23 +14,25 @@ import Logout from "./Logout.js";
 import "bootstrap/dist/css/bootstrap.css";
 
 function App() {
-  const { token } = useContext(AuthContext);
-  console.log(token);
   return (
-    <>
-      <Nav />
-      <Routes>
-        <Route path="/" element={<HeroPage />} />
-        <Route path="clientlanding" element={<ClientLanding />} />
-        <Route path="technician">
-          <Route path="new" element={<TechnicianForm />} />
-          <Route path="landing" element={<TechnicianLanding />} />
-        </Route>
-        <Route path="clientsignup" element={<ClientSignUpForm />} />
-        <Route path="Login" element={<LoginForm />} />
-        <Route path="logout" element={<Logout />} />
-      </Routes>
-    </>
+    <BrowserRouter>
+      <AuthProvider
+        tokenUrl={`${process.env.REACT_APP_USER_SERVICE_API_HOST}/token`}
+      >
+        <Nav />
+        <Routes>
+          <Route path="/" element={<HeroPage />} />
+          <Route path="clientlanding" element={<ClientLanding />} />
+          <Route path="technician">
+            <Route path="new" element={<TechnicianForm />} />
+            <Route path="landing" element={<TechnicianLanding />} />
+          </Route>
+          <Route path="clientsignup" element={<ClientSignUpForm />} />
+          <Route path="Login" element={<LoginForm />} />
+          <Route path="logout" element={<Logout />} />
+        </Routes>
+      </AuthProvider>
+    </BrowserRouter>
   );
 }
 
