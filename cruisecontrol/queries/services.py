@@ -7,7 +7,7 @@ class ServiceIn(BaseModel):
     service_name: str
     service_type: str
     service_description: str
-    service_price: float
+    service_price: int
     
 
 
@@ -75,7 +75,7 @@ class ServiceQueries:
                 )
                 id = result.fetchone()[0]
                 old_data = service.dict()
-                return ServiceOut(id=id, **old_data)
+                return ServiceOut(id=id, business_id=business_id, **old_data)
 
 
    
