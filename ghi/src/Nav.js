@@ -1,10 +1,13 @@
-import { useContext } from "react";
 import { NavLink } from "react-router-dom";
 import useToken, { AuthContext } from "@galvanize-inc/jwtdown-for-react";
+import { useContext } from "react";
+import useUser from "./useUser";
 
 function Nav() {
+  const { token } = useContext(AuthContext);
+  const user = useUser(token);
+  console.log(user);
   const { logout } = useToken();
-  // const { token } = useContext(AuthContext);
   return (
     <nav className="navbar navbar-expand-lg navbar-light bg-info">
       <div className="container-fluid">
@@ -24,50 +27,64 @@ function Nav() {
         </button>
         <div className="collapse navbar-collapse" id="navbarSupportedContent">
           <ul className="navbar-nav me-auto mb-2 mb-lg-0">
-            <li>
-              <NavLink to="/Login">
-                <button button type="button" className="btn btn-warning">
-                  Login
-                </button>
-              </NavLink>
-            </li>
+            {token && user?.is_client === true ? (
+              <>
+                <li className="nav-item">
+                  <NavLink className="nav-link" to="/clientlanding">
+                    CLIENT Landing
+                  </NavLink>
+                </li>
+                <li className="nav-item">
+                  <NavLink className="nav-link" to="/technician/new">
+                    Create new TECHNICIAN
+                  </NavLink>
+                </li>
+                <li>
+                  <NavLink>
+                    <button className="btn btn-warning" onClick={logout}>
+                      Logout
+                    </button>
+                  </NavLink>
+                </li>
 
-            <li className="nav-item">
-              <NavLink className="nav-link" to="/clientsignup">
-                Client Sign Up
-              </NavLink>
-            </li>
+                <li className="nav-item">
+                  <NavLink className="nav-link" to="/technician/landing">
+                    TECHNICIAN Landing
+                  </NavLink>
+                </li>
+              </>
+            ) : null}
+            {token && user?.is_technician ? (
+              <>
+                <li>
+                  <NavLink>
+                    <button className="btn btn-warning" onClick={logout}>
+                      Logout
+                    </button>
+                  </NavLink>
+                </li>
 
-            <li className="nav-item">
-              <NavLink className="nav-link" to="/clientlanding">
-                CLIENT Landing
-              </NavLink>
-            </li>
-
-            <li className="nav-item">
-              <NavLink className="nav-link" to="/technician/new">
-                Create new TECHNICIAN
-              </NavLink>
-            </li>
-
-            <li className="nav-item">
-              <NavLink className="nav-link" to="/technician/landing">
-                TECHNICIAN Landing
-              </NavLink>
-            </li>
-
-            <li>
-              <NavLink>
-                <button
-                  button
-                  type="button"
-                  className="btn btn-warning"
-                  onClick={logout}
-                >
-                  Logout
-                </button>
-              </NavLink>
-            </li>
+                <li className="nav-item">
+                  <NavLink className="nav-link" to="/technician/landing">
+                    TECHNICIAN Landing
+                  </NavLink>
+                </li>
+              </>
+            ) : null}
+            {user === null || token === null ? (
+              <>
+                <li>
+                  <NavLink to="/Login">
+                    <button className="btn btn-warning">Login</button>
+                  </NavLink>
+                </li>
+                <li className="nav-item">
+                  <NavLink className="nav-link" to="/clientsignup">
+                    Client Sign Up
+                  </NavLink>
+                </li>
+              </>
+            ) : null}
           </ul>
         </div>
       </div>
