@@ -1,6 +1,6 @@
 from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
-from routers import querytest, accounts
+from routers import querytest, accounts, checklist
 import os
 from fastapi import APIRouter
 from authenticator import authenticator
@@ -16,6 +16,7 @@ origins = [
 app.include_router(querytest.router)
 app.include_router(accounts.router)
 app.include_router(authenticator.router)
+app.include_router(checklist.router)
 
 app.add_middleware(
     CORSMiddleware,

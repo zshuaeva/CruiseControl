@@ -9,22 +9,22 @@ function Nav() {
   //grabbing logged in user name
   const [username, setUsername] = useState("")
   const fetchData = async () => {
-    const accountUrl = 'http://localhost:8000/accounts'
+    const accountUrl = 'http://localhost:8000/accounts/'
     try{
       const response = await fetch(accountUrl)
         if(response.ok){
           const data = await response.json()
           console.log(data)
-          setUsername(data.username)
+          setUsername(data.detail)
 
       }
     } catch(e){
       console.error(e)
       }
     }
-          useEffect(() =>{
-          fetchData()
-      }, [])
+      useEffect(() =>{
+      fetchData()
+  }, [])
 //end
   return (
     <nav className="navbar navbar-expand-lg navbar-light bg-info">
