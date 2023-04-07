@@ -6,7 +6,7 @@ steps = [
             service_name CHAR(50) NOT NULL,
             service_type CHAR(50) NOT NULL,
             service_description TEXT NOT NULL,
-            service_price MONEY NOT NULL,
+            service_price NUMERIC NOT NULL,
             business_id INT NOT NULL,
             FOREIGN KEY (business_id) REFERENCES businesses (id)
         );
