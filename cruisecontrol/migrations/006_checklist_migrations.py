@@ -11,8 +11,7 @@ steps = [
       line_item6 VARCHAR(50) NULL,
       business_id INT NOT NULL,
       service_id INT NOT NULL,
-      FOREIGN KEY (business_id) REFERENCES businesses (id),
-      FOREIGN KEY (service_id) REFERENCES services (id)
+      FOREIGN KEY (business_id) REFERENCES businesses (id)
     );
     """,
     """

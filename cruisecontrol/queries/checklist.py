@@ -14,8 +14,7 @@ class ChecklistIn(BaseModel):
   line_item4: Optional[str]
   line_item5: Optional[str]
   line_item6: Optional[str]
-  business_id: int
-  service_id: int
+
 
 class ChecklistOut(BaseModel):
   id: str
@@ -26,11 +25,9 @@ class ChecklistOut(BaseModel):
   line_item5: Optional[str]
   line_item6: Optional[str]
   business_id: int
-  service_id: int
-
 class ChecklistQueries:
   def create_checklist(
-    self, checklist: ChecklistIn
+    self, checklist: ChecklistIn, business_id: int
   ) -> ChecklistOut:
     with pool.connection() as conn:
       with conn.cursor() as db:
@@ -45,9 +42,8 @@ class ChecklistQueries:
             , line_item5
             , line_item6
             , business_id
-            , service_id
           )
-          values(%s, %s, %s, %s, %s, %s, %s, %s)
+          values(%s, %s, %s, %s, %s, %s, %s)
           returning id
           """,
           [
@@ -58,7 +54,6 @@ class ChecklistQueries:
             checklist.line_item5,
             checklist.line_item6,
             business_id,
-            service_id,
           ],
         )
         id = result.fetchone()[0]
