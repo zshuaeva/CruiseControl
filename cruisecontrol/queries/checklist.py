@@ -17,7 +17,7 @@ class ChecklistIn(BaseModel):
 
 
 class ChecklistOut(BaseModel):
-  id: str
+  id: int
   line_item1: Optional[str]
   line_item2: Optional[str]
   line_item3: Optional[str]
@@ -27,11 +27,10 @@ class ChecklistOut(BaseModel):
   business_id: int
 class ChecklistQueries:
   def create_checklist(
-    self, checklist: ChecklistIn, business_id: int
-  ) -> ChecklistOut:
+    self, checklist: ChecklistIn, business_id: int) -> ChecklistOut:
     with pool.connection() as conn:
       with conn.cursor() as db:
-        db.execute(
+        result = db.execute(
           """
           insert into checklist
             (
@@ -42,9 +41,9 @@ class ChecklistQueries:
             , line_item5
             , line_item6
             , business_id
-          )
-          values(%s, %s, %s, %s, %s, %s, %s)
-          returning id
+            )
+            values(%s, %s, %s, %s, %s, %s, %s)
+            returning id
           """,
           [
             checklist.line_item1,
@@ -58,7 +57,7 @@ class ChecklistQueries:
         )
         id = result.fetchone()[0]
         old_data = checklist.dict()
-        return ChecklistOut(id=id, **old_data)
+        return ChecklistOut(id=id, business_id=business_id, **old_data)
 
   def get_all(self, buiness_id: int ) -> List[ChecklistOut]:
     with pool.connection() as conn:

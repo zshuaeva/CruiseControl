@@ -16,8 +16,8 @@ origins = [
 app.include_router(querytest.router)
 app.include_router(accounts.router)
 app.include_router(authenticator.router)
-app.include_router(services.router)
 app.include_router(checklist.router)
+app.include_router(services.router)
 
 app.add_middleware(
     CORSMiddleware,
