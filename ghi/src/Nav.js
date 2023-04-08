@@ -6,7 +6,6 @@ import useUser from "./useUser";
 function Nav() {
   const { token } = useContext(AuthContext);
   const user = useUser(token);
-  console.log(user);
   const { logout } = useToken();
   return (
     <nav className="navbar navbar-expand-lg navbar-light bg-info">
