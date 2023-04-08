@@ -125,3 +125,22 @@ def get_account(
             status_code=status.HTTP_400_BAD_REQUEST,
             detail="Cannot get an account with those credentials",
         )
+
+@router.put("/api/accounts/{id}", response_model=AccountOut)
+def update_account(
+    username_id: int,
+    account: AccountOut,
+    repo: AccountQueries = Depends(),
+    account_data: dict = Depends(authenticator.get_current_account_data),
+) -> AccountOut:
+    is_technician = account_data["is_technician"]
+    business_id = account_data["business_id"]
+    is_client = account_data["is_client"]
+    print(business_id)
+    try:
+        return repo.update(username_id, business_id,is_client, is_technician, account)
+    except ValueError:
+        raise HTTPException(
+            status_code=status.HTTP_400_BAD_REQUEST,
+            detail="Cannot get an account with those credentials",
+        )

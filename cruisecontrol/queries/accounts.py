@@ -235,3 +235,53 @@ class AccountQueries:
                     )
                     results.append(Account)
                 return results
+
+    def update(self, username_id: int, business_id: int, is_client:bool, is_technician:bool, account : AccountOut) -> AccountOut:
+        with pool.connection() as conn:
+            with conn.cursor() as db:
+                db.execute(
+                    """
+                    update accounts
+                    set username = %s
+                        , employee_id = %s
+                        , first_name = %s
+                        , last_name = %s
+                        , website = %s
+                        , email = %s
+                        , address = %s
+                        , phone_number  = %s
+                        , is_client = %s
+                        , is_technician = %s
+                    where username_id = %s business_id = %s
+                    """,
+                    [
+                        account.username,
+                        business_id,
+                        account.employee_id,
+                        account.first_name,
+                        account.last_name,
+                        account.website,
+                        account.email,
+                        account.address,
+                        account.phone_number,
+                        is_client,
+                        is_technician,
+                    ],
+                )
+                old_data = account.dict()
+                return AccountOut(id=username_id, business_id=business_id, is_client=is_client, is_technician=is_technician **old_data)
+
+
+class AccountOut(BaseModel):
+    id: str
+    username: str
+    business_id: Optional[int]
+    employee_id: Optional[int]
+    first_name: Optional[str]
+    last_name: Optional[str]
+    website: Optional[str]
+    email: Optional[str]
+    address: Optional[str]
+    phone_number: Optional[str]
+    is_client: Optional[bool]
+    is_technician: Optional[bool]
