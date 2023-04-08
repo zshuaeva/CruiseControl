@@ -8,7 +8,7 @@ class ServiceIn(BaseModel):
     service_type: str
     service_description: str
     service_price: int
-    
+
 
 
 class ServiceOut(BaseModel):
@@ -21,7 +21,7 @@ class ServiceOut(BaseModel):
 
 
 class ServiceQueries:
-    def get_all_services(self, business_id) -> List[ServiceOut]:
+    def get_all(self, service: ServiceIn, business_id: int) -> List[ServiceOut]:
         with pool.connection() as conn:
             with conn.cursor() as db:
                 result = db.execute(
@@ -31,6 +31,9 @@ class ServiceQueries:
                     , service_type
                     , service_description
                     , service_price
+                    , business_id
+                    from services
+                    where business_id = %s
                     """,
                     [business_id],
                 )
@@ -45,7 +48,7 @@ class ServiceQueries:
                         business_id=record[5],
                     )
                     result.append(service)
-                    return result
+                return result
 
     def create(self, service: ServiceIn, business_id: int) -> ServiceOut:
         with pool.connection() as conn:
@@ -61,9 +64,9 @@ class ServiceQueries:
                         , business_id
                         )
                         values (%s, %s, %s, %s, %s)
-                        returning id                       
+                        returning id
                     """,
-                    
+
 
                     [
                         service.service_name,
@@ -77,5 +80,42 @@ class ServiceQueries:
                 old_data = service.dict()
                 return ServiceOut(id=id, business_id=business_id, **old_data)
 
+    def update(self, service_id: int, business_id: int, service: ServiceIn) -> ServiceOut:
+        with pool.connection() as conn:
+            with conn.cursor() as db:
+                db.execute(
+                    """
+                    update services
+                    set service_name = %s
+                        , service_type = %s
+                        , service_description = %s
+                        , service_price = %s
+                        , business_id = %s
+                    where id = %s
+                    """,
+                    [
+                        service.service_name,
+                        service.service_type,
+                        service.service_description,
+                        service.service_price,
+                        business_id,
+                        service_id,
+                    ],
+                )
+                old_data = service.dict()
+                return ServiceOut(id=service_id, business_id=business_id, **old_data)
 
-   
+    def delete(self, service_id: int, business_id: int) -> bool:
+        with pool.connection() as conn:
+            with conn.cursor() as db:
+                    db.execute(
+                        """
+                        delete from services
+                        WHERE id = %s AND business_id = %s
+
+                        """,
+                        [service_id,
+                         business_id
+                         ],
+                    )
+                    return True
