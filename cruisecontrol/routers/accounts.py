@@ -60,7 +60,6 @@ async def create_client_account(
     hashed_password = authenticator.hash_password(info.password)
     try:
         account = repo.create_client(info, hashed_password)
-        print(account)
     except DuplicateAccountError:
         raise HTTPException(
             status_code=status.HTTP_400_BAD_REQUEST,
