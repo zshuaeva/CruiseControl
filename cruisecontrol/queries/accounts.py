@@ -22,7 +22,7 @@ class AccountIn(BaseModel):
 
 
 class AccountOut(BaseModel):
-    id: str
+    id: int
     username: str
     business_id: Optional[int]
     employee_id: Optional[int]
@@ -235,3 +235,54 @@ class AccountQueries:
                     )
                     results.append(Account)
                 return results
+
+    def update(self, user_id: int, business_id: int, is_client:bool, is_technician:bool, account : AccountOut) -> AccountOut:
+        with pool.connection() as conn:
+            with conn.cursor() as db:
+                db.execute(
+                    """
+                    update accounts
+                    set username = %s
+                        , employee_id = %s
+                        , first_name = %s
+                        , last_name = %s
+                        , website = %s
+                        , email = %s
+                        , address = %s
+                        , phone_number  = %s
+                    where id = %s AND business_id = %s
+                    """,
+                    [
+                        account.username,
+                        account.employee_id,
+                        account.first_name,
+                        account.last_name,
+                        account.website,
+                        account.email,
+                        account.address,
+                        account.phone_number,
+                        user_id,
+                        business_id,
+                    ],
+                )
+                old_data = account.dict()
+                old_data["business_id"] = business_id
+                old_data["is_technician"] = is_technician
+                old_data["is_client"] = is_client
+                old_data["id"] = user_id
+                return AccountOut( **old_data)
+
+    def delete(self, user_id: int, business_id: int) -> bool:
+        with pool.connection() as conn:
+            with conn.cursor() as db:
+                db.execute(
+                    """
+                    delete from accounts
+                    WHERE id = %s AND business_id = %s
+
+                    """,
+                    [user_id,
+                    business_id
+                    ],
+                )
+                return True
