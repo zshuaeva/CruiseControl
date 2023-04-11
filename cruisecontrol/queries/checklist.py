@@ -59,26 +59,27 @@ class ChecklistQueries:
         old_data = checklist.dict()
         return ChecklistOut(id=id, business_id=business_id, **old_data)
 
-  def get_all(self, buiness_id: int ) -> List[ChecklistOut]:
+  def get_all(self, business_id: int, checklist: ChecklistIn) -> List[ChecklistOut]:
     with pool.connection() as conn:
       with conn.cursor() as db:
         results = db.execute(
-          """
-        select id
+            """
+            select id
             , line_item1
             , line_item2
             , line_item3
             , line_item4
             , line_item5
             , line_item6
-        from checklist
-        where business_id = %s
-        """,
-          [buiness_id],
+            , business_id
+            from checklist
+            where business_id = %s
+            """,
+            [business_id],
         )
         results = []
         for record in db:
-          Checklist = ChecklistOut(
+          checklist = ChecklistOut(
             id=record[0],
             line_item1=record[1],
             line_item2=record[2],
@@ -86,6 +87,35 @@ class ChecklistQueries:
             line_item4=record[4],
             line_item5=record[5],
             line_item6=record[6],
+            business_id=record[7],
           )
-          results.append(Checklist)
+          results.append(checklist)
+          print("XXXXX", results)
         return results
+
+  def update(self, checklist_id: int, business_id: int, checklist: ChecklistIn) -> ChecklistOut:
+    with pool.connection() as conn:
+      with conn.cursor() as db:
+        db.execute(
+          """
+          update checklist
+          set line_item1 = %s
+            , line_item2 = %s
+            , line_item3 = %s
+            , line_item4 = %s
+            , line_item5 = %s
+            , line_item6 = %s
+          where business_id = %i
+          """,
+          [
+            checklist.line_item1,
+            checklist.line_item2,
+            checklist.line_item3,
+            checklist.line_item4,
+            checklist.line_item5,
+            checklist.line_item6,
+            business_id,
+          ],
+        )
+        old_data = checklist.dict()
+        return ChecklistOut(id=checklist_id, business_id=business_id, **old_data)

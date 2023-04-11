@@ -38,6 +38,11 @@ function Nav() {
                     Create new TECHNICIAN
                   </NavLink>
                 </li>
+                <li className="nav-item">
+                  <NavLink className="nav-link" to="/checklist/new">
+                    Create a Checklist
+                  </NavLink>
+                </li>
                 <li>
                   <NavLink>
                     <button className="btn btn-warning" onClick={logout}>

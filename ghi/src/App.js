@@ -11,6 +11,7 @@ import ClientLanding from "./ClientLanding.js";
 import TechnicianLanding from "./TechnicianLanding.js";
 import Nav from "./Nav.js";
 import "bootstrap/dist/css/bootstrap.css";
+import ChecklistForm from "./ChecklistForm.js";
 
 function App() {
   return (
@@ -28,6 +29,7 @@ function App() {
           </Route>
           <Route path="clientsignup" element={<ClientSignUpForm />} />
           <Route path="Login" element={<LoginForm />} />
+          <Route path="checklist/new" element={<ChecklistForm />} />
         </Routes>
       </AuthProvider>
     </BrowserRouter>
