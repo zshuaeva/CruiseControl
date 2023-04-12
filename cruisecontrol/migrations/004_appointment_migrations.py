@@ -11,8 +11,7 @@ steps = [
             vehicle_color CHAR(50),
             notes TEXT,
             date_of_service DATE,
-            business_id INT NOT NULL,
-            FOREIGN KEY (business_id) REFERENCES businesses (id)
+            business_id INTEGER NOT NULL
         );
         """,
         """
