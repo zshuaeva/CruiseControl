@@ -13,7 +13,6 @@ def get_all_services(
     account_data = Depends(authenticator.get_current_account_data)
 ):
     business_id = account_data['business_id']
-    print('************', business_id)
     return repo.get_all(repo, business_id)
 
 @router.post("/api/services", response_model=ServiceOut)
@@ -24,7 +23,6 @@ def create_service(
     account_data = Depends(authenticator.get_current_account_data)
 ):
     business_id = account_data['business_id']
-    print('************', business_id)
     return repo.create(info, business_id)
 
 @router.put("/services/{service_id}", response_model=ServiceOut)
@@ -47,5 +45,4 @@ def delete_service(
     account_data = Depends(authenticator.get_current_account_data)
 ) -> bool:
     business_id = account_data["business_id"]
-    print("******", business_id)
     return repo.delete(service_id, business_id)

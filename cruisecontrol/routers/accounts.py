@@ -81,7 +81,6 @@ async def create_technician_account(
     client_username = account_data["username"]
     client_account = repo.get(client_username)
     business_id = client_account.business_id
-    print(business_id)
 
     hashed_password = authenticator.hash_password(info.password)
     try:
@@ -136,7 +135,6 @@ def update_account(
     is_technician = account_data["is_technician"]
     business_id = account_data["business_id"]
     is_client = account_data["is_client"]
-    print(business_id)
     try:
         return repo.update(user_id, business_id,is_client, is_technician, account)
     except ValueError:

@@ -44,7 +44,6 @@ def get_checklist(
     print(account_data["business_id"])
     business_id = account_data['business_id']
     try:
-        print(repo)
         return repo.get_all(business_id)
     except ValueError:
         raise HTTPException(
