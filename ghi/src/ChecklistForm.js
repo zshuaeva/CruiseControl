@@ -55,7 +55,6 @@ function ChecklistForm() {
                 id="name"
                 value={line_item1}
                 onChange={(event) => setLineItem1(event.target.value)}
-                required
                 placeholder="Step One"
               />
               <label htmlFor="Step One">Step One</label>
@@ -68,7 +67,6 @@ function ChecklistForm() {
                 id="name"
                 value={line_item2}
                 onChange={(event) => setLineItem2(event.target.value)}
-                required
                 placeholder="Step Two"
               />
               <label htmlFor="Step Two">Step Two</label>
@@ -81,7 +79,6 @@ function ChecklistForm() {
                 id="name"
                 value={line_item3}
                 onChange={(event) => setLineItem3(event.target.value)}
-                required
                 placeholder="Step Three"
               />
               <label htmlFor="Step Three">Step Three</label>
@@ -94,7 +91,6 @@ function ChecklistForm() {
                 id="name"
                 value={line_item4}
                 onChange={(event) => setLineItem4(event.target.value)}
-                required
                 placeholder="Step Four"
               />
               <label htmlFor="Step Four">Step Four</label>
@@ -107,7 +103,6 @@ function ChecklistForm() {
                 id="name"
                 value={line_item5}
                 onChange={(event) => setLineItem5(event.target.value)}
-                required
                 placeholder="Step Five"
               />
               <label htmlFor="Step Five">Step Five</label>
@@ -120,7 +115,6 @@ function ChecklistForm() {
                 id="name"
                 value={line_item6}
                 onChange={(event) => setLineItem6(event.target.value)}
-                required
                 placeholder="Step Six"
               />
               <label htmlFor="Step Six">Step Six</label>
