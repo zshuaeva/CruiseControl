@@ -110,7 +110,7 @@ def get_account(
         )
 
 @router.get("/api/accounts/", response_model=List[AccountOut])
-def get_account(
+def get_accounts(
     repo: AccountQueries = Depends(),
     account_data: dict = Depends(authenticator.get_current_account_data),
 ) -> AccountOut:
@@ -152,3 +152,36 @@ def delete_accounts(
 ) -> bool:
     business_id = account_data["business_id"]
     return repo.delete(user_id, business_id)
+
+
+@router.get("/api/technician/{user_id}", response_model=AccountOut)
+def get_technician(
+    user_id: int,
+    repo: AccountQueries = Depends(),
+    account_data: dict = Depends(authenticator.get_current_account_data),
+) -> AccountOut:
+    business_id = account_data["business_id"]
+    try:
+        return repo.gettech(user_id,business_id)
+    except ValueError:
+        raise HTTPException(
+            status_code=status.HTTP_400_BAD_REQUEST,
+            detail="Cannot get an account with those credentials",
+        )
+
+
+@router.get("/api/technicians/", response_model=List[AccountOut])
+def get_technicians(
+    repo: AccountQueries = Depends(),
+    account_data: dict = Depends(authenticator.get_current_account_data),
+) -> AccountOut:
+
+    business_id = account_data["business_id"]
+
+    try:
+        return repo.get_all_tech(business_id)
+    except ValueError:
+        raise HTTPException(
+            status_code=status.HTTP_400_BAD_REQUEST,
+            detail="Cannot get an account with those credentials",
+        )
