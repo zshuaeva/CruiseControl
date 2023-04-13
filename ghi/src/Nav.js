@@ -43,6 +43,11 @@ function Nav() {
                     Create a Checklist
                   </NavLink>
                 </li>
+                <li className="nav-item">
+                  <NavLink className="nav-link" to="/checklist/all">
+                    All Checklist
+                  </NavLink>
+                </li>
                 <li>
                   <NavLink>
                     <button className="btn btn-warning" onClick={logout}>
