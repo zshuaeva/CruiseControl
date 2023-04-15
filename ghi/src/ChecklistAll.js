@@ -83,7 +83,7 @@ function ChecklistAll() {
                 <td>{item.line_item5}</td>
                 <td>{item.line_item6}</td>
                 <td>
-                  <button onClick={() => handleDelete(item.id)}>Delete</button>
+                  <button className="btn btn-warning" onClick={() => handleDelete(item.id)}>Delete</button>
                 </td>
               </tr>
             );

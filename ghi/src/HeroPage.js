@@ -4,9 +4,9 @@ function HeroPage() {
 return(
 <>
 
-<div class="p-3 mb-2 bg-secondary text-black">
+<div className="p-3 mb-2 bg-secondary text-black">
   <div class="hero-unit">
-    <div class="p-3 mb-2 .bg-secondary.bg-gradient text-black" style={{ backgroundImage:`url(${image})` }}>
+    <div className="p-3 mb-2 .bg-secondary.bg-gradient text-black" style={{ backgroundImage:`url(${image})` }}>
       <h1>Hello, Welcome to Cruise Control !</h1>
       <p>With our innovative software application, you can say goodbye to the hassle of paper workorders. Our digital solution streamlines the entire process, saving you time and effort. Say hello to a more efficient and organized way of managing your workorders. Experience the convenience of our software today!
       </p>
