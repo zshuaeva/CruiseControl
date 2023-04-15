@@ -11,6 +11,9 @@ import ClientLanding from "./ClientLanding.js";
 import TechnicianLanding from "./TechnicianLanding.js";
 import Nav from "./Nav.js";
 import "bootstrap/dist/css/bootstrap.css";
+import ServiceCreation from "./ServiceCreation.js";
+import ServiceList from "./ServiceList.js";
+import ServiceParent from "./ServiceParent.js";
 
 function App() {
   return (
@@ -21,13 +24,22 @@ function App() {
         <Nav />
         <Routes>
           <Route path="/" element={<HeroPage />} />
+
           <Route path="clientlanding" element={<ClientLanding />} />
+
           <Route path="technician">
             <Route path="new" element={<TechnicianForm />} />
             <Route path="landing" element={<TechnicianLanding />} />
           </Route>
+
+          <Route path="service" element={<ServiceParent />} />
+          {/* <Route path="new" element={<ServiceCreation />} />
+            <Route path="all" element={<ServiceList />} /> */}
+          {/* </Route> */}
+
           <Route path="clientsignup" element={<ClientSignUpForm />} />
           <Route path="Login" element={<LoginForm />} />
+
         </Routes>
       </AuthProvider>
     </BrowserRouter>

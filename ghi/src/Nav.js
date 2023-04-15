@@ -51,6 +51,11 @@ function Nav() {
                     TECHNICIAN Landing
                   </NavLink>
                 </li>
+                <li className="nav-item">
+                  <NavLink className="nav-link" to="/service">
+                    Service
+                  </NavLink>
+                </li>
               </>
             ) : null}
             {token && user?.is_technician ? (
