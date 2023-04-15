@@ -3,12 +3,12 @@ from queries.pool import pool
 from datetime import date, time
 from typing import List, Optional
 
+
 class ServiceIn(BaseModel):
     service_name: str
     service_type: str
     service_description: str
     service_price: int
-
 
 
 class ServiceOut(BaseModel):
@@ -21,7 +21,9 @@ class ServiceOut(BaseModel):
 
 
 class ServiceQueries:
-    def get_all(self, service: ServiceIn, business_id: int) -> List[ServiceOut]:
+    def get_all(
+        self, service: ServiceIn, business_id: int
+    ) -> List[ServiceOut]:
         with pool.connection() as conn:
             with conn.cursor() as db:
                 result = db.execute(
@@ -66,8 +68,6 @@ class ServiceQueries:
                         values (%s, %s, %s, %s, %s)
                         returning id
                     """,
-
-
                     [
                         service.service_name,
                         service.service_type,
@@ -80,7 +80,9 @@ class ServiceQueries:
                 old_data = service.dict()
                 return ServiceOut(id=id, business_id=business_id, **old_data)
 
-    def update(self, service_id: int, business_id: int, service: ServiceIn) -> ServiceOut:
+    def update(
+        self, service_id: int, business_id: int, service: ServiceIn
+    ) -> ServiceOut:
         with pool.connection() as conn:
             with conn.cursor() as db:
                 db.execute(
@@ -103,19 +105,47 @@ class ServiceQueries:
                     ],
                 )
                 old_data = service.dict()
-                return ServiceOut(id=service_id, business_id=business_id, **old_data)
+                return ServiceOut(
+                    id=service_id, business_id=business_id, **old_data
+                )
 
     def delete(self, service_id: int, business_id: int) -> bool:
         with pool.connection() as conn:
             with conn.cursor() as db:
-                    db.execute(
-                        """
+                db.execute(
+                    """
                         delete from services
                         WHERE id = %s AND business_id = %s
 
                         """,
-                        [service_id,
-                         business_id
-                         ],
-                    )
-                    return True
+                    [service_id, business_id],
+                )
+                return True
+
+    def get_one(self, service_id: int, business_id: int) -> bool:
+        with pool.connection() as conn:
+            with conn.cursor() as db:
+                result = db.execute(
+                    """
+                    select id 
+                        , service_name
+                        , service_type 
+                        , service_description 
+                        , service_price 
+                        , business_id 
+                    from services 
+                    where id = %s and business_id = %s
+                    """,
+                    [service_id, business_id],
+                )
+                record = result.fetchone()
+                if record is None:
+                    return None
+                return ServiceOut(
+                    id=record[0],
+                    service_name=record[1],
+                    service_type=record[2],
+                    service_description=record[3],
+                    service_price=record[4],
+                    business_id=record[5],
+                )
