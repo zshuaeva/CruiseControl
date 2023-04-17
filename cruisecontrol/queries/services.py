@@ -55,7 +55,7 @@ class ServiceQueries:
     def create(self, service: ServiceIn, business_id: int) -> ServiceOut:
         with pool.connection() as conn:
             with conn.cursor() as db:
-                result = db.execute(
+                db.execute(
                     """
                     insert into services
                         (
@@ -76,7 +76,8 @@ class ServiceQueries:
                         business_id,
                     ],
                 )
-                id = result.fetchone()[0]
+                result = db.fetchone()
+                id = result[0]
                 old_data = service.dict()
                 return ServiceOut(id=id, business_id=business_id, **old_data)
 
