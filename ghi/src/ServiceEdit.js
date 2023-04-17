@@ -10,8 +10,6 @@ function ServiceEdit(props) {
     const [service_price, setService_price] = useState(props.service.service_price);
     const [business_id, setbusiness_id] = useState(props.service.business_id);
 
-    console.log(props.service)
-
     const handleSubmit = async (event) => {
         event.preventDefault();
         const data = {};
@@ -21,7 +19,6 @@ function ServiceEdit(props) {
         data.service_description = service_description;
         data.service_price = service_price
         data.business_id = business_id
-        console.log(data)
         const submitUrl = `http://localhost:8000/api/services/${id}`;
         const fetchConfig = {
             method: "PUT",

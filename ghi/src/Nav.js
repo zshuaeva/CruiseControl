@@ -38,14 +38,6 @@ function Nav() {
                     Create new TECHNICIAN
                   </NavLink>
                 </li>
-                <li>
-                  <NavLink>
-                    <button className="btn btn-warning" onClick={logout}>
-                      Logout
-                    </button>
-                  </NavLink>
-                </li>
-
                 <li className="nav-item">
                   <NavLink className="nav-link" to="/technician/landing">
                     TECHNICIAN Landing
@@ -56,10 +48,26 @@ function Nav() {
                     Service
                   </NavLink>
                 </li>
-              </>
-            ) : null}
-            {token && user?.is_technician ? (
-              <>
+                <li className="nav-item">
+                  <NavLink className="nav-link" to="/customerAppointmentCreation">
+                    Customer Appointment Creation
+                  </NavLink>
+                </li>
+                <li className="nav-item">
+                  <NavLink className="nav-link" to="/appointment/all">
+                    All appointments
+                  </NavLink>
+                </li>
+                <li className="nav-item">
+                  <NavLink className="nav-link" to="/appointment/approved">
+                    Approved Appointments
+                  </NavLink>
+                </li>
+                <li className="nav-item">
+                  <NavLink className="nav-link" to="/appointment/pending">
+                    Upcoming Appointments
+                  </NavLink>
+                </li>
                 <li>
                   <NavLink>
                     <button className="btn btn-warning" onClick={logout}>
@@ -67,10 +75,20 @@ function Nav() {
                     </button>
                   </NavLink>
                 </li>
-
+              </>
+            ) : null}
+            {token && user?.is_technician ? (
+              <>
                 <li className="nav-item">
                   <NavLink className="nav-link" to="/technician/landing">
                     TECHNICIAN Landing
+                  </NavLink>
+                </li>
+                <li>
+                  <NavLink>
+                    <button className="btn btn-warning" onClick={logout}>
+                      Logout
+                    </button>
                   </NavLink>
                 </li>
               </>
@@ -94,6 +112,7 @@ function Nav() {
       </div>
     </nav>
   );
+
 }
 
 export default Nav;
