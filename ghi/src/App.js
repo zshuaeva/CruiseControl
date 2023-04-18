@@ -11,6 +11,7 @@ import ClientLanding from "./ClientLanding.js";
 import TechnicianLanding from "./TechnicianLanding.js";
 import Nav from "./Nav.js";
 import "bootstrap/dist/css/bootstrap.css";
+import TechnicianParent from "./TechnicianParent.js";
 import ServiceCreation from "./ServiceCreation.js";
 import ServiceList from "./ServiceList.js";
 import ServiceParent from "./ServiceParent.js";
@@ -22,8 +23,6 @@ import AppointmentApprovedList from "./AppointmentApprovedList.js";
 import AppointmentDetail from "./AppointmentDetail.js";
 
 import AppointmentEdit from "./AppointmentUpdate.js";
-
-
 
 function App() {
   return (
@@ -37,8 +36,7 @@ function App() {
 
           <Route path="clientlanding" element={<ClientLanding />} />
 
-          <Route path="technician">
-            <Route path="new" element={<TechnicianForm />} />
+          <Route path="technician" element={<TechnicianParent />}>
             <Route path="landing" element={<TechnicianLanding />} />
           </Route>
 
@@ -55,11 +53,13 @@ function App() {
             <Route path="all" element={<ServiceList />} /> */}
           {/* </Route> */}
 
-          <Route path="customerAppointmentCreation" element={<AppointmentCreation />} />
+          <Route
+            path="customerAppointmentCreation"
+            element={<AppointmentCreation />}
+          />
 
           <Route path="clientsignup" element={<ClientSignUpForm />} />
           <Route path="Login" element={<LoginForm />} />
-
         </Routes>
       </AuthProvider>
     </BrowserRouter>
