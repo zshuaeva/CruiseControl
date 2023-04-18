@@ -41,6 +41,7 @@ class ServiceQueries:
                 )
                 result = []
                 for record in db:
+                    print(record)
                     service = ServiceOut(
                         id=record[0],
                         service_name=record[1],

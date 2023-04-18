@@ -23,9 +23,10 @@ import AppointmentDetail from "./AppointmentDetail.js";
 
 import AppointmentEdit from "./AppointmentUpdate.js";
 
-
 import ChecklistForm from "./ChecklistForm.js";
 import ChecklistAll from "./ChecklistAll.js";
+
+import ServiceChecklist from "./ServiceChecklist.js";
 
 function App() {
   return (
@@ -52,18 +53,26 @@ function App() {
             <Route path=":appointmentId/edit" element={<AppointmentEdit />} />
           </Route>
 
-          <Route path="service" element={<ServiceParent />} />
+          <Route path="service">
+            <Route path="" element={<ServiceParent />} />
+            <Route path=":serviceId/checklist" element={<ServiceChecklist />} />
+          </Route>
+
           {/* <Route path="new" element={<ServiceCreation />} />
             <Route path="all" element={<ServiceList />} /> */}
-          {/* </Route> */}
 
-          <Route path="customerAppointmentCreation" element={<AppointmentCreation />} />
+
+          <Route
+            path="customerAppointmentCreation"
+            element={<AppointmentCreation />}
+          />
 
           <Route path="clientsignup" element={<ClientSignUpForm />} />
           <Route path="Login" element={<LoginForm />} />
+
+
           <Route path="checklist/new" element={<ChecklistForm />} />
           <Route path="checklist/all" element={<ChecklistAll />} />
-
         </Routes>
       </AuthProvider>
     </BrowserRouter>

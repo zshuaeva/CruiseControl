@@ -5,157 +5,117 @@ from typing import List, Optional
 
 
 class DuplicateChecklistError(ValueError):
-  pass
+    pass
+
 
 class ChecklistIn(BaseModel):
-  line_item1: Optional[str]
-  line_item2: Optional[str]
-  line_item3: Optional[str]
-  line_item4: Optional[str]
-  line_item5: Optional[str]
-  line_item6: Optional[str]
+    checklist_item: str
+    service_id: int
 
 
-class ChecklistOut(BaseModel):
-  id: int
-  line_item1: Optional[str]
-  line_item2: Optional[str]
-  line_item3: Optional[str]
-  line_item4: Optional[str]
-  line_item5: Optional[str]
-  line_item6: Optional[str]
-  business_id: int
+class ChecklistOut(ChecklistIn):
+    id: int
+
+
 class ChecklistQueries:
-  def create_checklist(
-    self, checklist: ChecklistIn, business_id: int) -> ChecklistOut:
-    with pool.connection() as conn:
-      with conn.cursor() as db:
-        result = db.execute(
-          """
+    def create_checklist_item(
+        self, checklist: ChecklistIn, business_id: int
+    ) -> ChecklistOut:
+        with pool.connection() as conn:
+            with conn.cursor() as db:
+                result = db.execute(
+                    """
           insert into checklist
             (
-            line_item1
-            , line_item2
-            , line_item3
-            , line_item4
-            , line_item5
-            , line_item6
-            , business_id
+            checklist_item, service_id
             )
-            values(%s, %s, %s, %s, %s, %s, %s)
+            values(%s, %s)
             returning id
           """,
-          [
-            checklist.line_item1,
-            checklist.line_item2,
-            checklist.line_item3,
-            checklist.line_item4,
-            checklist.line_item5,
-            checklist.line_item6,
-            business_id,
-          ],
-        )
-        id = result.fetchone()[0]
-        old_data = checklist.dict()
-        return ChecklistOut(id=id, business_id=business_id, **old_data)
+                    [
+                        checklist.checklist_item,
+                        checklist.service_id,
+                    ],
+                )
+                id = result.fetchone()[0]
+                old_data = checklist.dict()
+                return ChecklistOut(id=id, business_id=business_id, **old_data)
 
-  def get_all(self, business_id: int) -> List[ChecklistOut]:
-      with pool.connection() as conn:
-        with conn.cursor() as db:
-          results = db.execute(
-              """
-              select id, line_item1, line_item2, line_item3, line_item4, line_item5, line_item6, business_id
-              from checklist
-              where business_id = %s
-              """,
-              (business_id,)
-          )
-          results = []
-          for record in db:
-            checklist = ChecklistOut(
-              id=record[0],
-              line_item1=record[1],
-              line_item2=record[2],
-              line_item3=record[3],
-              line_item4=record[4],
-              line_item5=record[5],
-              line_item6=record[6],
-              business_id=record[7],
-            )
-            results.append(checklist)
-            print("XXXXX", results)
-          return results
+    def get_all_for_service(self, service_id: int) -> List[ChecklistOut]:
+        with pool.connection() as conn:
+            with conn.cursor() as db:
+                db.execute(
+                    """
+                    SELECT id
+                    , checklist_item
+                    , service_id 
+                    FROM checklist
+                    WHERE service_id = %s
+                    """,
+                    [service_id],
+                )
+                results = []
+                for record in db:
+                    checklist = ChecklistOut(
+                        id=record[0],
+                        checklist_item=record[1],
+                        service_id=record[2],
+                    )
+                    results.append(checklist.dict())
+                return results
 
-  def get_one(self, business_id: int, checklist_id: int) -> Optional[ChecklistOut]:
-      with pool.connection() as conn:
-          with conn.cursor() as db:
-              db.execute(
-                  """
+    def get_one(
+        self, service_id: int, checklist_id: int
+    ) -> Optional[ChecklistOut]:
+        with pool.connection() as conn:
+            with conn.cursor() as db:
+                db.execute(
+                    """
                   select *
                   from checklist
-                  where business_id = %s and id = %s
+                  where service_id = %s and id = %s
                   """,
-                  [business_id, checklist_id],
-              )
-              result = db.fetchone()
+                    [service_id, checklist_id],
+                )
+                result = db.fetchone()
+                if result is None:
+                    return None
+                return ChecklistOut(
+                    id=result[0],
+                    checklist_item=result[1],
+                    service_id=result[2],
+                )
 
-              if result is None:
-                  return None
-
-              checklist = ChecklistOut(
-                  id=result[0],
-                  business_id=result[1],
-                  line_item1=result[2],
-                  line_item2=result[3],
-                  line_item3=result[4],
-                  line_item4=result[5],
-                  line_item5=result[6],
-                  line_item6=result[7],
-              )
-
-              return checklist
-
-
-
-
-  def update(self, checklist_id: int, business_id: int, checklist: ChecklistIn) -> ChecklistOut:
-      with pool.connection() as conn:
-        with conn.cursor() as db:
-          db.execute(
-            """
+    def update(
+        self, checklist_id: int, checklist: ChecklistIn
+    ) -> ChecklistOut:
+        with pool.connection() as conn:
+            with conn.cursor() as db:
+                db.execute(
+                    """
             update checklist
-            set line_item1 = %s,
-                line_item2 = %s,
-                line_item3 = %s,
-                line_item4 = %s,
-                line_item5 = %s,
-                line_item6 = %s
-            where id = %s and business_id = %s
+            set checklist_item = %s
+            where id = %s
             """,
-            [
-              checklist.line_item1,
-              checklist.line_item2,
-              checklist.line_item3,
-              checklist.line_item4,
-              checklist.line_item5,
-              checklist.line_item6,
-              checklist_id,
-              business_id,
-            ],
-          )
-          old_data = checklist.dict()
-          return ChecklistOut(id=checklist_id, business_id=business_id, **old_data)
+                    [
+                        checklist.checklist_item,
+                        checklist_id,
+                    ],
+                )
+                old_data = checklist.dict()
+                return ChecklistOut(id=checklist_id, **old_data)
 
-
-  def delete(self, checklist_id: int, business_id: int):
-    with pool.connection() as conn:
-      with conn.cursor() as db:
-        db.execute(
-          """
+    def delete(self, checklist_id: int):
+        with pool.connection() as conn:
+            with conn.cursor() as db:
+                db.execute(
+                    """
           DELETE FROM checklist
-          WHERE id = %s AND business_id = %s
+          WHERE id = %s
           """,
-          (checklist_id, business_id),
-        )
-        if db.rowcount == 0:
-          raise ValueError("No checklist found with the given ID and business ID")
+                    [checklist_id],
+                )
+                if db.rowcount == 0:
+                    raise ValueError(
+                        "No checklist found with the given ID and business ID"
+                    )

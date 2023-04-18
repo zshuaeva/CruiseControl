@@ -77,6 +77,12 @@ function ServiceList({ services, toggleEditMode, getServices, token, user }) {
                                             <td>
                                                 <button
                                                     type="button"
+                                                    className="btn btn-success"
+                                                >
+                                                    <Link to={`${service.id}/checklist`} className="btn btn">Checklist</Link>
+                                                </button>
+                                                <button
+                                                    type="button"
                                                     onClick={() => toggleEditMode(service)}
                                                     className="btn btn-warning"
                                                 >

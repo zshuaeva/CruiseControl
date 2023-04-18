@@ -21,12 +21,8 @@ from queries.accounts import AccountOut
 
 
 class ChecklistForm(BaseModel):
-    line_item1: str
-    line_item2: str
-    line_item3: str
-    line_item4: str
-    line_item5: str
-    line_item6: str
+    checklist_item: str
+    service_id: int
 
 
 class HttpError(BaseModel):
@@ -36,31 +32,32 @@ class HttpError(BaseModel):
 router = APIRouter()
 
 
-@router.get("/api/checklist", response_model=List[ChecklistOut])
-def get_all_checklist(
-    repo: ChecklistQueries = Depends(),
-    account_data=Depends(authenticator.get_current_account_data),
-):
-    business_id = account_data["business_id"]
-    print("please work---", business_id, repo)
-    try:
-        return repo.get_all(business_id)
-    except ValueError:
-        raise HTTPException(
-            status_code=status.HTTP_400_BAD_REQUEST,
-            detail="Cannot get a checklist with those credentials",
-        )
+# @router.get("/api/checklist", response_model=List[ChecklistOut])
+# def get_all_checklist(
+#     repo: ChecklistQueries = Depends(),
+#     account_data=Depends(authenticator.get_current_account_data),
+# ):
+#     business_id = account_data["business_id"]
+#     try:
+#         return repo.get_all(business_id)
+#     except ValueError:
+#         raise HTTPException(
+#             status_code=status.HTTP_400_BAD_REQUEST,
+#             detail="Cannot get a checklist with those credentials",
+#         )
 
 
-@router.get("/checklist/{checklist_id}", response_model=ChecklistOut)
+@router.get(
+    "/services/{service_id}/checklist/",
+    response_model=List[ChecklistOut],
+)
 def get_one_checklist(
-    checklist_id: int,
+    service_id: int,
     response: Response,
     repo: ChecklistQueries = Depends(),
     account_data=Depends(authenticator.get_current_account_data),
-) -> ChecklistOut:
-    business_id = account_data["business_id"]
-    checklist = repo.get_one(business_id, checklist_id)
+) -> List[ChecklistOut]:
+    checklist = repo.get_all_for_service(service_id)
     if checklist is None:
         response.status_code = status.HTTP_404_NOT_FOUND
         return {"detail": "Checklist not found"}
@@ -76,7 +73,7 @@ def create_checklist(
 ):
     business_id = account_data["business_id"]
     try:
-        return repo.create_checklist(info, business_id)
+        return repo.create_checklist_item(info, business_id)
     except DuplicateChecklistError:
         response.status_code = status.HTTP_409_CONFLICT
         return HttpError(detail="Checklist with the same id already exists")
@@ -86,7 +83,7 @@ def create_checklist(
 
 
 @router.put("/checklist/{checklist_id}", response_model=ChecklistOut)
-def update_checklist(
+def update_checklist_item(
     checklist_id: int,
     checklist: ChecklistIn,
     response: Response,
@@ -94,18 +91,17 @@ def update_checklist(
     account_data=Depends(authenticator.get_current_account_data),
 ) -> ChecklistOut:
     business_id = account_data["business_id"]
-    return repo.update(checklist_id, business_id, checklist)
+    return repo.update(checklist_id, checklist)
 
 
 @router.delete("/api/checklist/{checklist_id}")
-def delete_checklist(
+def delete_checklist_item(
     checklist_id: int,
     repo: ChecklistQueries = Depends(),
     account_data=Depends(authenticator.get_current_account_data),
 ):
-    business_id = account_data["business_id"]
     try:
-        repo.delete(checklist_id, business_id)
+        repo.delete(checklist_id)
     except ValueError:
         raise HTTPException(
             status_code=status.HTTP_404_NOT_FOUND,
