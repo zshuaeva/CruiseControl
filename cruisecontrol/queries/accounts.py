@@ -13,6 +13,7 @@ class AccountIn(BaseModel):
     password: str
     employee_id: Optional[int]
     business_name: Optional[str]
+    business_id: Optional[int]
     first_name: Optional[str]
     last_name: Optional[str]
     website: Optional[str]
