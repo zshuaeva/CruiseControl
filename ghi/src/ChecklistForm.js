@@ -1,8 +1,8 @@
 import React, { useState, useContext } from "react";
-import { AuthContext } from "@galvanize-inc/jwtdown-for-react";
+// import { AuthContext } from "@galvanize-inc/jwtdown-for-react";
 
-function ChecklistForm() {
-  const { token } = useContext(AuthContext);
+function ChecklistForm({ getChecklists, token, user}) {
+  // const { token } = useContext(AuthContext);
   const [line_item1, setLineItem1] = useState("");
   const [line_item2, setLineItem2] = useState("");
   const [line_item3, setLineItem3] = useState("");

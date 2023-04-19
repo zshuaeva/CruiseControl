@@ -39,7 +39,7 @@ function Nav() {
                   </NavLink>
                 </li>
                 <li className="nav-item">
-                  <NavLink className="nav-link" to="/checklist/new">
+                  <NavLink className="nav-link" to="/checklist">
                     Create a Checklist
                   </NavLink>
                 </li>

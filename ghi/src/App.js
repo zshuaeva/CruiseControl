@@ -27,6 +27,7 @@ import ChecklistForm from "./ChecklistForm.js";
 import ChecklistAll from "./ChecklistAll.js";
 
 import ServiceChecklist from "./ServiceChecklist.js";
+import ChecklistParent from "./ChecklistParent.js";
 
 function App() {
   return (
@@ -70,9 +71,9 @@ function App() {
           <Route path="clientsignup" element={<ClientSignUpForm />} />
           <Route path="Login" element={<LoginForm />} />
 
-
-          <Route path="checklist/new" element={<ChecklistForm />} />
-          <Route path="checklist/all" element={<ChecklistAll />} />
+          <Route path="checklist"/>
+            <Route path="" element={<ChecklistParent />} />
+            <Route path="checklist/all" element={<ChecklistAll />} />
         </Routes>
       </AuthProvider>
     </BrowserRouter>

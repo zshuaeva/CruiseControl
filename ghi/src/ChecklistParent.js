@@ -3,48 +3,50 @@ import { AuthContext } from "@galvanize-inc/jwtdown-for-react";
 import { useContext } from "react";
 import useUser from "./useUser";
 
-import ServiceCreation from "./ServiceCreation";
-import ServiceEdit from "./ServiceEdit";
-import ServiceList from "./ServiceList";
-import ServiceChecklist from "./ServiceChecklist";
+import ChecklistAll from "./ChecklistAll";
+import ChecklistForm from "./ChecklistForm";
 
 
-function ServiceParent() {
+
+function ChecklistParent() {
     const { token } = useContext(AuthContext);
     const user = useUser(token);
-
-    const [services, setServices] = useState([]);
+    
+    const [checklists, setChecklists] = useState([]);
     const [isEditing, setIsEditing] = useState(false);
-    const [editingService, setEditingService] = useState(null);
+    const [editingChecklist, setEditingChecklist] = useState(null);
 
-    // const [isChecklist,]
-
-    const toggleEditMode = (service) => {
+    const toggleEditMode = (checklist) => {
         setIsEditing(!isEditing);
-        setEditingService(service);
+        setEditingChecklist(checklist);
     };
 
-    const getServices = async () => {
-        const listUrl = "http://localhost:8000/api/services";
+    const getChecklists = async () => {
+        const listUrl = "http://localhost:8000/api/checklist";
         const response = await fetch(listUrl, {
             headers: { Authorization: `Bearer ${token}` },
         });
-        if (response.ok) {
-            const data = await response.json();
-            setServices(data);
-        }
+        try {
+            if (response.ok) {
+                const data = await response.json();
+                setChecklists(data);
+            } else {
+                throw new Error("Network response was not ok.");
+            }
+        } catch (error) {
+            console.error(error);
+        };
     };
-
     useEffect(() => {
         if (token) {
-            getServices();
+            getChecklists([]);
         }
     }, [token]);
 
     return (
         <div className="container-fluid">
             <div className="row">
-                <div className="col-12 col-md-4">
+                {/* <div className="col-12 col-md-4">
                     {isEditing ? (
                         <ServiceEdit
                             service={editingService}
@@ -60,13 +62,11 @@ function ServiceParent() {
                             user={user}
                         />
                     )}
-                </div>
+                </div> */}
                 <div className="col-12 col-md-8">
                     <div className="card-body">
-                        <ServiceList
-                            services={services}
-                            toggleEditMode={toggleEditMode}
-                            getServices={getServices}
+                        <ChecklistForm
+                            getChecklists={getChecklists}
                             token={token}
                             user={user}
                         />
@@ -75,6 +75,11 @@ function ServiceParent() {
             </div>
         </div>
     );
-}
+};
 
-export default ServiceParent
+  
+
+    
+
+
+export default ChecklistParent;
