@@ -1,3 +1,4 @@
+// THIS VERSION DOES NOT CONTAIN A RUNNING LIST
 import React, { useState, useContext, useEffect } from "react";
 import { AuthContext } from "@galvanize-inc/jwtdown-for-react";
 
@@ -86,7 +87,7 @@ function ChecklistForm({ getChecklists, user }) {
 
       <div className="container-fluid d-flex justify-content-center">
         <div className="shadow p-4 mt-4">
-          <h1>Create Checklist for "service name (Placeholder)"</h1>
+          <h1>Create Checklist for (placeholder checklistname)</h1>
           <form onSubmit={handleSubmit}>
             <div className="form-floating mb-3">
               <input

@@ -7,8 +7,8 @@ function ChecklistForm({ getChecklists, user }) {
   const [service, setService] = useState([]);
   const [serviceId, setServiceId] = useState("");
   const [serviceName, setServiceName] = useState("");
-  const [checklist, setChecklist] = useState([]);
-  const [checklists, setChecklists] = useState([]);
+  const [numForms, setNumForms] = useState(1);
+  const [formData, setFormData] = useState([{ checklist_item: "", service_id: "" }]);
 
   useEffect(() => {
     async function fetchServices() {
@@ -25,31 +25,10 @@ function ChecklistForm({ getChecklists, user }) {
         const serviceData = await response.json();
         setService(serviceData);
       } else {
-        console.error("Error fetching services");
+        console.error("Error fetching from service");
       }
     }
     fetchServices();
-  }, [token]);
-
-  useEffect(() => {
-    async function fetchChecklists() {
-      const checklistUrl = "http://localhost:8000/api/checklist";
-      const fetchConfig = {
-        method: "GET",
-        headers: {
-          Authorization: `Bearer ${token}`,
-          "Content-Type": "application/json",
-        },
-      };
-      const response = await fetch(checklistUrl, fetchConfig);
-      if (response.ok) {
-        const checklistData = await response.json();
-        setChecklists(checklistData);
-      } else {
-        console.error("Error fetching checklists");
-      }
-    }
-    fetchChecklists();
   }, [token]);
 
   const handleDrop = (event) => {
@@ -60,12 +39,11 @@ function ChecklistForm({ getChecklists, user }) {
     setServiceName(selectedService ? selectedService.service_name : "");
   };
 
-  const handleSubmit = async (event) => {
+  const handleSubmit = async (event, index) => {
     event.preventDefault();
     const data = {};
-    data.checklist_item = checklist_item;
-    data.service_id = serviceId;
-    data.service_name = serviceName;
+    data.checklist_item = formData[index].checklist_item;
+    data.service_id = formData[index].service_id;
 
     const url = "http://localhost:8000/api/checklist";
     const fetchConfig = {
@@ -78,69 +56,83 @@ function ChecklistForm({ getChecklists, user }) {
     };
     const response = await fetch(url, fetchConfig);
     if (response.ok) {
-      const newItem = await response.json();
-      setChecklist([...checklist, newItem]);
+      await response.json();
       setChecklistItem("");
+      setServiceName("");
       setServiceId("");
     } else {
       console.error("Error creating checklist, please check input");
     }
   };
 
+  const handleAddForm = () => {
+    setNumForms(numForms + 1);
+    setFormData([...formData, { checklist_item: "", service_id: "" }]);
+  };
+
+  const handleInputChange = (event, index) => {
+    const { name, value } = event.target;
+    const newData = [...formData];
+    newData[index][name] = value;
+    setFormData(newData);
+  };
+
 return (
   <>
-    <div className="form-floating mb-3">
-      <select
-        onChange={handleDrop}
-        value={serviceId}
-        id="serviceId"
-        className="form-select"
-      >
-        <option value="">Select a Service</option>
-        {service.map((service) => {
+    <div className="container-fluid d-flex justify-content-center mb-3">
+      <div className="shadow p-4 mt-4 w-75">
+        <h1>Create Checklist for (placeholder checklistname)</h1>
+
+        {formData.map((data, index) => {
           return (
-            <option key={service.id} value={service.id}>
-              {service.service_name}
-            </option>
+            <form key={index} onSubmit={(event) => handleSubmit(event, index)}>
+              <div className="form-floating mb-3">
+                <input
+                  type="text"
+                  className="form-control"
+                  name="checklist_item"
+                  value={data.checklist_item}
+                  onChange={(event) => handleInputChange(event, index)}
+                  placeholder="Enter Step Details"
+                />
+                <label htmlFor="Enter Step">Enter Step Detail</label>
+              </div>
+
+              <div className="form-floating mb-3">
+                <select
+                  onChange={(event) => handleInputChange(event, index)}
+                  value={data.service_id}
+                  name="service_id"
+                  id="serviceId"
+                  className="form-select"
+                >
+                  <option value="">Select a Service</option>
+                  {service.map((service) => {
+                    return (
+                      <option key={service.id} value={service.id}>
+                        {service.service_name}
+                      </option>
+                    );
+                  })}
+                </select>
+              </div>
+
+              <button className="btn btn-primary me-2" type="submit">
+                Submit Step Detail
+              </button>
+            </form>
           );
         })}
-      </select>
-    </div>
 
-    <div className="container-fluid d-flex justify-content-center">
-      <div className="shadow p-4 mt-4">
-        <h1>Create Checklist for {serviceName}</h1>
-        <form onSubmit={handleSubmit}>
-          <div className="form-floating mb-3">
-            <input
-              type="text"
-              className="form-control"
-              id="name"
-              value={checklist_item}
-              onChange={(event) => setChecklistItem(event.target.value)}
-              placeholder="Enter Step Details"
-            />
-            <label htmlFor="Enter Step">Enter Step Detail</label>
-          </div>
-
-          <button className="btn btn-primary" type="submit">
-            Submit
+        <div className="d-flex justify-content-end">
+          <button className="btn btn-primary" onClick={handleAddForm}>
+            + additional step
           </button>
-        </form>
-      </div>
-    </div>
-
-    <div className="container-fluid d-flex justify-content-center mt-5">
-      <div className="shadow p-4">
-        <h1>{serviceName} Steps:</h1>
-        <ul>
-          {checklist.map((item) => (
-            <li key={item.id}>{item.checklist_item}</li>
-          ))}
-        </ul>
+        </div>
       </div>
     </div>
   </>
-);};
+);
+};
 
 export default ChecklistForm;
