@@ -40,7 +40,7 @@ function Nav() {
                 </li>
                 <li className="nav-item">
                   <NavLink className="nav-link" to="/checklist">
-                    Create a Checklist
+                    Checklist Parent
                   </NavLink>
                 </li>
                 <li className="nav-item">
@@ -48,6 +48,12 @@ function Nav() {
                     All Checklist
                   </NavLink>
                 </li>
+                <li className="nav-item">
+                  <NavLink className="nav-link" to="/checklist/form">
+                    Checklist Form
+                  </NavLink>
+                </li>
+
                 <li className="nav-item">
                   <NavLink className="nav-link" to="/technician/landing">
                     TECHNICIAN Landing
