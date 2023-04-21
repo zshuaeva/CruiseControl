@@ -53,104 +53,116 @@ function TechnicianEdit(props) {
         <div className="container-fluid">
           <div className="row">
             <div className="col-12">
-              <div className="shadow p-4 mt-4">
+              <div className=" bg-dark text-white p-4 mt-4">
                 <h1>Edit A Technician</h1>
-                <form onSubmit={handleSubmit}>
-                  <div className="form-floating mb-3">
+                <form onSubmit={handleSubmit} className="row g-10">
+                  <div className="col-md-6">
                     <input
                       type="text"
                       className="form-control"
                       id="username"
                       value={username}
                       onChange={(event) => setUsername(event.target.value)}
-                      placeholder="username"
+                      placeholder="Username"
                     />
-                    <label htmlFor="username">Username</label>
+                    <label htmlFor="username"></label>
                   </div>
-                  <div className="form-floating mb-3">
+                  <div className="col-md-6">
                     <input
                       type="password"
                       className="form-control"
                       id="password"
-                      placeholder="password"
+                      placeholder="Password"
                       value={password}
                       onChange={(event) => setPassword(event.target.value)}
                     />
-                    <label htmlFor="password">Password</label>
+                    <label htmlFor="password"></label>
                   </div>
-                  <div className="form-floating mb-3">
-                    <input
-                      type="text"
-                      className="form-control"
-                      id="employee_id"
-                      placeholder="employee_id"
-                      value={employee_id}
-                      onChange={(event) => setEmployeeId(event.target.value)}
-                    />
-                    <label htmlFor="Employee_id">Employee Id</label>
-                  </div>
-                  <div className="form-floating mb-3">
+                  <div className="col-md-6">
                     <input
                       type="text"
                       className="form-control"
                       id="first_name"
-                      placeholder="filast_name"
+                      placeholder="First Name"
                       value={first_name}
                       onChange={(event) => setFirstName(event.target.value)}
                     />
-                    <label htmlFor="first_name">First Name</label>
+                    <label htmlFor="first_name"></label>
                   </div>
-                  <div className="form-floating mb-3">
+                  <div className="col-md-6">
                     <input
                       type="text"
                       className="form-control"
                       id="last_name"
-                      placeholder="last_name"
+                      placeholder="Last Name"
                       value={last_name}
                       onChange={(event) => setLastName(event.target.value)}
                     />
-                    <label htmlFor="last_name">Last Name</label>
+                    <label htmlFor="last_name"></label>
                   </div>
-                  <div className="form-floating mb-3">
+                  <div className="col-md-6">
+                    <input
+                      type="number"
+                      className="form-control"
+                      id="employee_id"
+                      placeholder="Employee Id"
+                      value={employee_id}
+                      onChange={(event) => setEmployeeId(event.target.value)}
+                    />
+                    <label htmlFor="Employee_id"></label>
+                  </div>
+                  <div className="col-md-6">
                     <input
                       type="text"
                       className="form-control"
                       id="email"
-                      placeholder="email"
+                      placeholder="Email"
                       value={email}
                       onChange={(event) => setEmail(event.target.value)}
                     />
-                    <label htmlFor="email">Email</label>
+                    <label htmlFor="email"></label>
                   </div>
-                  <div className="form-floating mb-3">
+                  <div className="col-md-6">
                     <input
                       type="text"
                       className="form-control"
                       id="address"
-                      placeholder="address"
+                      placeholder="Address"
                       value={address}
                       onChange={(event) => setAddress(event.target.value)}
                     />
-                    <label htmlFor="address">Address</label>
+                    <label htmlFor="address"></label>
                   </div>
-                  <div className="form-floating mb-3">
+                  <div className="col-md-6">
                     <input
-                      type="number"
+                      type="tel"
                       className="form-control"
                       id="phone_number"
-                      placeholder="phone_number"
+                      placeholder="Phone Number"
                       value={phone_number}
                       onChange={(event) => setPhoneNumber(event.target.value)}
                     />
-                    <label htmlFor="phone_number">Phone Number</label>
+                    <label htmlFor="phone_number"></label>
                   </div>
-                  <button className="btn btn-primary">Update</button>
-                  <button
-                    className="btn btn-primary"
-                    onClick={() => props.editToggle()}
-                  >
-                    cancel
-                  </button>
+                  <div className="btn-group gap-2">
+                    <button
+                      className="btn btn-lg text-primary btn-sm rounded-0 fw-bold fs-3"
+                      data-toggle="tooltip"
+                      data-placement="bottom"
+                      title="This will Submit your changes"
+                    >
+                      Update
+                    </button>
+                    <button
+                      className="btn btn-lg text-warning btn-sm rounded-0 fw-bold fs-3"
+                      data-toggle="tooltip"
+                      data-placement="bottom"
+                      title="This will Discard your changes"
+                      onClick={() => props.editToggle()}
+                    >
+                      Cancel
+                    </button>
+                  </div>
                 </form>
               </div>
             </div>
