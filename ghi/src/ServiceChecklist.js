@@ -1,13 +1,23 @@
 import React, { useState, useContext, useEffect } from "react";
 import { AuthContext } from "@galvanize-inc/jwtdown-for-react";
 import { Link, useParams, useNavigate } from "react-router-dom";
+import ChecklistCreation from "./ChecklistCreation";
+import useUser from "./useUser";
 
 function ServiceChecklist() {
     const { token } = useContext(AuthContext);
+    const user = useUser(token);
     const { serviceId } = useParams();
 
     const [checklistItems, setChecklistItems] = useState([])
+    const [services, setServices] = useState([]);
+    const [isEditing, setIsEditing] = useState(false);
 
+    const [editingService, setEditingService] = useState(null);
+    const toggleEditMode = (service) => {
+        setIsEditing(!isEditing);
+        setEditingService(service);
+    };
 
     const fetchServiceChecklistEntry = async (serviceId) => {
         const url = `http://localhost:8000/services/${serviceId}/checklist`
@@ -31,7 +41,16 @@ function ServiceChecklist() {
 
 
     return (
-        <p> this is working {serviceId}  </p>
+        <div className="container-fluid">
+            <div className="row">
+
+                <ChecklistCreation
+            token={token}
+            user={user}
+            />
+
+            </div>
+        </div>
     );
 
 }
