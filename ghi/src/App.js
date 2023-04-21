@@ -28,6 +28,7 @@ import ChecklistAll from "./ChecklistAll.js";
 
 import ServiceChecklist from "./ServiceChecklist.js";
 import ChecklistParent from "./ChecklistParent.js";
+import ChecklistEdit from "./ChecklistEdit.js";
 
 function App() {
   return (
@@ -62,7 +63,6 @@ function App() {
           {/* <Route path="new" element={<ServiceCreation />} />
             <Route path="all" element={<ServiceList />} /> */}
 
-
           <Route
             path="customerAppointmentCreation"
             element={<AppointmentCreation />}
@@ -71,9 +71,10 @@ function App() {
           <Route path="clientsignup" element={<ClientSignUpForm />} />
           <Route path="Login" element={<LoginForm />} />
 
-          <Route path="checklist"/>
-            <Route path="" element={<ChecklistParent />} />
-            <Route path="checklist/all" element={<ChecklistAll />} />
+          <Route path="checklist">
+            {/* <Route path="" element={<ChecklistParent />} /> */}
+            {/* <Route path="all" element={<ChecklistAll />} /> */}
+          </Route>
         </Routes>
       </AuthProvider>
     </BrowserRouter>

@@ -3,10 +3,10 @@ import { AuthContext } from "@galvanize-inc/jwtdown-for-react";
 
 function ChecklistAll() {
   const { token } = useContext(AuthContext);
-  const [checklist, setChecklist] = useState([]);
+  const [checklist, setChecklist] = useState();
 
   const fetchChecklist = async () => {
-    const checklistUrl = 'http://localhost:8000/api/checklist';
+    const checklistUrl = `http://localhost:8000/api/checklist`;
     const fetchConfig = {
       method: "GET",
       headers: {
