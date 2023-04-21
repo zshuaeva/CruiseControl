@@ -5,6 +5,7 @@ import useUser from "./useUser";
 import TechnicianList from "./ListTechnicians";
 import TechnicianForm from "./Technician/TechnicianForm";
 import TechnicianEdit from "./TechnicianEdit";
+import "./TechnicianParent.css";
 
 function TechnicianParent() {
   const { token } = useContext(AuthContext);
@@ -36,34 +37,36 @@ function TechnicianParent() {
   }, [token]);
 
   return (
-    <div className="container-fluid">
-      <div className="row">
-        <div className="col-12 col-md-4">
-          {toggle ? (
-            <TechnicianEdit
-              technician={editingTechnician}
-              editToggle={editToggle}
-              getTechnician={getTechnicians}
-              token={token}
-              user={user}
-            />
-          ) : (
-            <TechnicianForm
-              getTechnician={getTechnicians}
-              token={token}
-              user={user}
-            />
-          )}
-        </div>
-        <div className="col-12 col-md-8">
-          <div className="card-body">
-            <TechnicianList
-              technician={technician}
-              editToggle={editToggle}
-              getTechnicians={getTechnicians}
-              token={token}
-              user={user}
-            />
+    <div>
+      <div id="row">
+        <div className="row row-col-sm-3">
+          <div className="col align-self-end">
+            {toggle ? (
+              <TechnicianEdit
+                technician={editingTechnician}
+                editToggle={editToggle}
+                getTechnician={getTechnicians}
+                token={token}
+                user={user}
+              />
+            ) : (
+              <TechnicianForm
+                getTechnician={getTechnicians}
+                token={token}
+                user={user}
+              />
+            )}
+          </div>
+          <div id="table" className="col col-lg-9">
+            <div>
+              <TechnicianList
+                technician={technician}
+                editToggle={editToggle}
+                getTechnicians={getTechnicians}
+                token={token}
+                user={user}
+              />
+            </div>
           </div>
         </div>
       </div>

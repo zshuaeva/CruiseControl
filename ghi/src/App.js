@@ -1,19 +1,13 @@
-import { useEffect, useState, useContext } from "react";
-import { BrowserRouter, Routes, Route, useParams } from "react-router-dom";
-import DummyList from "./Construct.js";
-import ErrorNotification from "./ErrorNotification";
-import TechnicianForm from "./Technician/TechnicianForm.js";
+import { BrowserRouter, Routes, Route } from "react-router-dom";
 import ClientSignUpForm from "./ClientSignUp.js";
-import { AuthContext, AuthProvider } from "@galvanize-inc/jwtdown-for-react";
+import { AuthProvider } from "@galvanize-inc/jwtdown-for-react";
 import LoginForm from "./Login.js";
 import HeroPage from "./HeroPage.js";
 import ClientLanding from "./ClientLanding.js";
 import TechnicianLanding from "./TechnicianLanding.js";
 import Nav from "./Nav.js";
-import "bootstrap/dist/css/bootstrap.css";
+import "bootstrap-icons/font/bootstrap-icons.css";
 import TechnicianParent from "./TechnicianParent.js";
-import ServiceCreation from "./ServiceCreation.js";
-import ServiceList from "./ServiceList.js";
 import ServiceParent from "./ServiceParent.js";
 
 import AppointmentList from "./AppointmentList.js";
@@ -36,7 +30,8 @@ function App() {
 
           <Route path="clientlanding" element={<ClientLanding />} />
 
-          <Route path="technician" element={<TechnicianParent />}>
+          <Route path="technician" element={<TechnicianParent />}/>
+          <Route path="technician">
             <Route path="landing" element={<TechnicianLanding />} />
           </Route>
 
