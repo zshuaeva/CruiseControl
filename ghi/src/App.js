@@ -7,7 +7,7 @@ import ClientLanding from "./ClientLanding.js";
 import TechnicianLanding from "./TechnicianLanding.js";
 import Nav from "./Nav.js";
 import "bootstrap-icons/font/bootstrap-icons.css";
-import TechnicianParent from "./TechnicianParent.js";
+import TechnicianParent from "./TechParent.js";
 import ServiceParent from "./ServiceParent.js";
 
 import AppointmentList from "./AppointmentList.js";
