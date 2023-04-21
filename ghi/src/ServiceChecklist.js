@@ -10,7 +10,7 @@ function ServiceChecklist() {
 
 
     const fetchServiceChecklistEntry = async (serviceId) => {
-        const url = `http://localhost:8000/api/{serviceId}/checklist`
+        const url = `http://localhost:8000/services/${serviceId}/checklist`
         const fetchConfig = {
             method: "GET",
             headers: {
@@ -20,6 +20,7 @@ function ServiceChecklist() {
         };
         const response = await fetch(url, fetchConfig);
         const data = await response.json();
+        console.log(data)
         setChecklistItems(data);
     }
     useEffect(() => {
@@ -30,7 +31,7 @@ function ServiceChecklist() {
 
 
     return (
-        <p> this is working </p>
+        <p> this is working {serviceId}  </p>
     );
 
 }

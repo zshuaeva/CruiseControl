@@ -11,7 +11,7 @@ import ChecklistForm from "./ChecklistForm";
 function ChecklistParent() {
     const { token } = useContext(AuthContext);
     const user = useUser(token);
-    
+
     const [checklists, setChecklists] = useState([]);
     const [isEditing, setIsEditing] = useState(false);
     const [editingChecklist, setEditingChecklist] = useState(null);
@@ -77,9 +77,9 @@ function ChecklistParent() {
     );
 };
 
-  
 
-    
+
+
 
 
 export default ChecklistParent;

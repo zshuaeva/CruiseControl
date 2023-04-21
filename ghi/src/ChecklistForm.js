@@ -1,3 +1,4 @@
+// THIS VERSION DOES NOT CONTAIN A RUNNING LIST
 import React, { useState, useContext, useEffect } from "react";
 import { AuthContext } from "@galvanize-inc/jwtdown-for-react";
 
@@ -7,8 +8,6 @@ function ChecklistForm({ getChecklists, user }) {
   const [service, setService] = useState([]);
   const [serviceId, setServiceId] = useState("");
   const [serviceName, setServiceName] = useState("");
-  const [numForms, setNumForms] = useState(1);
-  const [formData, setFormData] = useState([{ checklist_item: "", service_id: "" }]);
 
   useEffect(() => {
     async function fetchServices() {
@@ -39,11 +38,11 @@ function ChecklistForm({ getChecklists, user }) {
     setServiceName(selectedService ? selectedService.service_name : "");
   };
 
-  const handleSubmit = async (event, index) => {
+  const handleSubmit = async (event) => {
     event.preventDefault();
     const data = {};
-    data.checklist_item = formData[index].checklist_item;
-    data.service_id = formData[index].service_id;
+    data.checklist_item = checklist_item;
+    data.service_id = serviceId;
 
     const url = "http://localhost:8000/api/checklist";
     const fetchConfig = {
@@ -59,80 +58,57 @@ function ChecklistForm({ getChecklists, user }) {
       await response.json();
       setChecklistItem("");
       setServiceName("");
-      setServiceId("");
+      setServiceId(serviceId);
     } else {
       console.error("Error creating checklist, please check input");
     }
   };
 
-  const handleAddForm = () => {
-    setNumForms(numForms + 1);
-    setFormData([...formData, { checklist_item: "", service_id: "" }]);
-  };
 
-  const handleInputChange = (event, index) => {
-    const { name, value } = event.target;
-    const newData = [...formData];
-    newData[index][name] = value;
-    setFormData(newData);
-  };
+  return (
+    <>
+      <div className="form-floating mb-3">
+        <select
+          onChange={handleDrop}
+          value={serviceId}
+          id="serviceId"
+          className="form-select"
+        >
+          <option value="">Select a Service</option>
+          {service.map((service) => {
+            return (
+              <option key={service.id} value={service.id}>
+                {service.service_name}
+              </option>
+            );
+          })}
+        </select>
+      </div>
 
-return (
-  <>
-    <div className="container-fluid d-flex justify-content-center mb-3">
-      <div className="shadow p-4 mt-4 w-75">
-        <h1>Create Checklist for (placeholder checklistname)</h1>
+      <div className="container-fluid d-flex justify-content-center">
+        <div className="shadow p-4 mt-4">
+          <h1>Create Checklist for (placeholder checklistname)</h1>
+          <form onSubmit={handleSubmit}>
+            <div className="form-floating mb-3">
+              <input
+                type="text"
+                className="form-control"
+                id="name"
+                value={checklist_item}
+                onChange={(event) =>
+                  setChecklistItem(event.target.value)
+                }
+                placeholder="Enter Step Details"
+              />
+              <label htmlFor="Enter Step">Enter Step Detail</label>
+            </div>
 
-        {formData.map((data, index) => {
-          return (
-            <form key={index} onSubmit={(event) => handleSubmit(event, index)}>
-              <div className="form-floating mb-3">
-                <input
-                  type="text"
-                  className="form-control"
-                  name="checklist_item"
-                  value={data.checklist_item}
-                  onChange={(event) => handleInputChange(event, index)}
-                  placeholder="Enter Step Details"
-                />
-                <label htmlFor="Enter Step">Enter Step Detail</label>
-              </div>
-
-              <div className="form-floating mb-3">
-                <select
-                  onChange={(event) => handleInputChange(event, index)}
-                  value={data.service_id}
-                  name="service_id"
-                  id="serviceId"
-                  className="form-select"
-                >
-                  <option value="">Select a Service</option>
-                  {service.map((service) => {
-                    return (
-                      <option key={service.id} value={service.id}>
-                        {service.service_name}
-                      </option>
-                    );
-                  })}
-                </select>
-              </div>
-
-              <button className="btn btn-primary me-2" type="submit">
-                Submit Step Detail
-              </button>
-            </form>
-          );
-        })}
-
-        <div className="d-flex justify-content-end">
-          <button className="btn btn-primary" onClick={handleAddForm}>
-            + additional step
-          </button>
+            <button className="btn btn-primary">Submit</button>
+          </form>
         </div>
       </div>
-    </div>
-  </>
-);
-};
+    </>
+  );
+}
 
 export default ChecklistForm;
