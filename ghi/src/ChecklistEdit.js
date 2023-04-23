@@ -1,26 +1,31 @@
-import { Link, useParams } from 'react-router-dom';
-import React, { useState, useContext, useEffect } from "react";
-// import { AuthContext } from "@galvanize-inc/jwtdown-for-react";
+import { useParams } from 'react-router-dom';
+import React, { useState } from "react";
 
-
-function ChecklistCreation({ getChecklist, user, token, checklistitems, serviceId }) {
-  // const { token } = useContext(AuthContext);
-    // const [service, setService] = useState([]);
+function ChecklistEdit({ getChecklist, token, props, checklistItems }) {
+  const { serviceId } = useParams();
   const [checklist_item, setChecklistItem] = useState("");
-  const [serviceName, setServiceName] = useState("");
-  const [restate, setRestate] = useState("")
+  const [checklistId, setChecklistId] = useState("");
+  console.log(checklistItems)
+  // const fetchChecklistId = async (checklist_id) => {
+  //       await fetch(`http://localhost:8000/api/checklist/${checklist_id}`, {
+  //           method: "DELETE",
+  //           headers: { Authorization: `Bearer ${token}` },
+  //       });
+  //       await getChecklist(serviceId);
+  //   };
 
+  const handleSubmit = async (event, checklist_id) => {
 
-  const handleSubmit = async (event) => {
     event.preventDefault();
-    const data = {};
-    data.checklist_item = checklist_item;
-    data.service_id = serviceId;
-    data.service_name = serviceName;
+    const data = {
+      checklist_item: checklist_item,
+      service_id: serviceId
+    };
+    console.log(data)
 
-    const url = "http://localhost:8000/api/checklist";
+    const url = `http://localhost:8000/checklist/${checklist_id}`;
     const fetchConfig = {
-      method: "POST",
+      method: "PUT",
       body: JSON.stringify(data),
       headers: {
         Authorization: `Bearer ${token}`,
@@ -31,19 +36,18 @@ function ChecklistCreation({ getChecklist, user, token, checklistitems, serviceI
     if (response.ok) {
       await response.json();
       setChecklistItem("");
-      setServiceName("");
       getChecklist(serviceId);
+      props.toggleEditMode();
     } else {
-      console.error("Error creating checklist, please check input");
+      console.error("Error updating checklist, please check input");
     }
   };
-
 
   return (
     <>
       <div className="container-fluid d-flex justify-content-center">
         <div className="shadow p-4 mt-4">
-          <h1>Create Checklist Item</h1>
+          <h1>Edit Checklist Item</h1>
           <form onSubmit={handleSubmit}>
             <div className="form-floating mb-3">
               <input
@@ -59,11 +63,12 @@ function ChecklistCreation({ getChecklist, user, token, checklistitems, serviceI
               <label htmlFor="Enter Step">Enter Step Detail</label>
             </div>
 
-            <button className="btn btn-primary">Submit</button>
+            <button className="btn btn-primary">Update</button>
           </form>
         </div>
       </div>
     </>
   );
 }
-export default ChecklistCreation;
+
+export default ChecklistEdit;

@@ -4,7 +4,8 @@ import { useContext } from "react";
 import useUser from "./useUser";
 
 import ChecklistAll from "./ChecklistAll";
-import ChecklistForm from "./ChecklistForm";
+import ChecklistCreation from "./ChecklistCreation";
+
 
 
 
@@ -65,7 +66,7 @@ function ChecklistParent() {
                 </div> */}
                 <div className="col-12 col-md-8">
                     <div className="card-body">
-                        <ChecklistForm
+                        <ChecklistCreation
                             getChecklists={getChecklists}
                             token={token}
                             user={user}

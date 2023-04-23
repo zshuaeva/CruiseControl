@@ -23,7 +23,7 @@ import AppointmentDetail from "./AppointmentDetail.js";
 
 import AppointmentEdit from "./AppointmentUpdate.js";
 
-import ChecklistForm from "./ChecklistForm.js";
+
 import ChecklistAll from "./ChecklistAll.js";
 import ChecklistCreation from "./ChecklistCreation.js";
 
@@ -75,7 +75,6 @@ function App() {
           <Route path="checklist"/>
             <Route path="" element={<ChecklistParent />} />
             <Route path="checklist/all" element={<ChecklistAll />} />
-            <Route path="checklist/form" element={<ChecklistForm />} />
         </Routes>
       </AuthProvider>
     </BrowserRouter>
