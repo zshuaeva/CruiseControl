@@ -17,7 +17,7 @@ test_user = {
     "address": "string",
     "phone_number": "string",
     "is_client": "true",
-    "is_technician": "false"
+    "is_technician": "false",
 }
 
 
@@ -27,10 +27,7 @@ def user_override():
 
 class CreateServiceQueries:
     def create(self, info, business_id):
-        result = {
-            "id": 12,
-            "business_id": business_id
-        }
+        result = {"id": 12, "business_id": business_id}
         result.update(info)
         return result
 
@@ -45,7 +42,7 @@ def test_create_service():
         "service_name": "double clean",
         "service_type": "detail",
         "service_description": "yellow",
-        "service_price": 5
+        "service_price": 5,
     }
     expected = {
         "service_name": "double clean",
@@ -53,7 +50,7 @@ def test_create_service():
         "service_description": "yellow",
         "service_price": 5,
         "id": 12,
-        "business_id": 1
+        "business_id": 1,
     }
 
     response = client.post("/api/services", json=json)
