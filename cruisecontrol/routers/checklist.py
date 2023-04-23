@@ -4,9 +4,8 @@ from fastapi import (
     status,
     Response,
     APIRouter,
-    Request,
 )
-from jwtdown_fastapi.authentication import Token
+
 from authenticator import authenticator
 from pydantic import BaseModel
 from typing import List
@@ -17,7 +16,6 @@ from queries.checklist import (
     ChecklistQueries,
     DuplicateChecklistError,
 )
-from queries.accounts import AccountOut
 
 
 class ChecklistForm(BaseModel):
