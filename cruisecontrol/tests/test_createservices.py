@@ -23,13 +23,11 @@ test_user = {
 def user_override():
     return test_user
 
-
-
 class CreateServiceQueries:
     def create(self, info, business_id):
         result = {
             "id": 12,
-            "business_id" : business_id
+            "business_id": business_id
         }
         result.update(info)
         return result
@@ -54,7 +52,6 @@ def test_create_service():
         "service_price": 5,
         "id": 12,
         "business_id": 1
-
     }
 
 

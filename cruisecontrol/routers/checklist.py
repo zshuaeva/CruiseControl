@@ -60,10 +60,10 @@ def create_checklist(
 ):
   business_id = account_data["business_id"]
   try:
-        return repo.create_checklist(info, business_id)
+    return repo.create_checklist(info, business_id)
   except DuplicateChecklistError:
-        response.status_code = status.HTTP_409_CONFLICT
-        return HttpError(detail="Checklist with the same id already exists")
+    response.status_code = status.HTTP_409_CONFLICT
+    return HttpError(detail="Checklist with the same id already exists")
   except Exception as e:
-        response.status_code = status.HTTP_500_INTERNAL_SERVER_ERROR
-        return HttpError(detail=str(e))
+    response.status_code = status.HTTP_500_INTERNAL_SERVER_ERROR
+    return HttpError(detail=str(e))
