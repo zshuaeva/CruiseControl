@@ -20,8 +20,10 @@ test_user = {
     "is_technician": "false"
 }
 
+
 def user_override():
     return test_user
+
 
 class CreateServiceQueries:
     def create(self, info, business_id):
@@ -53,7 +55,6 @@ def test_create_service():
         "id": 12,
         "business_id": 1
     }
-
 
     response = client.post("/api/services", json=json)
     app.dependency_overrides = {}
