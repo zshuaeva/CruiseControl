@@ -5,22 +5,15 @@ function ChecklistEdit({ getChecklist, token, checklistItem }) {
   const { serviceId } = useParams();
   const [checklist_item, setChecklistItem] = useState(checklistItem.checklist_item);
   const [checklist_item_id, setChecklistItemId] = useState("");
-  // const fetchChecklistId = async (checklist_id) => {
-  //       await fetch(`http://localhost:8000/api/checklist/${checklist_id}`, {
-  //           method: "DELETE",
-  //           headers: { Authorization: `Bearer ${token}` },
-  //       });
-  //       await getChecklist(serviceId);
-  //   };
+
 
   const handleSubmit = async (event) => {
-
     event.preventDefault();
     const data = {
       checklist_item: checklist_item,
       service_id: serviceId
     };
-    console.log(data, "test")
+
 
     const url = `http://localhost:8000/checklist/${checklistItem.id}`;
     const fetchConfig = {

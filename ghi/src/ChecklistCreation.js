@@ -1,14 +1,9 @@
-import { Link, useParams } from 'react-router-dom';
-import React, { useState, useContext, useEffect } from "react";
-// import { AuthContext } from "@galvanize-inc/jwtdown-for-react";
-
+import React, { useState} from "react";
 
 function ChecklistCreation({ getChecklist, user, token, checklistitems, serviceId }) {
-  // const { token } = useContext(AuthContext);
-    // const [service, setService] = useState([]);
+
   const [checklist_item, setChecklistItem] = useState("");
   const [serviceName, setServiceName] = useState("");
-  const [restate, setRestate] = useState("")
 
 
   const handleSubmit = async (event) => {

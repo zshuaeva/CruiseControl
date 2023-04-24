@@ -1,6 +1,6 @@
 import React, { useState, useContext, useEffect, useCallback } from "react";
 import { AuthContext } from "@galvanize-inc/jwtdown-for-react";
-import { Link, useParams, useNavigate } from "react-router-dom";
+import { useParams } from "react-router-dom";
 import ChecklistCreation from "./ChecklistCreation";
 import ChecklistList from "./ChecklistList";
 import useUser from "./useUser";
