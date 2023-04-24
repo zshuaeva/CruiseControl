@@ -1,10 +1,10 @@
 import React, { useState } from "react";
 
 function TechnicianEdit(props) {
-  const [id, setId] = useState(props.technician.id);
+  const [id] = useState(props.technician.id);
   const [username, setUsername] = useState(props.technician.username);
   const [password, setPassword] = useState(props.technician.password);
-  const [business_id, setbusiness_id] = useState(props.technician.business_id);
+  const [business_id] = useState(props.technician.business_id);
   const [employee_id, setEmployeeId] = useState(props.technician.employee_id);
   const [first_name, setFirstName] = useState(props.technician.first_name);
   const [last_name, setLastName] = useState(props.technician.last_name);

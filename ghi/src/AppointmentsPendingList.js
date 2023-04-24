@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useCallback } from "react";
 import { AuthContext } from "@galvanize-inc/jwtdown-for-react";
 import { useContext } from "react";
 import useUser from "./useUser";
@@ -11,25 +11,23 @@ function AppointmentPendingList() {
 
     const [appointments, setAppointments] = useState([]);
 
-    const getAppointments = async () => {
-        const listUrl = "http://localhost:8000/api/appointments";
-        const response = await fetch(listUrl, {
-            headers: { Authorization: `Bearer ${token}` },
-        });
-        if (response.ok) {
-            const data = await response.json();
-            const pendingAppointments = data.filter(
-                (appointment) => !appointment.is_approved
-            );
-            setAppointments(pendingAppointments);
-        }
-    };
+const getAppointments = useCallback(async () => {
+    const listUrl = "http://localhost:8000/api/appointments";
+    const response = await fetch(listUrl, {
+        headers: { Authorization: `Bearer ${token}` },
+    });
+    if (response.ok) {
+        const data = await response.json();
+        const pendingAppointments = data.filter(
+            (appointment) => !appointment.is_approved
+        );
+        setAppointments(pendingAppointments);
+    }
+}, [token]);
 
-    useEffect(() => {
-        if (token) {
-            getAppointments();
-        }
-    }, [token]);
+useEffect(() => {
+    getAppointments();
+}, [getAppointments]);
 
     const deleteAppointment = async (id) => {
         await fetch(`http://localhost:8000/api/appointments/${id}`, {
