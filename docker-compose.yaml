@@ -12,7 +12,7 @@ services:
       - ./cruisecontrol:/app
     environment:
       SIGNING_KEY: 1dba62137447861b2b2eb81e5886fa98d021007b
-      DATABASE_URL: postgresql://user:user@db/cruisecontrolpostgres
+      DATABASE_URL: "postgresql://user:user@db/cruisecontrolpostgres"
       WAIT_BEFORE: 5
       WAIT_TIMEOUT: 60
       WAIT_HOST: db:5432
