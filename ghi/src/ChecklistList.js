@@ -25,26 +25,28 @@ function ChecklistList({ toggleEditMode, getChecklist, token, user, checklistite
                         <tbody className="text-center">
                             {checklistitems
                                 .sort((a, b) => a.id - b.id)
-                                .map((checklistitems, index) => {
+                                .map((checklistitem, index) => {
                                     return (
-                                        <tr key={`${checklistitems.service_id/checklistitems}-${index}`}>
+                                        <tr key={`${checklistitem.service_id/checklistitem}-${index}`}>
 
                                             <td>
-                                                <Link to={`/services/${checklistitems.id}`} className="text-reset text-decoration-none">
-                                                    {checklistitems.checklist_item}
+                                                <Link to={`/services/${checklistitem.id}`} className="text-reset text-decoration-none">
+                                                    {checklistitem.checklist_item}
                                                 </Link>
                                             </td>
                                             <td>
                                                 <button
                                                     type="button"
-                                                    onClick={() => toggleEditMode(checklistitems)}
+                                                    onClick={() => {
+                                                        toggleEditMode(checklistitem)
+                                                    }}
                                                     className="btn btn-warning"
                                                 >
                                                     Edit
                                                 </button>
                                                 <button
                                                     type="button"
-                                                    onClick={() => deleteChecklistItem(checklistitems.id)}
+                                                    onClick={() => deleteChecklistItem(checklistitem.id)}
                                                     className="btn btn-danger"
                                                 >
                                                     Delete

@@ -12,10 +12,10 @@ function ServiceChecklist() {
     const { serviceId } = useParams();
     const [checklistItems, setChecklistItems] = useState([])
     const [isEditing, setIsEditing] = useState(false);
-    const [editingChecklist, setEditingChecklist] = useState(null);
-    const toggleEditMode = (checklist) => {
+    const [editingChecklistItem, setEditingChecklistItem] = useState(null);
+    const toggleEditMode = (checklist_item) => {
         setIsEditing(!isEditing);
-        setEditingChecklist(checklist);
+        setEditingChecklistItem(checklist_item);
     };
 
 const fetchServiceChecklistEntry = useCallback(async (serviceId) => {
@@ -46,9 +46,9 @@ useEffect(() => {
                 <div className="col-12 col-md-4">
                     {isEditing ? (
                     <ChecklistEdit
-                        checklist={editingChecklist}
+                        checklistItem={editingChecklistItem}
                         token={token}
-                        checklistItems={checklistItems}
+                        checklistitems={checklistItems}
                         toggleEditMode={toggleEditMode}
                         getChecklist={fetchServiceChecklistEntry}
                         user={user}
