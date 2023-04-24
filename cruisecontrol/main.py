@@ -1,8 +1,6 @@
 from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
 from routers import querytest, accounts, checklist, services, appointments
-import os
-from fastapi import APIRouter
 from authenticator import authenticator
 
 

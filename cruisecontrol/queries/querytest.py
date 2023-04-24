@@ -1,6 +1,5 @@
 from pydantic import BaseModel
 from queries.pool import pool
-from datetime import date, time
 from typing import List, Optional
 
 
@@ -61,9 +60,9 @@ class DummyRepository:
             with conn.cursor() as db:
                 result = db.execute(
                     """
-                    select id 
-                        , required_limited_text
-                        , required_unlimited_text
+                    select id
+                        ,required_limited_text
+                        ,required_unlimited_text
                     from dummy
                     where id = %s
                     """,

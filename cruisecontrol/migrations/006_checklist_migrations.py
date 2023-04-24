@@ -1,6 +1,6 @@
 steps = [
-  [
-    """
+    [
+        """
     CREATE TABLE checklist (
       id SERIAL PRIMARY KEY NOT NULL,
       line_item1 VARCHAR(50) NULL,
@@ -13,8 +13,8 @@ steps = [
       FOREIGN KEY (business_id) REFERENCES businesses (id)
     );
     """,
-    """
+        """
     DROP TABLE checklist;
     """,
-  ]
+    ]
 ]

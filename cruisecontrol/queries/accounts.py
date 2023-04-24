@@ -1,6 +1,5 @@
 from pydantic import BaseModel
 from queries.pool import pool
-from datetime import date, time
 from typing import List, Optional
 
 
@@ -194,7 +193,7 @@ class AccountQueries:
                 return AccountOutWithPassword(id=id, **old_data)
 
     # Get all
-    def get_all(self, business_id: int ) -> List[AccountOutWithPassword]:
+    def get_all(self, business_id: int) -> List[AccountOutWithPassword]:
         with pool.connection() as conn:
             with conn.cursor() as db:
                 results = db.execute(
@@ -237,7 +236,14 @@ class AccountQueries:
                     results.append(Account)
                 return results
 
-    def update(self, user_id: int, business_id: int, is_client:bool, is_technician:bool, account : AccountOut) -> AccountOut:
+    def update(
+        self,
+        user_id: int,
+        business_id: int,
+        is_client: bool,
+        is_technician: bool,
+        account: AccountOut,
+    ) -> AccountOut:
         with pool.connection() as conn:
             with conn.cursor() as db:
                 db.execute(
@@ -271,7 +277,7 @@ class AccountQueries:
                 old_data["is_technician"] = is_technician
                 old_data["is_client"] = is_client
                 old_data["id"] = user_id
-                return AccountOut( **old_data)
+                return AccountOut(**old_data)
 
     def delete(self, user_id: int, business_id: int) -> bool:
         with pool.connection() as conn:
@@ -282,12 +288,13 @@ class AccountQueries:
                     WHERE id = %s AND business_id = %s
 
                     """,
-                    [user_id,
-                    business_id
-                    ],
+                    [user_id, business_id],
                 )
                 return True
-    def gettech(self, user_id: int, business_id:int) -> Optional[AccountOutWithPassword]:
+
+    def gettech(
+        self, user_id: int, business_id: int
+    ) -> Optional[AccountOutWithPassword]:
         with pool.connection() as conn:
             with conn.cursor() as db:
                 result = db.execute(
@@ -308,9 +315,7 @@ class AccountQueries:
                 from accounts
                 where id = %s AND business_id = %s AND is_technician = true
                 """,
-                    [user_id,
-                    business_id
-                     ],
+                    [user_id, business_id],
                 )
                 record = result.fetchone()
                 if record is None:
@@ -332,8 +337,7 @@ class AccountQueries:
                 )
                 return Account
 
-
-    def get_all_tech(self, business_id: int ) -> List[AccountOutWithPassword]:
+    def get_all_tech(self, business_id: int) -> List[AccountOutWithPassword]:
         with pool.connection() as conn:
             with conn.cursor() as db:
                 results = db.execute(
