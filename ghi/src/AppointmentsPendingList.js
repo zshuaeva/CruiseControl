@@ -26,7 +26,9 @@ function AppointmentPendingList() {
   }, [token]);
 
   useEffect(() => {
-    getAppointments();
+    if (token) {
+      getAppointments();
+    }
   }, [getAppointments]);
 
   const deleteAppointment = async (id) => {
