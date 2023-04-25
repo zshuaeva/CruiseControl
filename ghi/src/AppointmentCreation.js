@@ -62,9 +62,12 @@ function AppointmentCreation() {
   };
 
   const getServices = async (event) => {
-    const response = await fetch("http://localhost:8000/api/services", {
-      headers: { Authorization: `Bearer ${token}` },
-    });
+    const response = await fetch(
+      `${process.env.REACT_APP_USER_SERVICE_API_HOST}/api/services`,
+      {
+        headers: { Authorization: `Bearer ${token}` },
+      }
+    );
     const data = await response.json();
     setServices(data);
   };

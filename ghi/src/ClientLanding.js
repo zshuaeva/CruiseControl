@@ -32,7 +32,11 @@ function ClientLanding() {
           <div className="row p-2">
             <div className="col-lg-8 mb-4">
               <CalendarComponent />
-              {showPending ? <AppointmentPendingList /> : <AppointmentApprovedList />}
+              {showPending ? (
+                <AppointmentPendingList />
+              ) : (
+                <AppointmentApprovedList />
+              )}
             </div>
             <div className="col-lg-4">
               <div className="row mb-4">
@@ -44,8 +48,9 @@ function ClientLanding() {
                       </h5>
                       <button
                         onClick={handlePendingClick}
-                        className={`btn btn-primary mt-3 mb-2 w-100 ${showPending ? "active" : ""
-                          }`}
+                        className={`btn btn-primary mt-3 mb-2 w-100 ${
+                          showPending ? "active" : ""
+                        }`}
                       >
                         View
                       </button>
@@ -62,8 +67,9 @@ function ClientLanding() {
                       </h5>
                       <button
                         onClick={handleApprovedClick}
-                        className={`btn btn-primary mt-3 mb-2 w-100 ${!showPending ? "active" : ""
-                          }`}
+                        className={`btn btn-primary mt-3 mb-2 w-100 ${
+                          !showPending ? "active" : ""
+                        }`}
                       >
                         View
                       </button>
@@ -79,7 +85,7 @@ function ClientLanding() {
                         Services
                       </h5>
                       <Link
-                        to="/service"
+                        to="/services"
                         className="btn btn-primary mt-3 mb-2 w-100"
                       >
                         View
@@ -96,7 +102,7 @@ function ClientLanding() {
                         Technicians
                       </h5>
                       <Link
-                        to="/technician/"
+                        to="/technicians"
                         className="btn btn-primary mt-3 mb-2 w-100"
                       >
                         View

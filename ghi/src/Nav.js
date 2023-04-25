@@ -81,13 +81,16 @@ function Nav() {
                   </li>
                   <hr className="nav-divider" />
                   <li className="nav-item p-2">
-                    <NavLink className="nav-link fw-bold fs-5" to="/technician">
+                    <NavLink
+                      className="nav-link fw-bold fs-5"
+                      to="/technicians"
+                    >
                       TECHNICIAN
                     </NavLink>
                   </li>
                   <hr className="nav-divider" />
                   <li className="nav-item p-2">
-                    <NavLink className="nav-link fw-bold fs-5" to="/service">
+                    <NavLink className="nav-link fw-bold fs-5" to="/services">
                       Service
                     </NavLink>
                   </li>
@@ -145,7 +148,7 @@ function Nav() {
                   <li className="nav-item p-2">
                     <NavLink
                       className="nav-link fw-bold fs-5"
-                      to="/technician/landing"
+                      to="/technicianlanding"
                     >
                       TECHNICIAN Landing
                     </NavLink>
