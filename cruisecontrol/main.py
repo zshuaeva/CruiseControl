@@ -7,7 +7,12 @@ import os
 
 app = FastAPI()
 
-origins = [os.environ.get("CORS_HOST", None), "http://localhost:3000"]
+origins = [
+    os.environ.get(
+        "CORS_HOST", "https://low-expectations.gitlab.io/cruise-control", None
+    ),
+    "http://localhost:3000",
+]
 
 app.include_router(querytest.router)
 app.include_router(accounts.router)
