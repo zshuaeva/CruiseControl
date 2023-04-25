@@ -18,9 +18,12 @@ import AppointmentDetail from "./AppointmentDetail.js";
 
 import AppointmentEdit from "./AppointmentUpdate.js";
 
+const domain = /https:\/\/[^/]+/;
+const basename = process.env.PUBLIC_URL.replace(domain, "");
+
 function App() {
   return (
-    <BrowserRouter>
+    <BrowserRouter basename={basename}>
       <AuthProvider
         tokenUrl={`${process.env.REACT_APP_USER_SERVICE_API_HOST}/token`}
       >
@@ -30,7 +33,7 @@ function App() {
 
           <Route path="clientlanding" element={<ClientLanding />} />
 
-          <Route path="technician" element={<TechnicianParent />}/>
+          <Route path="technician" element={<TechnicianParent />} />
           <Route path="technician">
             <Route path="landing" element={<TechnicianLanding />} />
           </Route>
