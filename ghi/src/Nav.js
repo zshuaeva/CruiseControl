@@ -7,8 +7,6 @@ import "./Nav.css";
 function Nav() {
   const { token } = useContext(AuthContext);
   const user = useUser(token);
-  console.log(token);
-  console.log(user);
   const { logout } = useToken();
   return (
     <nav id="nav" className="navbar fixed-top">

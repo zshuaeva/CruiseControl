@@ -3,7 +3,6 @@ import useToken, { AuthContext } from "@galvanize-inc/jwtdown-for-react";
 import useUser from "./useUser";
 import { useNavigate } from "react-router-dom";
 
-
 const LoginForm = () => {
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
@@ -11,6 +10,8 @@ const LoginForm = () => {
   const navigate = useNavigate();
   const { token } = useContext(AuthContext);
   const user = useUser(token);
+  console.log(token);
+  console.log(user);
 
   const handleSubmit = async (e) => {
     e.preventDefault();
