@@ -6,7 +6,7 @@ function TechnicianList({
   user,
 }) {
   async function technicianDelete(user_id) {
-    const deleteUrl = `${process.env.REACT_APP_USER_SERVICE_API_HOST}/api/accounts/${user_id}`;
+    const deleteUrl = `${process.env.REACT_APP_USER_SERVICE_API_HOST}/accounts/${user_id}`;
     const response = await fetch(deleteUrl, {
       method: "delete",
       headers: { Authorization: `Bearer ${token}` },

@@ -23,7 +23,7 @@ function TechnicianForm({ getTechnician, token, user }) {
     data.email = email;
     data.address = address;
     data.phone_number = phone_number;
-    const url = `${process.env.REACT_APP_USER_SERVICE_API_HOST}/api/technician`;
+    const url = `${process.env.REACT_APP_USER_SERVICE_API_HOST}/technician`;
     const fetchConfig = {
       method: "POST",
       body: JSON.stringify(data),
