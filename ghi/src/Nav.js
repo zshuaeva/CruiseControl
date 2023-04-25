@@ -8,12 +8,36 @@ function Nav() {
   const { token } = useContext(AuthContext);
   const user = useUser(token);
   const { logout } = useToken();
+
+  const closeOffcanvas = () => {
+    document.getElementById("offcanvasNavbar").classList.remove("show");
+  };
+
   return (
     <nav id="nav" className="navbar fixed-top">
       <div className="container-fluid">
-        <NavLink className="navbar-brand text-light fw-bold fs-4" to="/">
-          Cruise Control
-        </NavLink>
+        {user?.is_client ? (
+          <NavLink
+            className="navbar-brand text-light fw-bold fs-4"
+            to="/clientlanding"
+          >
+            Cruise Control
+          </NavLink>
+        ) : user?.is_technician ? (
+          <NavLink
+            className="navbar-brand text-light fw-bold fs-4"
+            to="/technician/landing"
+          >
+            Cruise Control
+          </NavLink>
+        ) : (
+          <NavLink
+            className="navbar-brand text-light fw-bold fs-4"
+            to="/"
+          >
+            Cruise Control
+          </NavLink>
+        )}
         <button
           className="navbar-toggler bg-secondary"
           type="button"

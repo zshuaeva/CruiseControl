@@ -37,35 +37,33 @@ function ServiceParent() {
   }, [token]);
 
   return (
-    <div className="container-fluid">
-      <div className="row">
-        <div className="col-12 col-md-4">
-          {isEditing ? (
-            <ServiceEdit
-              service={editingService}
-              toggleEditMode={toggleEditMode}
-              getServices={getServices}
-              token={token}
-              user={user}
-            />
-          ) : (
-            <ServiceCreation
-              getServices={getServices}
-              token={token}
-              user={user}
-            />
-          )}
-        </div>
-        <div className="col-12 col-md-8">
-          <div className="card-body">
-            <ServiceList
-              services={services}
-              toggleEditMode={toggleEditMode}
-              getServices={getServices}
-              token={token}
-              user={user}
-            />
-          </div>
+    <div className="row">
+      <div className="col-12 col-md-4">
+        {isEditing ? (
+          <ServiceEdit
+            service={editingService}
+            toggleEditMode={toggleEditMode}
+            getServices={getServices}
+            token={token}
+            user={user}
+          />
+        ) : (
+          <ServiceCreation
+            getServices={getServices}
+            token={token}
+            user={user}
+          />
+        )}
+      </div>
+      <div className="col-12 col-md-8">
+        <div className="card-body">
+          <ServiceList
+            services={services}
+            toggleEditMode={toggleEditMode}
+            getServices={getServices}
+            token={token}
+            user={user}
+          />
         </div>
       </div>
     </div>
