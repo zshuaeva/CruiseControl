@@ -27,7 +27,7 @@ function TechnicianEdit(props) {
     data.email = email;
     data.address = address;
     data.phone_number = phone_number;
-    const url = `http://localhost:8000/api/accounts/${id}`;
+    const url = `${process.env.REACT_APP_USER_SERVICE_API_HOST}/api/accounts/${id}`;
     const fetchConfig = {
       method: "PUT",
       body: JSON.stringify(data),

@@ -20,7 +20,7 @@ function ServiceParent() {
   };
 
   const getServices = async () => {
-    const listUrl = "http://localhost:8000/api/services";
+    const listUrl = `${process.env.REACT_APP_USER_SERVICE_API_HOST}/api/services`;
     const response = await fetch(listUrl, {
       headers: { Authorization: `Bearer ${token}` },
     });
