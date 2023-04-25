@@ -110,7 +110,7 @@ def get_account(
         )
 
 
-@router.get("/api/accounts/", response_model=List[AccountOut])
+@router.get("/api/accounts", response_model=List[AccountOut])
 def get_accounts(
     repo: AccountQueries = Depends(),
     account_data: dict = Depends(authenticator.get_current_account_data),
@@ -174,7 +174,7 @@ def get_technician(
         )
 
 
-@router.get("/api/technicians/", response_model=List[AccountOut])
+@router.get("/api/technicians", response_model=List[AccountOut])
 def get_technicians(
     repo: AccountQueries = Depends(),
     account_data: dict = Depends(authenticator.get_current_account_data),

@@ -30,34 +30,35 @@ function App() {
         <div className="container-fluid">
           <Nav />
           <div className="mt-5 pt-5">
-
             <Routes>
               <Route path="/" element={<HeroPage />} />
 
               <Route path="clientlanding" element={<ClientLanding />} />
 
+              <Route path="technicians" element={<TechnicianParent />} />
 
-              <Route path="/technician" element={<TechnicianParent />} />
-              <Route path="/technicianlanding" element={<TechnicianLanding />} />
+              <Route path="technicianlanding" element={<TechnicianLanding />} />
 
-
-              <Route path="/appointment">
+              <Route path="appointment">
                 <Route path="all" element={<AppointmentList />} />
                 <Route path="pending" element={<AppointmentPendingList />} />
                 <Route path="approved" element={<AppointmentApprovedList />} />
                 <Route path=":appointmentId" element={<AppointmentDetail />} />
-                <Route path=":appointmentId/edit" element={<AppointmentEdit />} />
+                <Route
+                  path=":appointmentId/edit"
+                  element={<AppointmentEdit />}
+                />
               </Route>
 
-              <Route path="service" element={<ServiceParent />} />
+              <Route path="services" element={<ServiceParent />} />
 
               <Route
-                path="/customerAppointmentCreation"
+                path="customerAppointmentCreation"
                 element={<AppointmentCreation />}
               />
 
-              <Route path="/clientsignup" element={<ClientSignUpForm />} />
-              <Route path="/Login" element={<LoginForm />} />
+              <Route path="clientsignup" element={<ClientSignUpForm />} />
+              <Route path="Login" element={<LoginForm />} />
             </Routes>
           </div>
         </div>

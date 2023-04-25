@@ -20,7 +20,7 @@ function TechnicianParent() {
   };
 
   const getTechnicians = async () => {
-    const listUrl = `${process.env.REACT_APP_USER_SERVICE_API_HOST}/api/technicians/`;
+    const listUrl = `${process.env.REACT_APP_USER_SERVICE_API_HOST}/api/technicians`;
     const response = await fetch(listUrl, {
       headers: { Authorization: `Bearer ${token}` },
     });
