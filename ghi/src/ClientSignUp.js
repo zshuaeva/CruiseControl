@@ -11,7 +11,7 @@ function ClientSignUpForm() {
     data.username = username;
     data.password = password;
     data.business_name = businessName;
-    const url = `${basename}/api/clientsignup`;
+    const url = `${process.env.REACT_APP_USER_SERVICE_API_HOST}/api/clientsignup`;
     const fetchConfig = {
       method: "POST",
       body: JSON.stringify(data),
