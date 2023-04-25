@@ -24,9 +24,7 @@ const basename = process.env.PUBLIC_URL.replace(domain, "");
 function App() {
   return (
     <BrowserRouter basename={basename}>
-      <AuthProvider
-        tokenUrl={`${process.env.REACT_APP_USER_SERVICE_API_HOST}/token`}
-      >
+      <AuthProvider tokenUrl={`${process.env.PUBLIC_URL}/token`}>
         <Nav />
         <Routes>
           <Route path="/" element={<HeroPage />} />
