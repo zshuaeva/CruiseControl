@@ -33,12 +33,12 @@ function App() {
 
           <Route path="clientlanding" element={<ClientLanding />} />
 
-          <Route path="technician" element={<TechnicianParent />} />
-          <Route path="technician">
+          <Route path="/technician" element={<TechnicianParent />} />
+          <Route path="/technician">
             <Route path="landing" element={<TechnicianLanding />} />
           </Route>
 
-          <Route path="appointment">
+          <Route path="/appointment">
             <Route path="all" element={<AppointmentList />} />
             <Route path="pending" element={<AppointmentPendingList />} />
             <Route path="approved" element={<AppointmentApprovedList />} />
@@ -46,18 +46,18 @@ function App() {
             <Route path=":appointmentId/edit" element={<AppointmentEdit />} />
           </Route>
 
-          <Route path="service" element={<ServiceParent />} />
+          <Route path="/service" element={<ServiceParent />} />
           {/* <Route path="new" element={<ServiceCreation />} />
             <Route path="all" element={<ServiceList />} /> */}
           {/* </Route> */}
 
           <Route
-            path="customerAppointmentCreation"
+            path="/customerAppointmentCreation"
             element={<AppointmentCreation />}
           />
 
-          <Route path="clientsignup" element={<ClientSignUpForm />} />
-          <Route path="Login" element={<LoginForm />} />
+          <Route path="/clientsignup" element={<ClientSignUpForm />} />
+          <Route path="/Login" element={<LoginForm />} />
         </Routes>
       </AuthProvider>
     </BrowserRouter>

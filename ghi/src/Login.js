@@ -10,8 +10,6 @@ const LoginForm = () => {
   const navigate = useNavigate();
   const { token } = useContext(AuthContext);
   const user = useUser(token);
-  console.log(token);
-  console.log(user);
 
   const handleSubmit = async (e) => {
     e.preventDefault();
