@@ -27,38 +27,40 @@ function App() {
       <AuthProvider
         tokenUrl={`${process.env.REACT_APP_USER_SERVICE_API_HOST}/token`}
       >
-        <Nav />
-        <Routes>
-          <Route path="/" element={<HeroPage />} />
+        <div className="container-fluid">
+          <Nav />
+          <div className="mt-5 pt-5">
 
-          <Route path="clientlanding" element={<ClientLanding />} />
+            <Routes>
+              <Route path="/" element={<HeroPage />} />
 
-          <Route path="/technician" element={<TechnicianParent />} />
-          <Route path="/technician">
-            <Route path="landing" element={<TechnicianLanding />} />
-          </Route>
+              <Route path="clientlanding" element={<ClientLanding />} />
 
-          <Route path="/appointment">
-            <Route path="all" element={<AppointmentList />} />
-            <Route path="pending" element={<AppointmentPendingList />} />
-            <Route path="approved" element={<AppointmentApprovedList />} />
-            <Route path=":appointmentId" element={<AppointmentDetail />} />
-            <Route path=":appointmentId/edit" element={<AppointmentEdit />} />
-          </Route>
 
-          <Route path="/service" element={<ServiceParent />} />
-          {/* <Route path="new" element={<ServiceCreation />} />
-            <Route path="all" element={<ServiceList />} /> */}
-          {/* </Route> */}
+              <Route path="/technician" element={<TechnicianParent />} />
+              <Route path="/technicianlanding" element={<TechnicianLanding />} />
 
-          <Route
-            path="/customerAppointmentCreation"
-            element={<AppointmentCreation />}
-          />
 
-          <Route path="/clientsignup" element={<ClientSignUpForm />} />
-          <Route path="/Login" element={<LoginForm />} />
-        </Routes>
+              <Route path="/appointment">
+                <Route path="all" element={<AppointmentList />} />
+                <Route path="pending" element={<AppointmentPendingList />} />
+                <Route path="approved" element={<AppointmentApprovedList />} />
+                <Route path=":appointmentId" element={<AppointmentDetail />} />
+                <Route path=":appointmentId/edit" element={<AppointmentEdit />} />
+              </Route>
+
+              <Route path="service" element={<ServiceParent />} />
+
+              <Route
+                path="/customerAppointmentCreation"
+                element={<AppointmentCreation />}
+              />
+
+              <Route path="/clientsignup" element={<ClientSignUpForm />} />
+              <Route path="/Login" element={<LoginForm />} />
+            </Routes>
+          </div>
+        </div>
       </AuthProvider>
     </BrowserRouter>
   );

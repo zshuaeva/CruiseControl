@@ -30,8 +30,8 @@ const LoginForm = () => {
   }, [user, navigate]);
 
   return (
-    <div className="container-fluid d-flex justify-content-center">
-      <div className="shadow p-4 mt-4">
+    <div className="container d-flex justify-content-center mt-5" style={{ marginTop: "5rem" }}>
+      <div className="shadow p-4" style={{ width: "30rem", backgroundColor: "#f8f9fa" }}>
         <h1>Log Into Cruise Control</h1>
         <form onSubmit={(e) => handleSubmit(e)}>
           <div className="form-floating mb-3">

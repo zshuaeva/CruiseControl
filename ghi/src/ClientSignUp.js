@@ -1,12 +1,19 @@
-import { useState } from "react";
+import React, { useState, useContext, useEffect } from "react";
+import { useNavigate } from "react-router-dom";
+import useToken, { AuthContext } from "@galvanize-inc/jwtdown-for-react";
+import useUser from "./useUser";
 
 function ClientSignUpForm() {
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
   const [businessName, setBusinessName] = useState("");
+  const navigate = useNavigate();
+  const { login } = useToken();
+  const { token } = useContext(AuthContext);
+  const user = useUser(token);
 
-  const handleSubmit = async (event) => {
-    event.preventDefault();
+  const handleSubmit = async (e) => {
+    e.preventDefault();
     const data = {};
     data.username = username;
     data.password = password;
@@ -22,20 +29,24 @@ function ClientSignUpForm() {
     const response = await fetch(url, fetchConfig);
     if (response.ok) {
       await response.json();
-      setUsername("");
-      setPassword("");
-      setBusinessName("");
+      try {
+        await login(username, password);
+        setUsername("");
+        setPassword("");
+        setBusinessName("");
+        navigate("/clientlanding");
+      } catch (error) {
+        console.error("Error logging in:", error);
+      }
     } else {
       console.error("Error creating Client; Please try again");
     }
   };
+
   return (
     <>
-      <a className="btn btn-primary" href="/clientlanding" role="button">
-        Temporary Link to Client Landing
-      </a>
-      <div className="container-fluid d-flex justify-content-center">
-        <div className="shadow p-4 mt-4">
+      <div className="container d-flex justify-content-center mt-5" style={{ marginTop: "5rem" }}>
+        <div className="shadow p-4" style={{ width: "30rem", backgroundColor: "#f8f9fa" }}>
           <h1>Sign Up For Cruise Control</h1>
           <form onSubmit={handleSubmit}>
             <div className="form-floating mb-3">
