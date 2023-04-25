@@ -11,7 +11,7 @@ origins = [
     os.environ.get(
         "CORS_HOST", None
     ),
-    "https://low-expectations.gitlab.io/cruise-control",
+    "https://low-expectations.gitlab.io",
     "http://localhost:3000",
 ]
 
