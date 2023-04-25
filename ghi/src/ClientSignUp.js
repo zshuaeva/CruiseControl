@@ -11,7 +11,7 @@ function ClientSignUpForm() {
     data.username = username;
     data.password = password;
     data.business_name = businessName;
-    const url = "http://localhost:8000/api/clientsignup";
+    const url = `${basename}/api/clientsignup`;
     const fetchConfig = {
       method: "POST",
       body: JSON.stringify(data),
