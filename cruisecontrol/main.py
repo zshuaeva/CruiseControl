@@ -9,8 +9,9 @@ app = FastAPI()
 
 origins = [
     os.environ.get(
-        "CORS_HOST", "https://low-expectations.gitlab.io/cruise-control", None
+        "CORS_HOST", None
     ),
+    "https://low-expectations.gitlab.io/cruise-control",
     "http://localhost:3000",
 ]
 
