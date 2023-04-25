@@ -70,7 +70,7 @@ async def create_client_account(
     return AccountToken(account=account, **token.dict())
 
 
-@router.post("/api/technician", response_model=AccountToken | HttpError)
+@router.post("/technician", response_model=AccountToken | HttpError)
 async def create_technician_account(
     info: AccountIn,
     request: Request,
@@ -127,7 +127,7 @@ def get_accounts(
         )
 
 
-@router.put("/api/accounts/{user_id}", response_model=AccountOut)
+@router.put("/accounts/{user_id}", response_model=AccountOut)
 def update_account(
     user_id: int,
     account: AccountOut,
@@ -148,7 +148,7 @@ def update_account(
         )
 
 
-@router.delete("/api/accounts/{user_id}", response_model=bool)
+@router.delete("/accounts/{user_id}", response_model=bool)
 def delete_accounts(
     user_id: int,
     repo: AccountQueries = Depends(),
@@ -158,7 +158,7 @@ def delete_accounts(
     return repo.delete(user_id, business_id)
 
 
-@router.get("/api/technician/{user_id}", response_model=AccountOut)
+@router.get("/technician/{user_id}", response_model=AccountOut)
 def get_technician(
     user_id: int,
     repo: AccountQueries = Depends(),
@@ -174,7 +174,7 @@ def get_technician(
         )
 
 
-@router.get("/api/technicians", response_model=List[AccountOut])
+@router.get("/technicians", response_model=List[AccountOut])
 def get_technicians(
     repo: AccountQueries = Depends(),
     account_data: dict = Depends(authenticator.get_current_account_data),
