@@ -7,6 +7,8 @@ import "./Nav.css";
 function Nav() {
   const { token } = useContext(AuthContext);
   const user = useUser(token);
+  console.log(token);
+  console.log(user);
   const { logout } = useToken();
   return (
     <nav id="nav" className="navbar fixed-top">
@@ -57,10 +59,7 @@ function Nav() {
                   </li>
                   <hr className="nav-divider" />
                   <li className="nav-item p-2">
-                    <NavLink
-                      className="nav-link fw-bold fs-5"
-                      to="/technician"
-                    >
+                    <NavLink className="nav-link fw-bold fs-5" to="/technician">
                       TECHNICIAN
                     </NavLink>
                   </li>

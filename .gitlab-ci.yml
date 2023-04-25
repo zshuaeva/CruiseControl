@@ -17,6 +17,9 @@ lint-test-job:
 #   stage: test
 #   needs:
 #     - lint-test-job
+#  before_script:
+#     - export DATABASE_URL=os.environ["DATABASE_URL"]
+#     - export SIGNING_KEY=os.environ["SIGNING_KEY"]
 #   script:
 #     - cd cruisecontrol
 #     - pip install -r requirements.txt
