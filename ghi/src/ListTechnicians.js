@@ -6,14 +6,13 @@ function TechnicianList({
   user,
 }) {
   async function technicianDelete(user_id) {
-    const deleteUrl = `http://localhost:8000/api/accounts/${user_id}`;
+    const deleteUrl = `${process.env.REACT_APP_USER_SERVICE_API_HOST}/api/accounts/${user_id}`;
     const response = await fetch(deleteUrl, {
       method: "delete",
       headers: { Authorization: `Bearer ${token}` },
     });
     await getTechnicians();
   }
-
 
   return (
     <div>
@@ -47,7 +46,9 @@ function TechnicianList({
                       <th scope="col" className="col">
                         phone number
                       </th>
-                      <th scope="col" className="col text-warning">Actions</th>
+                      <th scope="col" className="col text-warning">
+                        Actions
+                      </th>
                     </tr>
                   </thead>
                   <tbody>
