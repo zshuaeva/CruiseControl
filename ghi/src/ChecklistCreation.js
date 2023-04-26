@@ -1,16 +1,13 @@
-import { Link, useParams } from "react-router-dom";
-import React, { useState, useContext, useEffect } from "react";
+import React, { useState } from "react";
 
 function ChecklistCreation({
   getChecklist,
-  user,
   token,
-  checklistitems,
   serviceId,
 }) {
   const [checklist_item, setChecklistItem] = useState("");
   const [serviceName, setServiceName] = useState("");
-  const [restate, setRestate] = useState("");
+
 
   const handleSubmit = async (event) => {
     event.preventDefault();
