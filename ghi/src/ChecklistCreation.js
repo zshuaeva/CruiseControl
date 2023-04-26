@@ -13,7 +13,7 @@ function ChecklistCreation({ getChecklist, user, token, checklistitems, serviceI
     data.service_id = serviceId;
     data.service_name = serviceName;
 
-    const url = "http://localhost:8000/api/checklist";
+    const url = `${process.env.REACT_APP_USER_SERVICE_API_HOST}api/checklist`;
     const fetchConfig = {
       method: "POST",
       body: JSON.stringify(data),

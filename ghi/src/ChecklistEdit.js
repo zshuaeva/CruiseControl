@@ -4,7 +4,6 @@ import React, { useState } from "react";
 function ChecklistEdit({ getChecklist, token, checklistItem }) {
   const { serviceId } = useParams();
   const [checklist_item, setChecklistItem] = useState(checklistItem.checklist_item);
-  const [checklist_item_id, setChecklistItemId] = useState("");
 
 
   const handleSubmit = async (event) => {
@@ -15,7 +14,7 @@ function ChecklistEdit({ getChecklist, token, checklistItem }) {
     };
 
 
-    const url = `http://localhost:8000/checklist/${checklistItem.id}`;
+    const url = `${process.env.REACT_APP_USER_SERVICE_API_HOST}/${checklistItem.id}`;
     const fetchConfig = {
       method: "PUT",
       body: JSON.stringify(data),

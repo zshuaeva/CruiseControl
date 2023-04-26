@@ -8,12 +8,12 @@ class DuplicateChecklistError(ValueError):
 
 
 class ChecklistIn(BaseModel):
-  line_item1: Optional[str]
-  line_item2: Optional[str]
-  line_item3: Optional[str]
-  line_item4: Optional[str]
-  line_item5: Optional[str]
-  line_item6: Optional[str]
+    line_item1: Optional[str]
+    line_item2: Optional[str]
+    line_item3: Optional[str]
+    line_item4: Optional[str]
+    line_item5: Optional[str]
+    line_item6: Optional[str]
 
 
 class ChecklistOut(ChecklistIn):

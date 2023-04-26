@@ -19,7 +19,7 @@ function ServiceChecklist() {
     };
 
 const fetchServiceChecklistEntry = useCallback(async (serviceId) => {
-  const url = `http://localhost:8000/services/${serviceId}/checklist`
+  const url = `${process.env.REACT_APP_USER_SERVICE_API_HOST}/services/${serviceId}/checklist`
   const fetchConfig = {
     method: "GET",
     headers: {

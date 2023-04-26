@@ -11,10 +11,10 @@ from pydantic import BaseModel
 from typing import List
 
 from queries.checklist import (
-  ChecklistIn,
-  ChecklistOut,
-  ChecklistQueries,
-  DuplicateChecklistError,
+    ChecklistIn,
+    ChecklistOut,
+    ChecklistQueries,
+    DuplicateChecklistError,
 )
 from queries.accounts import AccountOut
 
@@ -30,10 +30,8 @@ class ChecklistForm(BaseModel):
     service_id: int
 
 
-
 class HttpError(BaseModel):
     detail: str
-
 
 
 router = APIRouter()
