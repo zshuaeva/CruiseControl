@@ -53,11 +53,9 @@ def test_create_appointment():
         "vehicle_color": "Blue",
         "notes": "Some notes",
         "date_of_service": "2023-05-01",
-        'is_approved': False,
+        "is_approved": False,
         "service_id": 1,
         "business_id": 1,
-
-
     }
     expected = {
         "customer_name": "John Doe",

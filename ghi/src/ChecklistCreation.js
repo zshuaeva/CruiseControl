@@ -1,6 +1,6 @@
 import React, { useState} from "react";
 
-function ChecklistCreation({ getChecklist, user, token, checklistitems, serviceId }) {
+function ChecklistCreation({ getChecklist, token, serviceId }) {
 
   const [checklist_item, setChecklistItem] = useState("");
   const [serviceName, setServiceName] = useState("");
