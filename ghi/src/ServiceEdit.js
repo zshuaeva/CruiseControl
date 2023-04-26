@@ -1,5 +1,5 @@
-import React, { useState, useEffect } from "react";
-import { useParams } from "react-router-dom";
+import React, { useState } from "react";
+
 
 function ServiceEdit(props) {
   const [id, setId] = useState(props.service.id);
