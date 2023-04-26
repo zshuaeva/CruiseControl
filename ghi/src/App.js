@@ -21,8 +21,9 @@ import AppointmentEdit from "./AppointmentUpdate.js";
 function App() {
   const domain = /https:\/\/[^/]+/;
   const basename = process.env.PUBLIC_URL.replace(domain, "");
-  console.log(basename);
-  console.log(domain);
+  console.log("************", basename);
+  console.log("_____________", domain);
+  console.log("HHHHHHHHHHHHHHHHHHHHHHHHHHHHHH");
   return (
     <BrowserRouter basename={basename}>
       <AuthProvider
