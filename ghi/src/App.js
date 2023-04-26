@@ -21,6 +21,7 @@ import AppointmentEdit from "./AppointmentUpdate.js";
 
 const domain = /https:\/\/[^/]+/;
 const basename = process.env.PUBLIC_URL.replace(domain, "");
+import ChecklistEdit from "./ChecklistEdit.js";
 
 function App() {
   return (
