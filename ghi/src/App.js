@@ -1,19 +1,15 @@
-import { useEffect, useState, useContext } from "react";
-import { BrowserRouter, Routes, Route, useParams } from "react-router-dom";
-import DummyList from "./Construct.js";
-import ErrorNotification from "./ErrorNotification";
-import TechnicianForm from "./Technician/TechnicianForm.js";
+import { BrowserRouter, Routes, Route } from "react-router-dom";
 import ClientSignUpForm from "./ClientSignUp.js";
-import { AuthContext, AuthProvider } from "@galvanize-inc/jwtdown-for-react";
+import { AuthProvider } from "@galvanize-inc/jwtdown-for-react";
 import LoginForm from "./Login.js";
 import HeroPage from "./HeroPage.js";
 import ClientLanding from "./ClientLanding.js";
 import TechnicianLanding from "./TechnicianLanding.js";
 import Nav from "./Nav.js";
-import "bootstrap/dist/css/bootstrap.css";
-import ServiceCreation from "./ServiceCreation.js";
-import ServiceList from "./ServiceList.js";
+import "bootstrap-icons/font/bootstrap-icons.css";
+import TechnicianParent from "./TechParent.js";
 import ServiceParent from "./ServiceParent.js";
+import ServiceChecklist from "./ServiceChecklist.js";
 
 import AppointmentList from "./AppointmentList.js";
 import AppointmentCreation from "./AppointmentCreation.js";
@@ -23,59 +19,68 @@ import AppointmentDetail from "./AppointmentDetail.js";
 
 import AppointmentEdit from "./AppointmentUpdate.js";
 
-import ChecklistForm from "./ChecklistForm.js";
-import ChecklistAll from "./ChecklistAll.js";
-
-import ServiceChecklist from "./ServiceChecklist.js";
-import ChecklistParent from "./ChecklistParent.js";
+const domain = /https:\/\/[^/]+/;
+const basename = process.env.PUBLIC_URL.replace(domain, "");
 import ChecklistEdit from "./ChecklistEdit.js";
 
 function App() {
   return (
-    <BrowserRouter>
+    <BrowserRouter basename={basename}>
       <AuthProvider
         tokenUrl={`${process.env.REACT_APP_USER_SERVICE_API_HOST}/token`}
       >
-        <Nav />
-        <Routes>
-          <Route path="/" element={<HeroPage />} />
+        <div className="container-fluid">
+          <Nav />
+          <div className="mt-5 pt-5">
+            <Routes>
+              <Route path="/" element={<HeroPage />} />
 
-          <Route path="clientlanding" element={<ClientLanding />} />
+              <Route path="clientlanding" element={<ClientLanding />} />
 
-          <Route path="technician">
-            <Route path="new" element={<TechnicianForm />} />
-            <Route path="landing" element={<TechnicianLanding />} />
-          </Route>
+              <Route path="technicians" element={<TechnicianParent />} />
 
-          <Route path="appointment">
-            <Route path="all" element={<AppointmentList />} />
-            <Route path="pending" element={<AppointmentPendingList />} />
-            <Route path="approved" element={<AppointmentApprovedList />} />
-            <Route path=":appointmentId" element={<AppointmentDetail />} />
-            <Route path=":appointmentId/edit" element={<AppointmentEdit />} />
-          </Route>
+              <Route path="technicianlanding" element={<TechnicianLanding />} />
 
-          <Route path="service">
-            <Route path="" element={<ServiceParent />} />
-            <Route path=":serviceId/checklist" element={<ServiceChecklist />} />
-          </Route>
+              <Route path="appointment">
+                <Route path="all" element={<AppointmentList />} />
+                <Route path="pending" element={<AppointmentPendingList />} />
+                <Route path="approved" element={<AppointmentApprovedList />} />
+                <Route path=":appointmentId" element={<AppointmentDetail />} />
+                <Route
+                  path=":appointmentId/edit"
+                  element={<AppointmentEdit />}
+                />
+              </Route>
 
-          {/* <Route path="new" element={<ServiceCreation />} />
+              <Route path="services" element={<ServiceParent />} />
+              <Route path="service">
+                <Route path="" element={<ServiceParent />} />
+                <Route
+                  path=":serviceId/checklist"
+                  element={<ServiceChecklist />}
+                />
+              </Route>
+
+              {/* <Route path="new" element={<ServiceCreation />} />
             <Route path="all" element={<ServiceList />} /> */}
 
-          <Route
-            path="customerAppointmentCreation"
-            element={<AppointmentCreation />}
-          />
+              <Route
+                path="customerAppointmentCreation"
+                element={<AppointmentCreation />}
+              />
+              <Route
+                path="customerAppointmentCreation"
+                element={<AppointmentCreation />}
+              />
 
-          <Route path="clientsignup" element={<ClientSignUpForm />} />
-          <Route path="Login" element={<LoginForm />} />
+              <Route path="clientsignup" element={<ClientSignUpForm />} />
+              <Route path="Login" element={<LoginForm />} />
 
-          <Route path="checklist">
-            {/* <Route path="" element={<ChecklistParent />} /> */}
-            {/* <Route path="all" element={<ChecklistAll />} /> */}
-          </Route>
-        </Routes>
+              <Route path="clientsignup" element={<ClientSignUpForm />} />
+              <Route path="Login" element={<LoginForm />} />
+            </Routes>
+          </div>
+        </div>
       </AuthProvider>
     </BrowserRouter>
   );

@@ -1,6 +1,5 @@
 from pydantic import BaseModel
 from queries.pool import pool
-from datetime import date, time
 from typing import List, Optional
 
 
@@ -48,7 +47,7 @@ class ChecklistQueries:
                     """
                     SELECT id
                     , checklist_item
-                    , service_id 
+                    , service_id
                     FROM checklist
                     WHERE service_id = %s
                     """,
