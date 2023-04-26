@@ -4,7 +4,7 @@ import { useParams } from "react-router-dom";
 import ChecklistCreation from "./ChecklistCreation";
 import ChecklistList from "./ChecklistList";
 import useUser from "./useUser";
-import ChecklistEdit from "./ChecklistEdit";
+
 
 function ServiceChecklist() {
   const { token } = useContext(AuthContext);
@@ -46,16 +46,7 @@ function ServiceChecklist() {
       <div className="row">
         <div className="col-12 col-md-4">
           {isEditing ? (
-            <ChecklistEdit
-              checklistItem={editingChecklistItem}
-              token={token}
-              checklistitems={checklistItems}
-              toggleEditMode={toggleEditMode}
-              getChecklist={fetchServiceChecklistEntry}
-              user={user}
-              serviceId={serviceId}
-              setIsEditing={setIsEditing}
-            />
+            console.log("edit call and props go here?")
           ) : (
             <ChecklistCreation
               token={token}
