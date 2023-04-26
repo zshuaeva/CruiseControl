@@ -51,17 +51,35 @@ function App() {
               </Route>
 
               <Route path="services" element={<ServiceParent />} />
+          <Route path="service">
+            <Route path="" element={<ServiceParent />} />
+            <Route path=":serviceId/checklist" element={<ServiceChecklist />} />
+          </Route>
+
+          {/* <Route path="new" element={<ServiceCreation />} />
+            <Route path="all" element={<ServiceList />} /> */}
+
 
               <Route
                 path="customerAppointmentCreation"
                 element={<AppointmentCreation />}
               />
+          <Route
+            path="customerAppointmentCreation"
+            element={<AppointmentCreation />}
+          />
 
               <Route path="clientsignup" element={<ClientSignUpForm />} />
               <Route path="Login" element={<LoginForm />} />
             </Routes>
           </div>
         </div>
+          <Route path="clientsignup" element={<ClientSignUpForm />} />
+          <Route path="Login" element={<LoginForm />} />
+
+          <Route path="checklist"/>
+            <Route path="" element={<ChecklistParent />} />
+            <Route path="checklist/all" element={<ChecklistAll />} />
       </AuthProvider>
     </BrowserRouter>
   );
