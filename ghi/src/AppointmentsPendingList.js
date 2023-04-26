@@ -15,7 +15,6 @@ function AppointmentPendingList() {
     const response = await fetch(listUrl, {
       headers: { Authorization: `Bearer ${token}` },
     });
-    console.log(token);
     if (response.ok) {
       const data = await response.json();
       const pendingAppointments = data.filter(
