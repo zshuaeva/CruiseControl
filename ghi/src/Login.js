@@ -23,9 +23,9 @@ const LoginForm = () => {
 
   useEffect(() => {
     if (user && user.is_client) {
-      // navigate("/clientlanding");
+      navigate("/clientlanding");
     } else if (user && user.is_technician) {
-      // navigate("/technician/landing");
+      navigate("/technician/landing");
     }
   }, [user, navigate]);
 
