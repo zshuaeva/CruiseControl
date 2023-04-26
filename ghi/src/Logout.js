@@ -1,6 +1,9 @@
 import { useContext } from "react";
 import { useNavigate } from "react-router-dom";
 import { AuthContext } from "@galvanize-inc/jwtdown-for-react";
+import { useContext } from "react";
+import { useNavigate } from "react-router-dom";
+import { AuthContext } from "@galvanize-inc/jwtdown-for-react";
 
 function Logout() {
   const { setToken } = useContext(AuthContext);
@@ -11,11 +14,13 @@ function Logout() {
       await fetch(`${process.env.REACT_APP_USER_SERVICE_API_HOST}/token`, {
         method: "DELETE",
         credentials: "include",
+        method: "DELETE",
+        credentials: "include",
       });
       setToken(null);
       document.cookie =
         "fastapi_token=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;";
-      // navigate('/Login');
+      navigate("/Login");
     } catch (error) {
       console.error(error);
     }
