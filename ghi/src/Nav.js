@@ -23,18 +23,20 @@ function Nav() {
           >
             Cruise Control
           </NavLink>
-        ) : user?.is_technician ? (
+        ) : null}
+        {user?.is_technician ? (
           <NavLink
             className="navbar-brand text-light fw-bold fs-4"
             to="/technician/landing"
           >
             Cruise Control
           </NavLink>
-        ) : (
+        ) : null}
+        {user === null ? (
           <NavLink className="navbar-brand text-light fw-bold fs-4" to="/">
             Cruise Control
           </NavLink>
-        )}
+        ) : null}
         <button
           className="navbar-toggler bg-secondary"
           type="button"

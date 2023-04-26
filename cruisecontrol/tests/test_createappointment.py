@@ -7,6 +7,7 @@ from authenticator import authenticator
 
 client = TestClient(app)
 
+
 test_user = {
     "id": 1,
     "username": "Nick",
@@ -56,6 +57,7 @@ def test_create_appointment():
         "service_id": 1,
         "business_id": 1,
     }
+
     expected = {
         "customer_name": "John Doe",
         "customer_phone": 1234567890,
