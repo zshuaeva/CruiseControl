@@ -30,7 +30,7 @@ function App() {
           <Nav />
           <div className="mt-5 pt-5">
             <Routes>
-              <Route path="" element={<HeroPage />} />
+              <Route path="/" element={<HeroPage />} />
 
               <Route path="cruise-control">
                 <Route path="clientlanding" element={<ClientLanding />} />
