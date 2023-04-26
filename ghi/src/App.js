@@ -9,6 +9,7 @@ import Nav from "./Nav.js";
 import "bootstrap-icons/font/bootstrap-icons.css";
 import TechnicianParent from "./TechParent.js";
 import ServiceParent from "./ServiceParent.js";
+import ServiceChecklist from "./ServiceChecklist.js";
 
 import AppointmentList from "./AppointmentList.js";
 import AppointmentCreation from "./AppointmentCreation.js";
@@ -50,11 +51,28 @@ function App() {
               </Route>
 
               <Route path="services" element={<ServiceParent />} />
+              <Route path="service">
+                <Route path="" element={<ServiceParent />} />
+                <Route
+                  path=":serviceId/checklist"
+                  element={<ServiceChecklist />}
+                />
+              </Route>
+
+              {/* <Route path="new" element={<ServiceCreation />} />
+            <Route path="all" element={<ServiceList />} /> */}
 
               <Route
                 path="customerAppointmentCreation"
                 element={<AppointmentCreation />}
               />
+              <Route
+                path="customerAppointmentCreation"
+                element={<AppointmentCreation />}
+              />
+
+              <Route path="clientsignup" element={<ClientSignUpForm />} />
+              <Route path="Login" element={<LoginForm />} />
 
               <Route path="clientsignup" element={<ClientSignUpForm />} />
               <Route path="Login" element={<LoginForm />} />
