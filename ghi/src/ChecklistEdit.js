@@ -1,86 +1,63 @@
-import React, { useState, useEffect } from "react";
+import React, { useParams } from "react-router-dom";
+import { useState } from "react";
 
+function ChecklistEdit({ getChecklist, token, checklistItem, setIsEditing }) {
+  const { serviceId } = useParams();
+  const [checklist_item, setChecklistItem] = useState(checklistItem.checklist_item);
+  const [checklist_item_id, setChecklistItemId] = useState("");
 
-function ChecklistEdit(props) {
-    const [id , setId] = useState(props.checklist.id);
-    const [checklist_item, setChecklist_Item] = useState(props.checklist.checklist_item);
-    const [service_id, setService_Id] = useState(props.checklist.service_id);
-
-    const handleSubmit = async (event) => {
-        event.preventDefault();
-        const data = {};
-        data.id = id;
-        data.checklist_item = checklist_item;
-        data.service_id = service_id;
-        const submitUrl = `http://localhost:8000/api/checklist/${id}`;
-        const fetchConfig = {
-            method: "PUT",
-            body: JSON.stringify(data),
-            headers: {
-                Authorization: `Bearer ${props.token}`,
-                "Content-Type": "application/json",
-            }
-        };
-        const response = await fetch(submitUrl, fetchConfig);
-        if (response.ok) {
-            await response.json();
-            props.getChecklists();
-            props.toggleEditMode();
-        } else {
-            console.error(
-                "Error updating checklist; Please try again."
-            )
-        };
+  const handleSubmit = async (event) => {
+    event.preventDefault();
+    const data = {
+      checklist_item: checklist_item,
+      service_id: serviceId,
     };
-    return (
-      <div>
-        {props.token && props.user?.is_client === true ? (
-          <div className="container-fluid">
-            <div className="row">
-              <div className="col-12">
-                <div className="shadow p-4 mt-4">
-                  <h1>Edit A Checklist Item</h1>
-                  <form onSubmit={handleSubmit}>
-                    <div className="form-floating mb-3">
-                      <input
-                        type="text"
-                        className="form-control"
-                        id="checklist_item"
-                        value={checklist_item}
-                        onChange={(event) =>
-                          setChecklist_Item(event.target.value)
-                        }
-                        required
-                        placeholder="checklist_item"
-                      />
-                      <label htmlFor="checklist_item">Checklist Item</label>
-                    </div>
-                    <div className="form-floating mb-3">
-                      <input
-                        type="text"
-                        className="form-control"
-                        id="service_id"
-                        value={service_id}
-                        onChange={(event) => setService_Id(event.target.value)}
-                        required
-                        placeholder="service_id"
-                      />
-                      <label htmlFor="service_id">Service Id</label>
-                    </div>
-                    <button className="btn btn-">Update</button>
-                  </form>
-                </div>
-              </div>
-            </div>
-          </div>
-        ) : null}
-        {props.toke && props.user?.is_client === false ? (
-            <div className= "alert alert-danger" role="alert">
-                This area is off limits.
-            </div>
-        ) : null}
-      </div>
-    );
+    console.log(data, "test");
 
+    const url = `http://localhost:8000/checklist/${checklistItem.id}`;
+    const fetchConfig = {
+      method: "PUT",
+      body: JSON.stringify(data),
+      headers: {
+        Authorization: `Bearer ${token}`,
+        "Content-Type": "application/json",
+      },
+    };
+    const response = await fetch(url, fetchConfig);
+    if (response.ok) {
+      await response.json();
+      setChecklistItem("");
+      getChecklist(serviceId);
+      setIsEditing(false);
+    } else {
+      console.error("Error updating checklist, please check input");
+    }
+  };
+
+  return (
+    <>
+      <div className="container-fluid d-flex justify-content-center">
+        <div className="shadow p-4 mt-4">
+          <h1>Edit Checklist Item</h1>
+          <form onSubmit={handleSubmit}>
+            <div className="form-floating mb-3">
+              <input
+                type="text"
+                className="form-control"
+                id="name"
+                value={checklist_item}
+                onChange={(event) => setChecklistItem(event.target.value)}
+                placeholder="Enter Step Details"
+              />
+              <label htmlFor="Enter Step">Enter Step Detail</label>
+            </div>
+
+            <button className="btn btn-primary">Update</button>
+          </form>
+        </div>
+      </div>
+    </>
+  );
 }
+
 export default ChecklistEdit;
