@@ -39,7 +39,7 @@ appointments = [
 
 
 def user_override():
-    return test_appointments
+    return appointments
 
     class MockAppointmentQueries:
         def get_all(self, repo, business_id):
