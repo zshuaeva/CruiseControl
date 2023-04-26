@@ -45,7 +45,7 @@ def get_all_checklist(
 
 
 @router.get(
-    "/services/{service_id}/checklist/",
+    "/services/{service_id}/checklist",
     response_model=List[ChecklistOut],
 )
 def get_one_checklist(
