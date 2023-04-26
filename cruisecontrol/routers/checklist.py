@@ -4,9 +4,7 @@ from fastapi import (
     status,
     Response,
     APIRouter,
-    Request,
 )
-from jwtdown_fastapi.authentication import Token
 from authenticator import authenticator
 from pydantic import BaseModel
 from typing import List
@@ -17,7 +15,6 @@ from queries.checklist import (
     ChecklistQueries,
     DuplicateChecklistError,
 )
-from queries.accounts import AccountOut
 
 
 class ChecklistForm(BaseModel):
@@ -90,7 +87,6 @@ def update_checklist_item(
     repo: ChecklistQueries = Depends(),
     account_data=Depends(authenticator.get_current_account_data),
 ) -> ChecklistOut:
-    business_id = account_data["business_id"]
     return repo.update(checklist_id, checklist)
 
 

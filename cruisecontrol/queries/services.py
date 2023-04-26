@@ -1,7 +1,6 @@
 from pydantic import BaseModel
 from queries.pool import pool
-from datetime import date, time
-from typing import List, Optional
+from typing import List
 
 
 class ServiceIn(BaseModel):
@@ -129,13 +128,13 @@ class ServiceQueries:
             with conn.cursor() as db:
                 result = db.execute(
                     """
-                    select id 
-                        , service_name
-                        , service_type 
-                        , service_description 
-                        , service_price 
-                        , business_id 
-                    from services 
+                    select id
+                        ,service_name
+                        ,service_type
+                        ,service_description
+                        ,service_price
+                        ,business_id
+                    from services
                     where id = %s and business_id = %s
                     """,
                     [service_id, business_id],
