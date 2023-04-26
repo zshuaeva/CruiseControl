@@ -81,7 +81,7 @@ function AppointmentEdit() {
       // setDateOfService("");
       // setBusinessId("");
       // setServiceId("");
-      navigate(-1);
+      // navigate(-1);
     } else {
       console.error("Error creating appointment; Please try again.");
     }
