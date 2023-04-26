@@ -53,7 +53,7 @@ function ChecklistEdit({ getChecklist, token, checklistItem }) {
               <label htmlFor="Enter Step">Enter Step Detail</label>
             </div>
 
-            <button className="btn btn-primary">Update</button>
+            <button className="btn btn-warning">Update</button>
           </form>
         </div>
       </div>
