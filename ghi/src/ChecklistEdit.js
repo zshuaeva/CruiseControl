@@ -14,7 +14,7 @@ function ChecklistEdit({ getChecklist, token, checklistItem }) {
     };
 
 
-    const url = `${process.env.REACT_APP_USER_SERVICE_API_HOST}/${checklistItem.id}`;
+    const url = `${process.env.REACT_APP_USER_SERVICE_API_HOST}/checklist/${checklistItem.id}`;
     const fetchConfig = {
       method: "PUT",
       body: JSON.stringify(data),

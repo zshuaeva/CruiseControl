@@ -1,6 +1,6 @@
 import React, { useState, useContext, useEffect, useCallback } from "react";
 import { AuthContext } from "@galvanize-inc/jwtdown-for-react";
-import { useParams } from "react-router-dom";
+import { Link, useParams, useNavigate } from "react-router-dom";
 import ChecklistCreation from "./ChecklistCreation";
 import ChecklistList from "./ChecklistList";
 import useUser from "./useUser";
@@ -18,8 +18,9 @@ function ServiceChecklist() {
         setEditingChecklistItem(checklist_item);
     };
 
+
 const fetchServiceChecklistEntry = useCallback(async (serviceId) => {
-  const url = `${process.env.REACT_APP_USER_SERVICE_API_HOST}/services/${serviceId}/checklist`
+  const url = `${process.env.REACT_APP_USER_SERVICE_API_HOST}/${serviceId}/checklist`
   const fetchConfig = {
     method: "GET",
     headers: {
@@ -53,6 +54,7 @@ useEffect(() => {
                         getChecklist={fetchServiceChecklistEntry}
                         user={user}
                         serviceId={serviceId}
+                        setIsEditing={setIsEditing}
                     />
                     ) : (
 

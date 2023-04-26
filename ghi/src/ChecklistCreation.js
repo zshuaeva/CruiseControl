@@ -1,9 +1,12 @@
-import React, { useState} from "react";
+import { Link, useParams } from 'react-router-dom';
+import React, { useState, useContext, useEffect } from "react";
 
-function ChecklistCreation({ getChecklist, token, serviceId }) {
 
+
+function ChecklistCreation({ getChecklist, user, token, checklistitems, serviceId }) {
   const [checklist_item, setChecklistItem] = useState("");
   const [serviceName, setServiceName] = useState("");
+  const [restate, setRestate] = useState("")
 
 
   const handleSubmit = async (event) => {
@@ -13,7 +16,7 @@ function ChecklistCreation({ getChecklist, token, serviceId }) {
     data.service_id = serviceId;
     data.service_name = serviceName;
 
-    const url = `${process.env.REACT_APP_USER_SERVICE_API_HOST}api/checklist`;
+    const url = `${process.env.REACT_APP_USER_SERVICE_API_HOST}/api/checklist`;
     const fetchConfig = {
       method: "POST",
       body: JSON.stringify(data),

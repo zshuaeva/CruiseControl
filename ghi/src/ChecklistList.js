@@ -4,7 +4,7 @@ import { Link } from "react-router-dom";
 
 function ChecklistList({ toggleEditMode, getChecklist, token, user, checklistitems, serviceId}) {
     const deleteChecklistItem = async (checklist_id) => {
-        await fetch(`http://localhost:8000/api/checklist/${checklist_id}`, {
+        await fetch(`${process.env.REACT_APP_USER_SERVICE_API_HOST}/api/checklist/${checklist_id}`, {
             method: "DELETE",
             headers: { Authorization: `Bearer ${token}` },
         });
