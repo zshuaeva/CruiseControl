@@ -5,7 +5,6 @@ import ChecklistCreation from "./ChecklistCreation";
 import ChecklistList from "./ChecklistList";
 import useUser from "./useUser";
 
-
 function ServiceChecklist() {
   const { token } = useContext(AuthContext);
   const user = useUser(token);
