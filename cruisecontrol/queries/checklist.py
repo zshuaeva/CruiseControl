@@ -1,6 +1,5 @@
 from pydantic import BaseModel
 from queries.pool import pool
-from datetime import date, time
 from typing import List, Optional
 
 

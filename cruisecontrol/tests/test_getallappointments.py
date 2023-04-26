@@ -1,14 +1,13 @@
 from fastapi.testclient import TestClient
 from main import app
-from queries.appointments import AppointmentQueries, AppointmentOut
+from queries.appointments import AppointmentQueries
 from authenticator import authenticator
-from typing import List
-from datetime import date
+
 
 client = TestClient(app)
 
 
-test_appointments = [
+appointments = [
     {
         "id": 1,
         "business_id": 1,

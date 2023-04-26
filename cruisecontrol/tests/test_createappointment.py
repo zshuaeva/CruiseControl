@@ -1,7 +1,6 @@
 from fastapi.testclient import TestClient
 from main import app
 from queries.appointments import (
-    AppointmentOut,
     AppointmentQueries,
 )
 from authenticator import authenticator
