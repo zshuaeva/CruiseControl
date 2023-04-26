@@ -7,16 +7,15 @@ import ServiceEdit from "./ServiceEdit";
 import ServiceList from "./ServiceList";
 import ServiceChecklist from "./ServiceChecklist";
 
-
 function ServiceParent() {
   const { token } = useContext(AuthContext);
   const user = useUser(token);
 
-    const [services, setServices] = useState([]);
-    const [isEditing, setIsEditing] = useState(false);
-    const [editingService, setEditingService] = useState(null);
+  const [services, setServices] = useState([]);
+  const [isEditing, setIsEditing] = useState(false);
+  const [editingService, setEditingService] = useState(null);
 
-    // const [isChecklist,]
+  // const [isChecklist,]
 
   const toggleEditMode = (service) => {
     setIsEditing(!isEditing);
@@ -74,4 +73,4 @@ function ServiceParent() {
   );
 }
 
-export default ServiceParent
+export default ServiceParent;

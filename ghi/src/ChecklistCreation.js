@@ -1,13 +1,16 @@
-import { Link, useParams } from 'react-router-dom';
+import { Link, useParams } from "react-router-dom";
 import React, { useState, useContext, useEffect } from "react";
 
-
-
-function ChecklistCreation({ getChecklist, user, token, checklistitems, serviceId }) {
+function ChecklistCreation({
+  getChecklist,
+  user,
+  token,
+  checklistitems,
+  serviceId,
+}) {
   const [checklist_item, setChecklistItem] = useState("");
   const [serviceName, setServiceName] = useState("");
-  const [restate, setRestate] = useState("")
-
+  const [restate, setRestate] = useState("");
 
   const handleSubmit = async (event) => {
     event.preventDefault();
@@ -36,7 +39,6 @@ function ChecklistCreation({ getChecklist, user, token, checklistitems, serviceI
     }
   };
 
-
   return (
     <>
       <div className="container-fluid d-flex justify-content-center">
@@ -49,9 +51,7 @@ function ChecklistCreation({ getChecklist, user, token, checklistitems, serviceI
                 className="form-control"
                 id="name"
                 value={checklist_item}
-                onChange={(event) =>
-                  setChecklistItem(event.target.value)
-                }
+                onChange={(event) => setChecklistItem(event.target.value)}
                 placeholder="Enter Step Details"
               />
               <label htmlFor="Enter Step">Enter Step Detail</label>

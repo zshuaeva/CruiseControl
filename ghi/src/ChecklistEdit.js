@@ -1,18 +1,18 @@
-import { useParams } from 'react-router-dom';
+import { useParams } from "react-router-dom";
 import React, { useState } from "react";
 
 function ChecklistEdit({ getChecklist, token, checklistItem }) {
   const { serviceId } = useParams();
-  const [checklist_item, setChecklistItem] = useState(checklistItem.checklist_item);
-
+  const [checklist_item, setChecklistItem] = useState(
+    checklistItem.checklist_item
+  );
 
   const handleSubmit = async (event) => {
     event.preventDefault();
     const data = {
       checklist_item: checklist_item,
-      service_id: serviceId
+      service_id: serviceId,
     };
-
 
     const url = `${process.env.REACT_APP_USER_SERVICE_API_HOST}/checklist/${checklistItem.id}`;
     const fetchConfig = {
@@ -45,9 +45,7 @@ function ChecklistEdit({ getChecklist, token, checklistItem }) {
                 className="form-control"
                 id="name"
                 value={checklist_item}
-                onChange={(event) =>
-                  setChecklistItem(event.target.value)
-                }
+                onChange={(event) => setChecklistItem(event.target.value)}
                 placeholder="Enter Step Details"
               />
               <label htmlFor="Enter Step">Enter Step Detail</label>

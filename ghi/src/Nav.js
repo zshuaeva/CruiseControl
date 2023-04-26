@@ -31,10 +31,7 @@ function Nav() {
             Cruise Control
           </NavLink>
         ) : (
-          <NavLink
-            className="navbar-brand text-light fw-bold fs-4"
-            to="/"
-          >
+          <NavLink className="navbar-brand text-light fw-bold fs-4" to="/">
             Cruise Control
           </NavLink>
         )}
