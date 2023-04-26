@@ -9,7 +9,7 @@ import Nav from "./Nav.js";
 import "bootstrap-icons/font/bootstrap-icons.css";
 import TechnicianParent from "./TechParent.js";
 import ServiceParent from "./ServiceParent.js";
-import ServiceChecklist from "./ServiceChecklist.js";
+import ChecklistParent from "./ChecklistParent.js";
 
 import AppointmentList from "./AppointmentList.js";
 import AppointmentCreation from "./AppointmentCreation.js";
@@ -56,7 +56,7 @@ function App() {
                 <Route path="" element={<ServiceParent />} />
                 <Route
                   path=":serviceId/checklist"
-                  element={<ServiceChecklist />}
+                  element={<ChecklistParent />}
                 />
               </Route>
 
