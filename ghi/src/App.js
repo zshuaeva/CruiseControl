@@ -18,10 +18,11 @@ import AppointmentDetail from "./AppointmentDetail.js";
 
 import AppointmentEdit from "./AppointmentUpdate.js";
 
-const domain = /https:\/\/[^/]+/;
-const basename = process.env.PUBLIC_URL.replace(domain, "");
-
 function App() {
+  const domain = /https:\/\/[^/]+/;
+  const basename = process.env.PUBLIC_URL.replace(domain, "");
+  console.log(basename);
+  console.log(domain);
   return (
     <BrowserRouter basename={basename}>
       <AuthProvider
