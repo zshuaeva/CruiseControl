@@ -32,43 +32,32 @@ function App() {
             <Routes>
               <Route path="/" element={<HeroPage />} />
 
-              <Route path="cruise-control">
-                <Route path="clientlanding" element={<ClientLanding />} />
+              <Route path="clientlanding" element={<ClientLanding />} />
 
-                <Route path="technicians" element={<TechnicianParent />} />
+              <Route path="technicians" element={<TechnicianParent />} />
 
+              <Route path="technicianlanding" element={<TechnicianLanding />} />
+
+              <Route path="appointment">
+                <Route path="all" element={<AppointmentList />} />
+                <Route path="pending" element={<AppointmentPendingList />} />
+                <Route path="approved" element={<AppointmentApprovedList />} />
+                <Route path=":appointmentId" element={<AppointmentDetail />} />
                 <Route
-                  path="technicianlanding"
-                  element={<TechnicianLanding />}
+                  path=":appointmentId/edit"
+                  element={<AppointmentEdit />}
                 />
-
-                <Route path="appointment">
-                  <Route path="all" element={<AppointmentList />} />
-                  <Route path="pending" element={<AppointmentPendingList />} />
-                  <Route
-                    path="approved"
-                    element={<AppointmentApprovedList />}
-                  />
-                  <Route
-                    path=":appointmentId"
-                    element={<AppointmentDetail />}
-                  />
-                  <Route
-                    path=":appointmentId/edit"
-                    element={<AppointmentEdit />}
-                  />
-                </Route>
-
-                <Route path="services" element={<ServiceParent />} />
-
-                <Route
-                  path="customerAppointmentCreation"
-                  element={<AppointmentCreation />}
-                />
-
-                <Route path="clientsignup" element={<ClientSignUpForm />} />
-                <Route path="Login" element={<LoginForm />} />
               </Route>
+
+              <Route path="services" element={<ServiceParent />} />
+
+              <Route
+                path="customerAppointmentCreation"
+                element={<AppointmentCreation />}
+              />
+
+              <Route path="clientsignup" element={<ClientSignUpForm />} />
+              <Route path="Login" element={<LoginForm />} />
             </Routes>
           </div>
         </div>
