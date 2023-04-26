@@ -4,7 +4,6 @@ import { useState } from "react";
 function ChecklistEdit({ getChecklist, token, checklistItem, setIsEditing }) {
   const { serviceId } = useParams();
   const [checklist_item, setChecklistItem] = useState(checklistItem.checklist_item);
-  const [checklist_item_id, setChecklistItemId] = useState("");
 
   const handleSubmit = async (event) => {
     event.preventDefault();
