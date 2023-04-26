@@ -34,7 +34,7 @@ function ClientSignUpForm() {
         setUsername("");
         setPassword("");
         setBusinessName("");
-        // navigate("/clientlanding");
+        navigate("/clientlanding");
       } catch (error) {
         console.error("Error logging in:", error);
       }
