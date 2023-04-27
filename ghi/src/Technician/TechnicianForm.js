@@ -55,7 +55,7 @@ function TechnicianForm({ getTechnician, token, user }) {
         <div className="container-fluid">
           <div className="row">
             <div className="col-12">
-              <div className=" bg-dark text-white p-4 mt-4">
+              <div className="shadow p-4 mt-4">
                 <h1>Sign Up As Technician</h1>
                 <form onSubmit={handleSubmit} className="row g-10">
                   <div className="col-md-6">
@@ -154,14 +154,16 @@ function TechnicianForm({ getTechnician, token, user }) {
                     />
                     <label htmlFor="phone_number"></label>
                   </div>
-                  <button
-                    className="btn text-primary btn-sm rounded-0 fw-bold fs-3"
-                    data-toggle="tooltip"
-                    data-placement="bottom"
-                    title="This will Create a technician"
-                  >
-                    Create
-                  </button>
+                  <div className="btn-group d-md-block">
+                    <button
+                      className="btn btn-primary btn-sm rounded-3 fw-bold fs-5"
+                      data-toggle="tooltip"
+                      data-placement="bottom"
+                      title="This will Create a technician"
+                    >
+                      Create
+                    </button>
+                  </div>
                 </form>
               </div>
             </div>
