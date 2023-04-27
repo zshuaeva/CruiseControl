@@ -1,6 +1,6 @@
 from fastapi.testclient import TestClient
 from main import app
-from queries.checklist import ChecklistQueries, ChecklistIn, ChecklistOut
+from queries.checklist import ChecklistQueries, ChecklistIn
 from authenticator import authenticator
 
 client = TestClient(app)
@@ -32,17 +32,13 @@ class CreateChecklistQueries:
         return result
 
 
-
 def test_create_checklist():
     app.dependency_overrides[ChecklistQueries] = CreateChecklistQueries
     app.dependency_overrides[
         authenticator.try_get_current_account_data
     ] = user_override
 
-    json = {
-        "checklist_item": "test item",
-        "service_id": 1
-    }
+    json = {"checklist_item": "test item", "service_id": 1}
     expected = {
         "id": 1,
         "checklist_item": "test item",

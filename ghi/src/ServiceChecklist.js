@@ -47,15 +47,15 @@ function ServiceChecklist() {
         <div className="col-12 col-md-4">
           {isEditing ? (
             <ChecklistEdit
-                checklistItem={editingChecklistItem}
-                token={token}
-                checklistitems={checklistItems}
-                toggleEditMode={toggleEditMode}
-                getChecklist={fetchServiceChecklistEntry}
-                user={user}
-                serviceId={serviceId}
-                setIsEditing={setIsEditing}
-              /> 
+              checklistItem={editingChecklistItem}
+              token={token}
+              checklistitems={checklistItems}
+              toggleEditMode={toggleEditMode}
+              getChecklist={fetchServiceChecklistEntry}
+              user={user}
+              serviceId={serviceId}
+              setIsEditing={setIsEditing}
+            />
           ) : (
             <ChecklistCreation
               token={token}
