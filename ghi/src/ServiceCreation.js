@@ -1,12 +1,6 @@
-import React, { useState, useEffect } from "react";
-// import useToken, { AuthContext } from "@galvanize-inc/jwtdown-for-react";
-// import { useContext } from "react";
-// import useUser from "./useUser";
-import { Link } from "react-router-dom";
+import React, { useState } from "react";
 
 function ServiceCreation({ getServices, token, user }) {
-  // const { token } = useContext(AuthContext);
-  // const user = useUser(token);
   const [service_name, setService_Name] = useState("");
   const [service_type, setService_type] = useState("");
   const [service_description, setService_description] = useState("");

@@ -8,7 +8,6 @@ import AppointmentApprovedList from "./AppointmentApprovedList";
 function TechnicianLanding() {
   const { token } = useContext(AuthContext);
   const user = useUser(token);
-  console.log(user);
   return (
     <div>
       <AppointmentApprovedList />

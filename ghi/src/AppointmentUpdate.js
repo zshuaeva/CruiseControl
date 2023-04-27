@@ -1,8 +1,8 @@
 import React, { useState, useEffect } from "react";
-import useToken, { AuthContext } from "@galvanize-inc/jwtdown-for-react";
+import { AuthContext } from "@galvanize-inc/jwtdown-for-react";
 import { useContext } from "react";
 import useUser from "./useUser";
-import { Link, useParams, useNavigate } from "react-router-dom";
+import { useParams, useNavigate } from "react-router-dom";
 
 function AppointmentEdit() {
   const { token } = useContext(AuthContext);
@@ -71,16 +71,6 @@ function AppointmentEdit() {
     const response = await fetch(url, fetchConfig);
     if (response.ok) {
       await response.json();
-      // setCustomerName("");
-      // setCustomerPhone("");
-      // setVehicleMake("");
-      // setVehicleModel("");
-      // setVehicleYear("");
-      // setVehicleColor("");
-      // setNotes("");
-      // setDateOfService("");
-      // setBusinessId("");
-      // setServiceId("");
       navigate(-1);
     } else {
       console.error("Error creating appointment; Please try again.");
