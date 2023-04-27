@@ -1,24 +1,22 @@
-import React, { useState } from "react";
+import React, { useParams } from "react-router-dom";
+import { useState } from "react";
 
-function ChecklistCreation({
-  getChecklist,
-  token,
-  serviceId,
-}) {
-  const [checklist_item, setChecklistItem] = useState("");
-  const [serviceName, setServiceName] = useState("");
-
+function ChecklistEdit({ getChecklist, token, checklistItem, setIsEditing }) {
+  const { serviceId } = useParams();
+  const [checklist_item, setChecklistItem] = useState(checklistItem.checklist_item);
+  const [checklist_item_id, setChecklistItemId] = useState("");
 
   const handleSubmit = async (event) => {
     event.preventDefault();
-    const data = {};
-    data.checklist_item = checklist_item;
-    data.service_id = serviceId;
-    data.service_name = serviceName;
+    const data = {
+      checklist_item: checklist_item,
+      service_id: serviceId,
+    };
+  
 
-    const url = `${process.env.REACT_APP_USER_SERVICE_API_HOST}/api/checklist`;
+    const url = `${process.env.REACT_APP_USER_SERVICE_API_HOST}/checklist/${checklistItem.id}`;
     const fetchConfig = {
-      method: "POST",
+      method: "PUT",
       body: JSON.stringify(data),
       headers: {
         Authorization: `Bearer ${token}`,
@@ -29,10 +27,10 @@ function ChecklistCreation({
     if (response.ok) {
       await response.json();
       setChecklistItem("");
-      setServiceName("");
       getChecklist(serviceId);
+      setIsEditing(false);
     } else {
-      console.error("Error creating checklist, please check input");
+      console.error("Error updating checklist, please check input");
     }
   };
 
@@ -40,7 +38,7 @@ function ChecklistCreation({
     <>
       <div className="container-fluid d-flex justify-content-center">
         <div className="shadow p-4 mt-4">
-          <h1>Create Checklist Item</h1>
+          <h1>Edit Checklist Item</h1>
           <form onSubmit={handleSubmit}>
             <div className="form-floating mb-3">
               <input
@@ -54,11 +52,12 @@ function ChecklistCreation({
               <label htmlFor="Enter Step">Enter Step Detail</label>
             </div>
 
-            <button className="btn btn-primary">Submit</button>
+            <button className="btn btn-primary">Update</button>
           </form>
         </div>
       </div>
     </>
   );
 }
-export default ChecklistCreation;
+
+export default ChecklistEdit;
