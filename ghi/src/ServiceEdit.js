@@ -99,7 +99,7 @@ function ServiceEdit(props) {
                     />
                     <label htmlFor="Name">Service Price</label>
                   </div>
-                  <button className="btn btn-primary">Update</button>
+                  <button className="btn btn-warning">Update</button>
                 </form>
               </div>
             </div>

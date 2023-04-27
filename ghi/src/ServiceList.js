@@ -1,13 +1,11 @@
 import React, { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
-// import { AuthContext } from "@galvanize-inc/jwtdown-for-react";
-// import { useContext } from "react";
-// import useUser from "./useUser";
+
+
+
 
 function ServiceList({ services, toggleEditMode, getServices, token, user }) {
-  // const { token } = useContext(AuthContext);
-  // const user = useUser(token);
-  // const [services, setServices] = useState([]);
+
 
   const deleteService = async (service_id) => {
     await fetch(
@@ -20,22 +18,6 @@ function ServiceList({ services, toggleEditMode, getServices, token, user }) {
     await getServices();
   };
 
-  // const getServices = async () => {
-  //     const listUrl = "http://localhost:8000/api/services";
-  //     const response = await fetch(listUrl, {
-  //         headers: { Authorization: `Bearer ${token}` },
-  //     });
-  //     if (response.ok) {
-  //         const data = await response.json();
-  //         setServices(data);
-  //     }
-  // };
-
-  // useEffect(() => {
-  //     if (token) {
-  //         getServices();
-  //     }
-  // }, [token]);
 
   return (
     <div>
@@ -93,7 +75,7 @@ function ServiceList({ services, toggleEditMode, getServices, token, user }) {
                         <button type="button" className="btn btn-success">
                           <Link
                             to={`/services/${service.id}/checklist`}
-                            className="btn btn"
+                            className="text-reset text-decoration-none"
                           >
                             Checklist
                           </Link>
