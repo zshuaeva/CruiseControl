@@ -16,7 +16,7 @@ function Nav() {
   return (
     <nav id="nav" className="navbar fixed-top">
       <div className="container-fluid">
-        {user === null ? (
+        {user === null || token === null ? (
           <NavLink className="navbar-brand text-light fw-bold fs-4" to="/">
             Cruise Control
           </NavLink>
