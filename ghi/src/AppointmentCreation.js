@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import useToken, { AuthContext } from "@galvanize-inc/jwtdown-for-react";
+import { AuthContext } from "@galvanize-inc/jwtdown-for-react";
 import { useContext } from "react";
 import useUser from "./useUser";
 
