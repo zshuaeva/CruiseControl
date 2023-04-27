@@ -50,7 +50,6 @@ function App() {
                 />
               </Route>
 
-              <Route path="services" element={<ServiceParent />} />
               <Route path="service">
                 <Route path="" element={<ServiceParent />} />
                 <Route
@@ -59,20 +58,10 @@ function App() {
                 />
               </Route>
 
-              {/* <Route path="new" element={<ServiceCreation />} />
-            <Route path="all" element={<ServiceList />} /> */}
-
               <Route
                 path="customerAppointmentCreation"
                 element={<AppointmentCreation />}
               />
-              <Route
-                path="customerAppointmentCreation"
-                element={<AppointmentCreation />}
-              />
-
-              <Route path="clientsignup" element={<ClientSignUpForm />} />
-              <Route path="Login" element={<LoginForm />} />
 
               <Route path="clientsignup" element={<ClientSignUpForm />} />
               <Route path="Login" element={<LoginForm />} />
