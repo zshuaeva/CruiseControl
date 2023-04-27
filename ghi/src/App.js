@@ -16,7 +16,7 @@ import AppointmentCreation from "./AppointmentCreation.js";
 import AppointmentPendingList from "./AppointmentsPendingList.js";
 import AppointmentApprovedList from "./AppointmentApprovedList.js";
 import AppointmentDetail from "./AppointmentDetail.js";
-
+import Footer from "./Footer.js";
 import AppointmentEdit from "./AppointmentUpdate.js";
 
 function App() {
@@ -68,6 +68,7 @@ function App() {
             </Routes>
           </div>
         </div>
+        <Footer />
       </AuthProvider>
     </BrowserRouter>
   );
