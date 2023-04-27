@@ -50,7 +50,7 @@ function App() {
                 />
               </Route>
 
-              <Route path="service">
+              <Route path="services">
                 <Route path="" element={<ServiceParent />} />
                 <Route
                   path=":serviceId/checklist"

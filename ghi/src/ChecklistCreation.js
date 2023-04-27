@@ -1,13 +1,8 @@
 import React, { useState } from "react";
 
-function ChecklistCreation({
-  getChecklist,
-  token,
-  serviceId,
-}) {
+function ChecklistCreation({ getChecklist, token, serviceId }) {
   const [checklist_item, setChecklistItem] = useState("");
   const [serviceName, setServiceName] = useState("");
-
 
   const handleSubmit = async (event) => {
     event.preventDefault();
