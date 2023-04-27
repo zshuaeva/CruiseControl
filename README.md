@@ -1,150 +1,182 @@
-# Module3 Project Gamma
+# Cruise Control
 
-docker volume create cruisecontrolvolume
-docker compose up
+Cruise Control is an appointment and service management application built using FastAPI for the backend, React.js for the frontend, Bootstrap for the css library, and PostgreSQL as the database. The application provides a platform for businesses to manage appointments, services, and technicians.
 
-## Getting started
+---
 
-You have a project repository, now what? The next section
-lists all of the deliverables that are due at the end of the
-week. Below is some guidance for getting started on the
-tasks for this week.
+## Created by
 
-## Install Extensions
+- Lee Seaver
+- Joshua Evangelista
+- Nicholas Trevino
+- Kenneth Wilson
 
-- Prettier: <https://marketplace.visualstudio.com/items?itemName=esbenp.prettier-vscode>
-- Black Formatter: <https://marketplace.visualstudio.com/items?itemName=ms-python.black-formatter>
+---
 
-## Deliverables
+## Overview
 
-- [ ] Wire-frame diagrams
-- [ ] API documentation
-- [ ] Project is deployed to Render.com/GitLab-pages
-- [ ] GitLab issue board is setup and in use
-- [ ] Journals
+The application is designed to handle appointment scheduling, service management, and technician management for businesses. It allows users to create, update, and delete appointments and services, as well as manage technicians.
 
-## Project layout
+## Features
 
-The layout of the project is just like all of the projects
-you did with `docker-compose` in module #2. You will create
-a directory in the root of the repository for each service
-that you add to your project just like those previous
-projects were setup.
+- **Account management**: The system allows users to create, edit, and manage accounts for clients and technicians. It provides authentication and authorization functionalities to ensure data security and privacy.
 
-### Directories
+- **Appointment scheduling**: Customers can easily schedule appointments for vehicle services. The system also provides features to approve or disapprove appointments based on availability.
 
-Several directories have been added to your project. The
-directories `docs` and `journals` are places for you and
-your team-mates to, respectively, put any documentation
-about your project that you create and to put your
-project-journal entries. See the _README.md_ file in each
-directory for more info.
+- **Service management**: Ability to create, edit, and manage a list of services they offer. This allows clients to easily browse and select the required services for their vehicles.
 
-The other directories, `ghi` and `sample_service`, are
-sample services, that you can start building off of or use
-as a reference point.
+- **Checklist management**: The system allows businesses to create and maintain checklists for each service, ensuring that all necessary tasks are completed during vehicle maintenance and repair.
 
-Inside of `ghi` is a minimal React app that has an "under
-construction" page. It is setup similarly to all of the
-other React projects that you have worked on.
+- **Docker deployment**: The Cruise Control Project can be easily downloaded from the Git repository and installed using Docker. This simplifies the deployment process and ensures a consistent environment across different platforms.
 
-Inside of `sample_service` is a minimal FastAPI application.
-"Where are all the files?" you might ask? Well, the
-`main.py` file is the whole thing, and go take look inside
-of it... There's not even much in there..., hmm? That is
-FastAPI, we'll learn more about it in the coming days. Can
-you figure out what this little web-application does even
-though you haven't learned about FastAPI yet?
+## Technologies
 
-Also in `sample_service` is a directory for your migrations.
-If you choose to use PostgreSQL, then you'll want to use
-migrations to control your database. Unlike Django, where
-migrations were automatically created for you, you'll write
-yours by hand using DDL. Don't worry about not knowing what
-DDL means; we have you covered. There's a sample migration
-in there that creates two tables so you can see what they
-look like.
+- React.js for frontend development
+- FastAPI for backend development
+- PostgreSQL for database management
+- JWT for user authentication
+- Bootstrap for responsive design and styling
 
-The sample Dockerfile and Dockerfile.dev run your migrations
-for you automatically.
+---
 
-### Other files
+## How to Install and Run the Project
 
-The following project files have been created as a minimal
-starting point. Please follow the guidance for each one for
-a most successful project.
+### Requirements
 
-- `docker-compose.yaml`: there isn't much in here, just a
-  **really** simple UI and FastAPI service. Add services
-  (like a database) to this file as you did with previous
-  projects in module #2.
-- `.gitlab-ci.yml`: This is your "ci/cd" file where you will
-  configure automated unit tests, code quality checks, and
-  the building and deployment of your production system.
-  Currently, all it does is deploy an "under construction"
-  page to your production UI on GitLab and a sample backend
-  to Render.com. We will learn much more about this file.
-- `.gitignore`: This is a file that prevents unwanted files
-  from getting added to your repository, files like
-  `pyc` files, `__pycache__`, etc. We've set it up so that
-  it has a good default configuration for Python projects.
+- Docker
+- Docker Compose
+- Git
 
-## How to complete the initial deploy
+### Downloading and Installing the Project
 
-There will be further guidance on completing the initial
-deployment, but it just consists of these steps:
+Follow the steps below to download the project from Git and install it using Docker:
 
-### Setup GitLab repo/project
+**Step 1: Clone the Repository**
 
-- make sure this project is in a group. If it isn't, stop
-  now and move it to a GitLab group
-- remove the fork relationship: In GitLab go to:
+To clone the repository, open a terminal, and run the following command:
 
-  Settings -> General -> Advanced -> Remove fork relationship
+```
+git clone https://gitlab.com/low-expectations/cruise-control.git
+```
 
-- add these GitLab CI/CD variables:
-  - PUBLIC_URL : this is your gitlab pages URL
-  - SAMPLE_SERVICE_API_HOST: enter "blank" for now
+**Step 2: Change to the Project Directory**
 
-#### Your GitLab pages URL
+Change your working directory to the root of the cloned project:
 
-You can't find this in GitLab until after you've done a deploy
-but you can figure it out yourself from your GitLab project URL.
+```
+cd cruise-control
+```
 
-If this is your project URL
+**Step 3: Build and Run the Docker Container**
 
-https://gitlab.com/GROUP_NAME/PROJECT_NAME
+To build and run the Docker container, use the following commands:
+These commands will create the volume, build the Docker image and run the containers in the background.
 
-then your GitLab pages URL will be
+```
+docker create volume cruisecontrolvolume
+docker-compose up
+```
 
-https://GROUP_NAME.gitlab.io/PROJECT_NAME
+**Step 4: Access the API**
 
-### Create render.com account and application
+The API should now be accessible at http://localhost:8000. You can interact with the API using the provided FastAPI interactive documentation at http://localhost:8000/docs.
 
-- create account on render.com
-- one person create a group and invite all other members
-- create a new "Web Service"
-  - authenticate with GitLab and choose your project
-  - Enter fields:
-    - Name: name of your service
-    - Root Directory: the directory of your service in your git repo.
-      For this example use "sample_service".
-    - Environment: Docker
-    - Plan Type: Free
-  - click the "Create Web Service" button to create it
-  - the build will succeed and it will look like the server is running,
-    most likely, in 6-10 minutes, it will fail.
-  - click "Manual Deploy" -> "Deploy latest commit" and the service
-    should deploy successfully.
+**Stopping and Removing the Docker Container**
 
-### Update GitLab CI/CD variables
+To stop the running container, run the following command:
 
-Copy the service URL for your new render.com service and then paste
-that into the value for the SAMPLE_SERVICE_API_HOST CI/CD variable
-in GitLab.
+```
+docker-compose down
+```
 
-### Deploy it
+This command will stop and remove the container. If you want to rebuild and start the container again, you can use the command from Step 3.
 
-Merge a change into main to kick off the initial deploy. Once the build pipeline
-finishes you should be able to see an "under construction" page on your GitLab
-pages site.
+---
+
+## Database Schema
+
+The application uses the following tables in the PostgreSQL database:
+
+- Acounts: Information for users, including email, password, and role.
+- Businesses: Stores business information, such as name, address, and phone number.
+- Technicians: Stores technician information, including name, phone number, and email.
+- Services: Stores service information, including service name, description, and duration.
+- Appointments: Stores appointment information, including appointment time, status, and related business, technician, and service information.
+
+---
+
+## Api Endpoints
+
+The following are the main API endpoints in the Cruise Control project
+
+**Accounts**
+
+- GET /token: Retrieves an account token for the currently logged-in user.
+- POST /api/clientsignup: Creates a new client account.
+- GET /api/accounts/{username}: Retrieves an account's details by username.
+- GET /api/accounts: Retrieves a list of all accounts.
+- PUT /accounts/{user_id}: Updates an account's details.
+- DELETE /accounts/{user_id}: Deletes an account.
+
+**Technicians**
+
+- GET /technician/{user_id}: Retrieves a technician's details.
+- GET /technicians: Retrieves a list of all technicians.
+- POST /technician: Creates a new technician account.
+
+**Appointments**
+
+- GET /api/appointments: Retrieves a list of all appointments.
+- GET /api/appointments/{appointment_id}: Retrieves details of a specific appointment.
+- POST /api/appointments: Creates a new appointment.
+- PUT /api/appointments/{appointment_id}: Updates an appointment's details.
+- DELETE /api/appointments/{appointment_id}: Deletes an appointment.
+- PUT /api/appointments/{appointment_id}/approve: Approves an appointment.
+
+**Checklist**
+
+- GET /api/checklist: Retrieves a list of all checklist items.
+- GET /services/{service_id}/checklist: Retrieves a list of all checklist items for a specific service.
+- POST /api/checklist: Creates a new checklist item.
+- PUT /checklist/{checklist_id}: Updates a checklist item.
+- DELETE /api/checklist/{checklist_id}: Deletes a checklist item.
+
+**Services**
+
+- GET /api/services: Retrieves a list of all services.
+- POST /api/services: Creates a new service.
+- PUT /api/services/{service_id}: Updates a service's details.
+- DELETE /api/services/{service_id}: Deletes a service.
+- GET /api/services/{service_id}: Retrieves details of a specific service.
+
+**Authentication**
+
+- All API endpoints (except /token and /api/clientsignup) require authentication. The Cruise Control project uses JWT (JSON Web Tokens) for authentication. To access protected endpoints, include the JWT token in the Authorization header of the HTTP request as a Bearer token.
+
+---
+
+## Models
+
+The Cruise Control project uses Pydantic models for data validation and serialization. The main models used in the project include:
+
+- AccountIn
+- AccountOut
+- AccountToken
+- AppointmentIn
+- AppointmentOut
+- ChecklistIn
+- ChecklistOut
+- ServiceIn
+- ServiceOut
+
+---
+
+## Wireframe
+
+![Wireframe](Excalidraw\Excalidraw.png)
+
+---
+
+## License
+
+Cruise Control, including its backend FastAPI, and frontend React.js code, is licensed under the MIT License. This means that the code is free to use, modify, and distribute, subject to the terms and conditions of the license.
