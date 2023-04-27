@@ -6,6 +6,20 @@ from authenticator import authenticator
 
 client = TestClient(app)
 
+test_user = {
+    "id": 1,
+    "username": "josh",
+    "business_id": 1,
+    "employee_id": 0,
+    "first_name": "string",
+    "last_name": "string",
+    "website": "string",
+    "email": "string",
+    "address": "string",
+    "phone_number": "string",
+    "is_client": "true",
+    "is_technician": "false",
+}
 
 appointments = [
     {
@@ -39,7 +53,7 @@ appointments = [
 
 
 def user_override():
-    return appointments
+    return test_user
 
     class MockAppointmentQueries:
         def get_all(self, repo, business_id):
@@ -52,13 +66,11 @@ def user_override():
         return {"business_id": 1}
 
     app.dependency_overrides[AppointmentQueries] = get_mock_appointment_queries
-    app.dependency_overrides[
-        authenticator.get_current_account_data
-    ] = user_override
+    app.dependency_overrides[ authenticator.get_current_account_data] = user_override
 
     response = client.get("/api/appointments")
 
+    app.dependency_overrides = {}
+
     assert response.status_code == 200
     assert response.json() == appointments
-
-    app.dependency_overrides = {}
