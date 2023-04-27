@@ -27,7 +27,7 @@ function Nav() {
         {user?.is_technician ? (
           <NavLink
             className="navbar-brand text-light fw-bold fs-4"
-            to="/technician/landing"
+            to="/technicianlanding"
           >
             Cruise Control
           </NavLink>
