@@ -25,7 +25,7 @@ const LoginForm = () => {
     if (user && user.is_client) {
       navigate("/clientlanding");
     } else if (user && user.is_technician) {
-      navigate("/technician/landing");
+      navigate("/technicianlanding");
     }
   }, [user, navigate]);
 
