@@ -21,8 +21,8 @@ function TechnicianList({
           <div>
             <div>
               <div className="table-responsive-md rounded">
-                <h1 className=" text-center text-white">Technician List</h1>
-                <table className="table table-fixed table-hover table-dark">
+                <h1 className=" text-center">Technician List</h1>
+                <table className="table table-fixed table-hover">
                   <thead>
                     <tr>
                       <th scope="col" className="col">
@@ -65,7 +65,7 @@ function TechnicianList({
                           <td className="col">
                             <div className="btn-group gap-2">
                               <button
-                                className="btn btn-success btn-sm rounded-0"
+                                className="btn btn-success btn-sm rounded-0 me-md-3"
                                 data-toggle="tooltip"
                                 title="Edit"
                                 onClick={() => editToggle(technician)}

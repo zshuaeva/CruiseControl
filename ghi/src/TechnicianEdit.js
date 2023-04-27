@@ -53,7 +53,7 @@ function TechnicianEdit(props) {
         <div className="container-fluid">
           <div className="row">
             <div className="col-12">
-              <div className=" bg-dark text-white p-4 mt-4">
+              <div className="shadow p-4 mt-4">
                 <h1>Edit A Technician</h1>
                 <form onSubmit={handleSubmit} className="row g-10">
                   <div className="col-md-6">
@@ -144,9 +144,9 @@ function TechnicianEdit(props) {
                     />
                     <label htmlFor="phone_number"></label>
                   </div>
-                  <div className="btn-group gap-2">
+                  <div className="btn-group gap-4 d-md-block">
                     <button
-                      className="btn btn-lg text-primary btn-sm rounded-0 fw-bold fs-3"
+                      className="btn btn-primary btn-sm rounded-3 fw-bold fs-5 me-md-3"
                       data-toggle="tooltip"
                       data-placement="bottom"
                       title="This will Submit your changes"
@@ -154,7 +154,7 @@ function TechnicianEdit(props) {
                       Update
                     </button>
                     <button
-                      className="btn btn-lg text-warning btn-sm rounded-0 fw-bold fs-3"
+                      className="btn btn-warning btn-sm rounded-3 fw-bold fs-5"
                       data-toggle="tooltip"
                       data-placement="bottom"
                       title="This will Discard your changes"
