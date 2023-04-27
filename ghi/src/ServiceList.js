@@ -92,7 +92,7 @@ function ServiceList({ services, toggleEditMode, getServices, token, user }) {
                       <td>
                         <button type="button" className="btn btn-success">
                           <Link
-                            to={`/service/${service.id}/checklist`}
+                            to={`/services/${service.id}/checklist`}
                             className="btn btn"
                           >
                             Checklist
