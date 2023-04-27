@@ -1,6 +1,9 @@
 import { useContext } from "react";
 import { useNavigate } from "react-router-dom";
 import { AuthContext } from "@galvanize-inc/jwtdown-for-react";
+import { useContext } from "react";
+import { useNavigate } from "react-router-dom";
+import { AuthContext } from "@galvanize-inc/jwtdown-for-react";
 
 function Logout() {
   const { setToken } = useContext(AuthContext);
@@ -9,6 +12,8 @@ function Logout() {
   const handleLogout = async () => {
     try {
       await fetch(`${process.env.REACT_APP_USER_SERVICE_API_HOST}/token`, {
+        method: "DELETE",
+        credentials: "include",
         method: "DELETE",
         credentials: "include",
       });
