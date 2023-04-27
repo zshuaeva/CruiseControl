@@ -16,6 +16,11 @@ function Nav() {
   return (
     <nav id="nav" className="navbar fixed-top">
       <div className="container-fluid">
+        {user === null || token === null ? (
+          <NavLink className="navbar-brand text-light fw-bold fs-4" to="/">
+            Cruise Control
+          </NavLink>
+        ) : null}
         {user?.is_client ? (
           <NavLink
             className="navbar-brand text-light fw-bold fs-4"
@@ -27,13 +32,8 @@ function Nav() {
         {user?.is_technician ? (
           <NavLink
             className="navbar-brand text-light fw-bold fs-4"
-            to="/technician/landing"
+            to="/technicianlanding"
           >
-            Cruise Control
-          </NavLink>
-        ) : null}
-        {user === null ? (
-          <NavLink className="navbar-brand text-light fw-bold fs-4" to="/">
             Cruise Control
           </NavLink>
         ) : null}

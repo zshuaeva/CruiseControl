@@ -3,6 +3,7 @@ import { AuthContext } from "@galvanize-inc/jwtdown-for-react";
 import { useParams } from "react-router-dom";
 import ChecklistCreation from "./ChecklistCreation";
 import ChecklistList from "./ChecklistList";
+import ChecklistEdit from "./ChecklistEdit";
 import useUser from "./useUser";
 
 function ServiceChecklist() {
@@ -45,7 +46,16 @@ function ServiceChecklist() {
       <div className="row">
         <div className="col-12 col-md-4">
           {isEditing ? (
-            console.log("edit call and props go here?")
+            <ChecklistEdit
+                checklistItem={editingChecklistItem}
+                token={token}
+                checklistitems={checklistItems}
+                toggleEditMode={toggleEditMode}
+                getChecklist={fetchServiceChecklistEntry}
+                user={user}
+                serviceId={serviceId}
+                setIsEditing={setIsEditing}
+              /> 
           ) : (
             <ChecklistCreation
               token={token}
