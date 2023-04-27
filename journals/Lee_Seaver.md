@@ -1,27 +1,25 @@
-# THE HISTORY OF CRUISE CONTROL
+# Lee Seaver Daily[ish] Journal
 
-In the early days of our Cruise Control venture, we began our journey with a single purpose: to lay a solid foundation for our grand vision. Guided by a clear goal, we set forth to craft a user story that would steer our development course. We gathered around, exchanging thoughts and ideas, ensuring that our pursuit would lead us to the most fitting Minimum Viable Product (MVP) for our concept.
+Week 1 - Worked as a group to develop MVP, wireframe, Docker containers configured and built. Created Gitlab board and issues.
 
-With the MVP firmly in place, we turned our attention to the creation of a wireframe, a blueprint to breathe life into our vision. Iteration after iteration, we refined every detail until we arrived at the finest version of our wireframe.
+Week 2 - Worked as group to develop FastApi framework, created schema and started working on CRUD and queries,
 
-Upon the completion of the wireframe, Nick and Josh dedicated an entire day to the critical task of configuring and fine-tuning the Docker containers, ensuring seamless operation and integration within our project's infrastructure.
+Week 3 - Worked as a group, the entire week we worked on auth and completed it, and at the end of this week started to break off and work on issues. I had to take the last 2 days off from school as we went into spring break. During these two days my teammates got a lot of work done
 
-Our next endeavor involved crafting issues on our GitLab board, a compass to keep us on the right path and maintain steady progress throughout the week. With a meticulous approach, we divided our workload into smaller, more digestible tasks, preventing our resources from becoming overwhelmed.
+Spring Break - I picked up and finished all the work that was left for BE and FE for service, I got started on finishing off on what my team did for appointments
 
-As we ventured into the second week, our focus shifted towards implementing the Fast-API framework and establishing the Create, Read, Update, and Delete (CRUD) endpoints for our Cruise Control concept. Lee, in particular, devoted his efforts to crafting a comprehensive CRUD system, which would serve as an example for the rest of the team. His work provided guidance and inspiration for those who might have been uncertain of their next steps.
+4/17 - First day back, got caught up with each other. Started re-working checklist BE /FE feature that josh wrote as the schema needed to be modified. Starting unit tests
 
-We invested many hours, testing our handiwork to ensure a flawless operation. In our quest to streamline the development process, we fashioned a base-template, a trusty tool for future projects, saving us precious time and guaranteeing consistency in our coding practices.
+4/18 - Continued to work on checklist modifications and started to play with bootstrap UI
 
-We gathered once more to discuss and refine the various features of our concept, taking heed of each other's feedback and making the necessary adjustments. Our goal, to build something of value and user-friendly, guided us as we scrutinized every detail.
+4/19 - Completed checklist modifications after a slight blocker.
 
-During that week, we made remarkable progress and completed the lion's share of the tasks on our GitLab board. Our concept began to take form, and we held onto our optimism as we continued our development journey.
+4/20 - Started Deployment, Group programming, i took backseat
 
-In the latter stages of week 14, we turned our attention to the pivotal matter of Authentication and Authorization for our Cruise Control concept. The team, steadfast in their determination, worked relentlessly to seamlessly integrate this essential component. Among us, Josh and Lee played a key role in the coding aspects, ensuring top-notch security and privacy for our users.
+4/24 - Deployment
 
-Amidst this daunting task, Lee rose to the challenge, committed to forging a complete CRUD system from back-end to front-end with React. He embarked on the creation of Authentication, Login, and Logout, joined by Joshua in the morning and working solo in the afternoon on March 30th. Our team faced numerous obstacles that demanded unwavering persistence and problem-solving prowess.
+4/25 - Deployment, i worked on a calendar component and integrated it.
 
-Undaunted by the technical hurdles, Lee pressed on, focusing his efforts on crafting a user and login function with Swagger. He dedicated himself to the task, ultimately succeeding in creating an automated migration system on April 1st.
+4/26 - Deployment finally finished.
 
-On April 2nd, Lee and Joshua combined their collective wisdom, examining the authentication and user components in-depth. They skillfully restructured the database schema to accommodate both Client and Tech permissions, devising new client and tech routes and queries. Together, they laid the groundwork for a robust and scalable system.
-
-As our Cruise Control project advances, our team remains steadfast in our mission to deliver an unparalleled user experience and push the boundaries of innovation in the industry.
+4/27 - Wrote readme, and modified database migrations, UI edits and mock walk presentation
