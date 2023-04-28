@@ -7,7 +7,7 @@ import AppointmentPendingList from "./AppointmentsPendingList";
 import AppointmentApprovedList from "./AppointmentApprovedList";
 import ServiceParent from "./ServiceParent";
 import TechnicianParent from "./TechParent";
-
+import ApprovedAppointmentsGraph from "./ApprovedAppointmentsGraph";
 
 function ClientLanding() {
   const { token } = useContext(AuthContext);
@@ -15,7 +15,7 @@ function ClientLanding() {
   // const [showPending, setShowPending] = useState(true);
   const [activeComponent, setActiveComponent] = useState("pending")
   const [pendingAppointments, setPendingAppointments] = useState([]);
-  const [approvedAppoinemnts, setApprovedAppointments] = useState([]);
+  const [approvedAppointments, setApprovedAppointments] = useState([]);
 
   const getAppointments = async () => {
     const listUrl = `${process.env.REACT_APP_USER_SERVICE_API_HOST}/api/appointments`;
@@ -24,16 +24,39 @@ function ClientLanding() {
     });
     if (response.ok) {
       const data = await response.json();
-      const approvedAppoinemnts = data.filter(
+      const approvedAppointments = data.filter(
         (appointment) => appointment.is_approved
       );
-      setApprovedAppointments(approvedAppoinemnts);
+      setApprovedAppointments(approvedAppointments);
       const pendingAppointments = data.filter(
         (appointment) => !appointment.is_approved
       );
       setPendingAppointments(pendingAppointments);
     }
   };
+
+  const filterAppointmentsByWeek = (appointments, weeksAgo) => {
+    const now = new Date();
+    const startOfWeek = new Date(
+      now.getFullYear(),
+      now.getMonth(),
+      now.getDate() - now.getDay() - weeksAgo * 7
+    );
+    const endOfWeek = new Date(
+      startOfWeek.getFullYear(),
+      startOfWeek.getMonth(),
+      startOfWeek.getDate() + 6
+    );
+
+    return appointments.filter((appointment) => {
+      const appointmentDate = new Date(appointment.date_of_service);
+      return (
+        appointmentDate >= startOfWeek && appointmentDate <= endOfWeek
+      );
+    });
+  };
+  const lastWeekAppointments = filterAppointmentsByWeek(approvedAppointments, 0);
+  const weekBeforeLastAppointments = filterAppointmentsByWeek(approvedAppointments, 1);
 
   useEffect(() => {
     if (token) {
@@ -62,7 +85,7 @@ function ClientLanding() {
       case "pending":
         return <AppointmentPendingList user={user} getAppointments={getAppointments} appointments={pendingAppointments} token={token} />;
       case "approved":
-        return <AppointmentApprovedList user={user} getAppointments={getAppointments} appointments={approvedAppoinemnts} token={token} />;
+        return <AppointmentApprovedList user={user} getAppointments={getAppointments} appointments={approvedAppointments} token={token} />;
       case "services":
         return <ServiceParent user={user} token={token} />;
       case "technicians":
@@ -77,11 +100,21 @@ function ClientLanding() {
         <div className="">
           <div className="container">
             <div className="row align-items-start">
-              <h1 className="text-left text-capitalize text-black col">
-                {user.username}'s Dashboard
-              </h1>
-              <div className="col">
-                <CalendarComponent appointments={approvedAppoinemnts} token={token} />
+              <div className="col-md-6">
+                <div className="card mb-4">
+                  <div className="card-body">
+                    <h1 className="text-center text-capitalize text-black">
+                      {user.username}'s Dashboard
+                    </h1>
+                  </div>
+                </div>
+                <ApprovedAppointmentsGraph
+                  lastWeek={lastWeekAppointments.length}
+                  weekBeforeLast={weekBeforeLastAppointments.length}
+                />
+              </div>
+              <div className="col-md-6">
+                <CalendarComponent appointments={approvedAppointments} token={token} />
               </div>
             </div>
           </div>

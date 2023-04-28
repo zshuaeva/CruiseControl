@@ -70,29 +70,6 @@ function Nav() {
             <ul className="navbar-nav justify-content-end flex-grow-1 pe-3">
               {token && user?.is_client === true ? (
                 <>
-                  <li className="nav-item p-2">
-                    <NavLink
-                      className="nav-link fw-bold fs-5"
-                      to="/clientlanding"
-                    >
-                      CLIENT Landing
-                    </NavLink>
-                  </li>
-                  <hr className="nav-divider" />
-                  <li className="nav-item p-2">
-                    <NavLink
-                      className="nav-link fw-bold fs-5"
-                      to="/technicians"
-                    >
-                      TECHNICIAN
-                    </NavLink>
-                  </li>
-                  <hr className="nav-divider" />
-                  <li className="nav-item p-2">
-                    <NavLink className="nav-link fw-bold fs-5" to="/services">
-                      Service
-                    </NavLink>
-                  </li>
                   <hr className="nav-divider" />
                   <li className="nav-item p-2">
                     <NavLink
@@ -102,33 +79,7 @@ function Nav() {
                       Customer Appointment Creation
                     </NavLink>
                   </li>
-                  <hr className="nav-divider" />
-                  <li className="nav-item p-2">
-                    <NavLink
-                      className="nav-link fw-bold fs-5"
-                      to="/appointment/all"
-                    >
-                      All Appointments
-                    </NavLink>
-                  </li>
-                  <hr className="nav-divider" />
-                  <li className="nav-item p-2">
-                    <NavLink
-                      className="nav-link fw-bold fs-5"
-                      to="/appointment/approved"
-                    >
-                      Approved Appointments
-                    </NavLink>
-                  </li>
-                  <hr className="nav-divider" />
-                  <li className="nav-item p-2">
-                    <NavLink
-                      className="nav-link fw-bold fs-5"
-                      to="/appointment/pending"
-                    >
-                      Upcoming Appointments
-                    </NavLink>
-                  </li>
+
                   <hr className="nav-divider" />
                   <li className="nav-item">
                     <NavLink>
