@@ -27,6 +27,7 @@ function App() {
       <AuthProvider
         tokenUrl={`${process.env.REACT_APP_USER_SERVICE_API_HOST}/token`}
       >
+        <div className="app-footer">
         <div className="container-fluid">
           <Nav />
           <div className="mt-5 pt-5">
@@ -69,6 +70,7 @@ function App() {
           </div>
         </div>
         <Footer />
+        </div>
       </AuthProvider>
     </BrowserRouter>
   );

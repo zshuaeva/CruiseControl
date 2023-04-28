@@ -4,7 +4,7 @@ function Footer() {
   return (
     <div className="postion-relative bottom-0">
       <footer className="footer mt-auto py-3 bg-success">
-        Copyright © Upbeat Code
+        Copyright © Cruise Control Inc.
       </footer>
     </div>
   );
