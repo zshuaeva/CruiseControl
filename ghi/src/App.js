@@ -20,6 +20,9 @@ import AppointmentDetail from "./AppointmentDetail.js";
 import AppointmentEdit from "./AppointmentUpdate.js";
 import Footer from "./Footer.js";
 
+import ClientInfoParent from "./ClientInfoParent.js";
+
+
 function App() {
   const appStyle = {
     display: 'flex',
@@ -45,7 +48,13 @@ function App() {
               <Routes>
                 <Route path="/" element={<HeroPage />} />
 
-                <Route path="clientlanding" element={<ClientLanding />} />
+              <Route path="clientlanding" element={<ClientLanding />} />
+
+              <Route
+                path="client/info"
+                element={<ClientInfoParent />}
+              />
+              
 
                 <Route path="technicians" element={<TechnicianParent />} />
 
