@@ -7,6 +7,12 @@ function ClientSignUpForm() {
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
   const [businessName, setBusinessName] = useState("");
+  const [employee_id, setEmployeeId] = useState("");
+  const [first_name, setFirstName] = useState("");
+  const [last_name, setLastName] = useState("");
+  const [email, setEmail] = useState("");
+  const [address, setAddress] = useState("");
+  const [phone_number, setPhoneNumber] = useState("");
   const navigate = useNavigate();
   const { login } = useToken();
   const { token } = useContext(AuthContext);
@@ -69,6 +75,30 @@ function ClientSignUpForm() {
             </div>
             <div className="form-floating mb-3">
               <input
+                type="text"
+                className="form-control"
+                id="first_name"
+                placeholder="First Name"
+                value={first_name}
+                onChange={(event) => setFirstName(event.target.value)}
+                required
+              />
+              <label htmlFor="first_name">First Name</label>
+            </div>
+            <div className="form-floating mb-3">
+              <input
+                type="text"
+                className="form-control"
+                id="last_name"
+                placeholder="Last Name"
+                value={last_name}
+                onChange={(event) => setLastName(event.target.value)}
+                required
+              />
+              <label htmlFor="last_name">Last Name</label>
+            </div>
+            <div className="form-floating mb-3">
+              <input
                 type="password"
                 className="form-control"
                 id="password"
@@ -87,8 +117,57 @@ function ClientSignUpForm() {
                 value={businessName}
                 onChange={(event) => setBusinessName(event.target.value)}
                 placeholder="businessName"
+                required
               />
               <label htmlFor="businessName">Business Name</label>
+            </div>
+            <div className="form-floating mb-3">
+              <input
+                type="number"
+                className="form-control"
+                id="employee_id"
+                placeholder="Employee Id"
+                value={employee_id}
+                onChange={(event) => setEmployeeId(event.target.value)}
+                required
+              />
+              <label htmlFor="Employee_id">Employee Id</label>
+            </div>
+            <div className="form-floating mb-3">
+              <input
+                type="text"
+                className="form-control"
+                id="email"
+                placeholder="Email"
+                value={email}
+                onChange={(event) => setEmail(event.target.value)}
+                required
+              />
+              <label htmlFor="email">Email</label>
+            </div>
+            <div className="form-floating mb-3">
+              <input
+                type="text"
+                className="form-control"
+                id="address"
+                placeholder="Address"
+                value={address}
+                onChange={(event) => setAddress(event.target.value)}
+                required
+              />
+              <label htmlFor="address">Address</label>
+            </div>
+            <div className="form-floating mb-3">
+              <input
+                type="tel"
+                className="form-control"
+                id="phone_number"
+                placeholder="Phone Number"
+                value={phone_number}
+                onChange={(event) => setPhoneNumber(event.target.value)}
+                required
+              />
+              <label htmlFor="phone_number">Phone Number</label>
             </div>
             <button className="btn btn-primary">Create</button>
           </form>

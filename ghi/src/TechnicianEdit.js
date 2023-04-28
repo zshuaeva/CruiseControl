@@ -69,17 +69,6 @@ function TechnicianEdit(props) {
                   </div>
                   <div className="col-md-6">
                     <input
-                      type="password"
-                      className="form-control"
-                      id="password"
-                      placeholder="Password"
-                      value={password}
-                      onChange={(event) => setPassword(event.target.value)}
-                    />
-                    <label htmlFor="password"></label>
-                  </div>
-                  <div className="col-md-6">
-                    <input
                       type="text"
                       className="form-control"
                       id="first_name"
