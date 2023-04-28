@@ -18,9 +18,19 @@ import AppointmentApprovedList from "./AppointmentApprovedList.js";
 import AppointmentDetail from "./AppointmentDetail.js";
 
 import AppointmentEdit from "./AppointmentUpdate.js";
-import AboutUs from "./AboutUs.js";
+import Footer from "./Footer.js";
 
 function App() {
+  const appStyle = {
+    display: 'flex',
+    flexDirection: 'column',
+    minHeight: '100vh',
+  };
+
+  const mainContentStyle = {
+    flexGrow: 1,
+  };
+
   const domain = /https:\/\/[^/]+/;
   const basename = process.env.PUBLIC_URL.replace(domain, "");
   return (
@@ -28,46 +38,49 @@ function App() {
       <AuthProvider
         tokenUrl={`${process.env.REACT_APP_USER_SERVICE_API_HOST}/token`}
       >
-        <div className="container-fluid">
+        <div style={appStyle}>
           <Nav />
-          <div className="mt-5 pt-5">
-            <Routes>
-              <Route path="/" element={<HeroPage />} />
+          <div className="container-fluid" style={mainContentStyle}>
+            <div className="mt-5 pt-5">
+              <Routes>
+                <Route path="/" element={<HeroPage />} />
 
-              <Route path="clientlanding" element={<ClientLanding />} />
+                <Route path="clientlanding" element={<ClientLanding />} />
 
-              <Route path="technicians" element={<TechnicianParent />} />
+                <Route path="technicians" element={<TechnicianParent />} />
 
-              <Route path="technicianlanding" element={<TechnicianLanding />} />
+                <Route path="technicianlanding" element={<TechnicianLanding />} />
 
-              <Route path="appointment">
-                <Route path="all" element={<AppointmentList />} />
-                <Route path="pending" element={<AppointmentPendingList />} />
-                <Route path="approved" element={<AppointmentApprovedList />} />
-                <Route path=":appointmentId" element={<AppointmentDetail />} />
+                <Route path="appointment">
+                  <Route path="all" element={<AppointmentList />} />
+                  <Route path="pending" element={<AppointmentPendingList />} />
+                  <Route path="approved" element={<AppointmentApprovedList />} />
+                  <Route path=":appointmentId" element={<AppointmentDetail />} />
+                  <Route
+                    path=":appointmentId/edit"
+                    element={<AppointmentEdit />}
+                  />
+                </Route>
+
+                <Route path="services">
+                  <Route path="" element={<ServiceParent />} />
+                  <Route
+                    path=":serviceId/checklist"
+                    element={<ServiceChecklist />}
+                  />
+                </Route>
+
                 <Route
-                  path=":appointmentId/edit"
-                  element={<AppointmentEdit />}
+                  path="customerAppointmentCreation"
+                  element={<AppointmentCreation />}
                 />
-              </Route>
 
-              <Route path="services">
-                <Route path="" element={<ServiceParent />} />
-                <Route
-                  path=":serviceId/checklist"
-                  element={<ServiceChecklist />}
-                />
-              </Route>
-
-              <Route
-                path="customerAppointmentCreation"
-                element={<AppointmentCreation />}
-              />
-              <Route path="aboutus" element={<AboutUs />} />
-              <Route path="clientsignup" element={<ClientSignUpForm />} />
-              <Route path="Login" element={<LoginForm />} />
-            </Routes>
+                <Route path="clientsignup" element={<ClientSignUpForm />} />
+                <Route path="Login" element={<LoginForm />} />
+              </Routes>
+            </div>
           </div>
+          <Footer />
         </div>
       </AuthProvider>
     </BrowserRouter>

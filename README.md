@@ -73,7 +73,7 @@ To build and run the Docker container, use the following commands:
 These commands will create the volume, build the Docker image and run the containers in the background.
 
 ```
-docker create volume cruisecontrolvolume
+docker volume create cruisecontrolvolume
 docker-compose up
 ```
 

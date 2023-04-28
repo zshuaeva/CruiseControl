@@ -1,0 +1,61 @@
+.approved-appointments-graph {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-top: 20px;
+  width: 100%;
+}
+
+.graph-container {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-end;
+  width: 100%;
+  height: 100px;
+}
+
+.graph-bar {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  align-items: center;
+  width: 50%;
+  height: 100%;
+  font-weight: bold;
+  color: #fff;
+  font-size: 18px;
+  position: relative;
+}
+
+.bar-fill {
+  width: 100%;
+  border-radius: 10px;
+}
+
+.last-week .bar-fill {
+  background-color: blue;
+}
+
+.week-before-last .bar-fill {
+  background-color: green;
+}
+
+.bar-label {
+  position: absolute;
+  bottom: 5px;
+  left: 50%;
+  transform: translateX(-50%);
+}
+
+.graph-labels {
+  display: flex;
+  justify-content: space-between;
+  width: 100%;
+  margin-top: 10px;
+}
+
+.graph-label {
+  font-weight: bold;
+  color: #000;
+  font-size: 16px;
+}

@@ -1,126 +1,194 @@
-import React, { useContext, useState } from "react";
+import React, { useContext, useState, useEffect } from "react";
 import { AuthContext } from "@galvanize-inc/jwtdown-for-react";
 import useUser from "./useUser";
 import CalendarComponent from "./CalendarComponent";
-
 import AppointmentPendingList from "./AppointmentsPendingList";
-
 import AppointmentApprovedList from "./AppointmentApprovedList";
-
-import { Link } from "react-router-dom";
+import ServiceParent from "./ServiceParent";
+import TechnicianParent from "./TechParent";
+import ApprovedAppointmentsGraph from "./ApprovedAppointmentsGraph";
+import AppointmentCreation from "./AppointmentCreation";
 
 function ClientLanding() {
   const { token } = useContext(AuthContext);
   const user = useUser(token);
-  const [showPending, setShowPending] = useState(true);
+  // const [showPending, setShowPending] = useState(true);
+  const [activeComponent, setActiveComponent] = useState("pending")
+  const [pendingAppointments, setPendingAppointments] = useState([]);
+  const [approvedAppointments, setApprovedAppointments] = useState([]);
+
+  const getAppointments = async () => {
+    const listUrl = `${process.env.REACT_APP_USER_SERVICE_API_HOST}/api/appointments`;
+    const response = await fetch(listUrl, {
+      headers: { Authorization: `Bearer ${token}` },
+    });
+    if (response.ok) {
+      const data = await response.json();
+      const approvedAppointments = data.filter(
+        (appointment) => appointment.is_approved
+      );
+      setApprovedAppointments(approvedAppointments);
+      const pendingAppointments = data.filter(
+        (appointment) => !appointment.is_approved
+      );
+      setPendingAppointments(pendingAppointments);
+    }
+  };
+
+  const filterAppointmentsByWeek = (appointments, weeksAgo) => {
+    const now = new Date();
+    const startOfWeek = new Date(
+      now.getFullYear(),
+      now.getMonth(),
+      now.getDate() - now.getDay() - weeksAgo * 7
+    );
+    const endOfWeek = new Date(
+      startOfWeek.getFullYear(),
+      startOfWeek.getMonth(),
+      startOfWeek.getDate() + 6
+    );
+
+    return appointments.filter((appointment) => {
+      const appointmentDate = new Date(appointment.date_of_service);
+      return (
+        appointmentDate >= startOfWeek && appointmentDate <= endOfWeek
+      );
+    });
+  };
+  const lastWeekAppointments = filterAppointmentsByWeek(approvedAppointments, 0);
+  const weekBeforeLastAppointments = filterAppointmentsByWeek(approvedAppointments, 1);
+
+  useEffect(() => {
+    if (token) {
+      getAppointments();
+    }
+  }, [token]);
 
   const handlePendingClick = () => {
-    setShowPending(true);
+    setActiveComponent("pending");
   };
 
   const handleApprovedClick = () => {
-    setShowPending(false);
+    setActiveComponent("approved");
   };
 
+  const handleServicesClick = () => {
+    setActiveComponent("services");
+  };
+
+  const handleTechniciansClick = () => {
+    setActiveComponent("technicians");
+  };
+
+  const handleAppointmentClick = () => {
+    setActiveComponent("appointmentCreate");
+  };
+
+  const renderActiveComponent = () => {
+    switch (activeComponent) {
+      case "pending":
+        return <AppointmentPendingList user={user} getAppointments={getAppointments} appointments={pendingAppointments} token={token} />;
+      case "approved":
+        return <AppointmentApprovedList user={user} getAppointments={getAppointments} appointments={approvedAppointments} token={token} />;
+      case "services":
+        return <ServiceParent user={user} token={token} />;
+      case "technicians":
+        return <TechnicianParent user={user} token={token} />;
+      case "appointmentCreate":
+        return <AppointmentCreation user={user} token={token} getAppointments={getAppointments} />;
+      default:
+        return null;
+    }
+  };
   return (
     <>
       {token && user?.is_client && (
         <div className="">
-          <h1 className="text-center text-capitalize text-black p-4 mb-4">
-            {user.username}'s Dashboard
-          </h1>
-          <div className="row p-2">
-            <div className="col-lg-8 mb-4">
-              <CalendarComponent />
-              {showPending ? (
-                <AppointmentPendingList />
-              ) : (
-                <AppointmentApprovedList />
-              )}
-            </div>
-            <div className="col-lg-4">
-              <div className="row mb-4">
-                <div className="col">
-                  <div className="card h-100">
-                    <div className="card-body d-flex flex-column align-items-center">
-                      <h5 className="card-title text-center fw-bold fs-5">
-                        Upcoming Appointments
-                      </h5>
-                      <button
-                        onClick={handlePendingClick}
-                        className={`btn btn-primary mt-3 mb-2 w-100 ${
-                          showPending ? "active" : ""
-                        }`}
-                      >
-                        View
-                      </button>
-                    </div>
+          <div className="container">
+            <div className="row align-items-start">
+              <div className="col-md-6">
+                <div className="card mb-4">
+                  <div className="card-body">
+                    <h1 className="text-center text-capitalize text-black">
+                      {user.username}'s Dashboard
+                    </h1>
                   </div>
                 </div>
+                <ApprovedAppointmentsGraph
+                  lastWeek={lastWeekAppointments.length}
+                  weekBeforeLast={weekBeforeLastAppointments.length}
+                />
               </div>
-              <div className="row mb-4">
-                <div className="col">
-                  <div className="card h-100">
-                    <div className="card-body d-flex flex-column align-items-center">
-                      <h5 className="card-title text-center fw-bold fs-5">
-                        Approved Appointments
-                      </h5>
-                      <button
-                        onClick={handleApprovedClick}
-                        className={`btn btn-primary mt-3 mb-2 w-100 ${
-                          !showPending ? "active" : ""
-                        }`}
-                      >
-                        View
-                      </button>
-                    </div>
-                  </div>
-                </div>
-              </div>
-              <div className="row mb-4">
-                <div className="col">
-                  <div className="card h-100">
-                    <div className="card-body d-flex flex-column align-items-center">
-                      <h5 className="card-title text-center fw-bold fs-5">
-                        Services
-                      </h5>
-                      <Link
-                        to="/services"
-                        className="btn btn-primary mt-3 mb-2 w-100"
-                      >
-                        View
-                      </Link>
-                    </div>
-                  </div>
-                </div>
-              </div>
-              <div className="row mb-4">
-                <div className="col">
-                  <div className="card h-100">
-                    <div className="card-body d-flex flex-column align-items-center">
-                      <h5 className="card-title text-center fw-bold fs-5">
-                        Technicians
-                      </h5>
-                      <Link
-                        to="/technicians"
-                        className="btn btn-primary mt-3 mb-2 w-100"
-                      >
-                        View
-                      </Link>
-                    </div>
-                  </div>
-                </div>
+              <div className="col-md-6">
+                <CalendarComponent appointments={approvedAppointments} token={token} />
               </div>
             </div>
           </div>
+          <div className="row p-1">
+            <div className="row mb-1">
+              <div className="col">
+                <ul className="nav nav-tabs">
+                  <li className="nav-item">
+                    <a
+                      className={`nav-link ${activeComponent === "pending" ? "active" : ""}`}
+                      onClick={handlePendingClick}
+                    >
+                      Upcoming Appointments
+                    </a>
+                  </li>
+                  <li className="nav-item">
+                    <a
+                      className={`nav-link ${activeComponent === "approved" ? "active" : ""}`}
+                      onClick={handleApprovedClick}
+                    >
+                      Approved Appointments
+                    </a>
+                  </li>
+                  <li className="nav-item">
+                    <a
+                      className={`nav-link ${activeComponent === "services" ? "active" : ""}`}
+                      onClick={handleServicesClick}
+                    >
+                      Services
+                    </a>
+                  </li>
+                  <li className="nav-item">
+                    <a
+                      className={`nav-link ${activeComponent === "technicians" ? "active" : ""}`}
+                      onClick={handleTechniciansClick}
+                    >
+                      Technicians
+                    </a>
+                  </li>
+                  <li className="nav-item">
+                    <a
+                      className={`nav-link ${activeComponent === "appointmentCreate" ? "active" : ""}`}
+                      onClick={handleAppointmentClick}
+                    >
+                      Create Appointment
+                    </a>
+                  </li>
+                </ul>
+              </div>
+            </div>
+
+            <div className="col mb-4">
+              {renderActiveComponent()}
+            </div>
+
+          </div>
         </div>
-      )}
-      {!token ||
+        // </div >
+      )
+      }
+      {
+        !token ||
         (token && user?.is_technician && (
           <div className="alert alert-danger" role="alert">
             This area is off limits.
           </div>
-        ))}
+        ))
+      }
     </>
   );
 }

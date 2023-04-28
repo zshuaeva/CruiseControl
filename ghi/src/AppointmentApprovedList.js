@@ -1,35 +1,8 @@
-import React, { useEffect, useState } from "react";
-import { AuthContext } from "@galvanize-inc/jwtdown-for-react";
-import { useContext } from "react";
-import useUser from "./useUser";
+import React from "react";
+
 import { Link } from "react-router-dom";
 
-function AppointmentApprovedList() {
-  const { token } = useContext(AuthContext);
-  const user = useUser(token);
-
-  const [appointments, setAppointments] = useState([]);
-
-  const getAppointments = async () => {
-    const listUrl = `${process.env.REACT_APP_USER_SERVICE_API_HOST}/api/appointments`;
-    const response = await fetch(listUrl, {
-      headers: { Authorization: `Bearer ${token}` },
-    });
-    if (response.ok) {
-      const data = await response.json();
-      const pendingAppointments = data.filter(
-        (appointment) => appointment.is_approved
-      );
-      setAppointments(pendingAppointments);
-    }
-  };
-
-  useEffect(() => {
-    if (token) {
-      getAppointments();
-    }
-  }, [token]);
-
+function AppointmentApprovedList({ user, getAppointments, appointments, token }) {
   const deleteAppointment = async (id) => {
     await fetch(
       `${process.env.REACT_APP_USER_SERVICE_API_HOST}/api/appointments/${id}`,
