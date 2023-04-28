@@ -1,15 +1,9 @@
 import React, { useEffect, useState } from "react";
-import { AuthContext } from "@galvanize-inc/jwtdown-for-react";
-import { useContext } from "react";
-import useUser from "./useUser";
 import ServiceCreation from "./ServiceCreation";
 import ServiceEdit from "./ServiceEdit";
 import ServiceList from "./ServiceList";
 
-function ServiceParent() {
-  const { token } = useContext(AuthContext);
-  const user = useUser(token);
-
+function ServiceParent({ user, token }) {
   const [services, setServices] = useState([]);
   const [isEditing, setIsEditing] = useState(false);
   const [editingService, setEditingService] = useState(null);

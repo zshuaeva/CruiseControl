@@ -1,11 +1,20 @@
-import React, { useState, useEffect } from "react";
-import { Link } from "react-router-dom";
-
-
-
+import React, { useState } from "react";
+import ServiceChecklist from "./ServiceChecklist";
 
 function ServiceList({ services, toggleEditMode, getServices, token, user }) {
+  const [showModal, setShowModal] = useState(false);
+  const [selectedServiceId, setSelectedServiceId] = useState(null);
 
+  const openChecklistModal = (serviceId) => {
+    setShowModal(true);
+    setSelectedServiceId(serviceId);
+  };
+
+
+  const closeChecklistModal = () => {
+    setShowModal(false);
+    setSelectedServiceId(null);
+  };
 
   const deleteService = async (service_id) => {
     await fetch(
@@ -31,6 +40,7 @@ function ServiceList({ services, toggleEditMode, getServices, token, user }) {
                 <th>Name</th>
                 <th>Description</th>
                 <th>Price</th>
+                <th>Actions</th>
               </tr>
             </thead>
             <tbody className="text-center">
@@ -39,46 +49,17 @@ function ServiceList({ services, toggleEditMode, getServices, token, user }) {
                 .map((service, index) => {
                   return (
                     <tr key={`${service.service_id}-${index}`}>
+                      <td>{service.service_type}</td>
+                      <td>{service.service_name}</td>
+                      <td>{service.service_description}</td>
+                      <td>{service.service_price}</td>
                       <td>
-                        <Link
-                          to={`/services/${service.id}`}
-                          className="text-reset text-decoration-none"
+                        <button
+                          type="button"
+                          className="btn btn-success"
+                          onClick={() => openChecklistModal(service.id)}
                         >
-                          {service.service_type}
-                        </Link>
-                      </td>
-                      <td>
-                        <Link
-                          to={`/services/${service.id}`}
-                          className="text-reset text-decoration-none"
-                        >
-                          {service.service_name}
-                        </Link>
-                      </td>
-                      <td>
-                        <Link
-                          to={`/services/${service.id}`}
-                          className="text-reset text-decoration-none"
-                        >
-                          {service.service_description}
-                        </Link>
-                      </td>
-                      <td>
-                        <Link
-                          to={`/services/${service.id}`}
-                          className="text-reset text-decoration-none"
-                        >
-                          {service.service_price}
-                        </Link>
-                      </td>
-                      <td>
-                        <button type="button" className="btn btn-success">
-                          <Link
-                            to={`/services/${service.id}/checklist`}
-                            className="text-reset text-decoration-none"
-                          >
-                            Checklist
-                          </Link>
+                          Checklist
                         </button>
                         <button
                           type="button"
@@ -103,10 +84,16 @@ function ServiceList({ services, toggleEditMode, getServices, token, user }) {
         </>
       ) : null}
       {token && user?.is_technician ? (
-        <div class="alert alert-danger" role="alert">
+        <div className="alert alert-danger" role="alert">
           This area is off limits.
         </div>
       ) : null}
+      {showModal && (
+        <ServiceChecklist
+          serviceId={selectedServiceId}
+          closeModal={closeChecklistModal}
+        />
+      )}
     </div>
   );
 }
