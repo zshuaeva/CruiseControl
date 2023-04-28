@@ -18,6 +18,7 @@ import AppointmentApprovedList from "./AppointmentApprovedList.js";
 import AppointmentDetail from "./AppointmentDetail.js";
 
 import AppointmentEdit from "./AppointmentUpdate.js";
+import AboutUs from "./AboutUs.js";
 
 function App() {
   const domain = /https:\/\/[^/]+/;
@@ -62,7 +63,7 @@ function App() {
                 path="customerAppointmentCreation"
                 element={<AppointmentCreation />}
               />
-
+              <Route path="aboutus" element={<AboutUs />} />
               <Route path="clientsignup" element={<ClientSignUpForm />} />
               <Route path="Login" element={<LoginForm />} />
             </Routes>
