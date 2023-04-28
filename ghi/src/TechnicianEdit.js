@@ -19,7 +19,7 @@ function TechnicianEdit(props) {
     const data = {};
     data.id = id;
     data.username = username;
-    data.password = password;
+    data.hashed_password = password;
     data.business_id = business_id;
     data.employee_id = employee_id;
     data.first_name = first_name;
@@ -66,17 +66,6 @@ function TechnicianEdit(props) {
                       placeholder="Username"
                     />
                     <label htmlFor="username"></label>
-                  </div>
-                  <div className="col-md-6">
-                    <input
-                      type="password"
-                      className="form-control"
-                      id="password"
-                      placeholder="Password"
-                      value={password}
-                      onChange={(event) => setPassword(event.target.value)}
-                    />
-                    <label htmlFor="password"></label>
                   </div>
                   <div className="col-md-6">
                     <input

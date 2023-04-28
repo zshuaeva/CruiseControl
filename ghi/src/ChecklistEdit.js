@@ -1,10 +1,8 @@
-import React, { useParams } from "react-router-dom";
+import React from "react-router-dom";
 import { useState } from "react";
 
-function ChecklistEdit({ getChecklist, token, checklistItem, setIsEditing }) {
-  const { serviceId } = useParams();
+function ChecklistEdit({ getChecklist, token, checklistItem, setIsEditing, serviceId }) {
   const [checklist_item, setChecklistItem] = useState(checklistItem.checklist_item);
-  const [checklist_item_id, setChecklistItemId] = useState("");
 
   const handleSubmit = async (event) => {
     event.preventDefault();
@@ -12,8 +10,6 @@ function ChecklistEdit({ getChecklist, token, checklistItem, setIsEditing }) {
       checklist_item: checklist_item,
       service_id: serviceId,
     };
-  
-
     const url = `${process.env.REACT_APP_USER_SERVICE_API_HOST}/checklist/${checklistItem.id}`;
     const fetchConfig = {
       method: "PUT",
@@ -25,6 +21,7 @@ function ChecklistEdit({ getChecklist, token, checklistItem, setIsEditing }) {
     };
     const response = await fetch(url, fetchConfig);
     if (response.ok) {
+
       await response.json();
       setChecklistItem("");
       getChecklist(serviceId);

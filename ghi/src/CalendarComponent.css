@@ -63,3 +63,15 @@
 .appointment {
   background-color: rgb(80, 171, 0) !important;
 }
+
+.one-appointment {
+  background-color: orange !important;
+}
+
+.two-appointments {
+  background-color: blue !important;
+}
+
+.three-or-more-appointments {
+  background-color: green !important;
+}
