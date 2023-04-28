@@ -1,5 +1,12 @@
+.navbar-brand-custom {
+  color: #05c4a4;
+}
+
 #nav,
 #offheader {
-  background-color: #01400b;
-  color: white;
+  color: #05c4a4;
+  background-color: #ffffff6f;
+}
+.navbar-brand-custom.active {
+  color: #05c4a4;
 }

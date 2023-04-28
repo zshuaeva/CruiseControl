@@ -1,6 +1,5 @@
 import React, { useContext, useState, useEffect } from "react";
 import { AuthContext } from "@galvanize-inc/jwtdown-for-react";
-import { Link } from "react-router-dom";
 import useUser from "./useUser";
 import CalendarComponent from "./CalendarComponent";
 import AppointmentPendingList from "./AppointmentsPendingList";
@@ -8,6 +7,7 @@ import AppointmentApprovedList from "./AppointmentApprovedList";
 import ServiceParent from "./ServiceParent";
 import TechnicianParent from "./TechParent";
 import ApprovedAppointmentsGraph from "./ApprovedAppointmentsGraph";
+import AppointmentCreation from "./AppointmentCreation";
 
 function ClientLanding() {
   const { token } = useContext(AuthContext);
@@ -80,6 +80,10 @@ function ClientLanding() {
     setActiveComponent("technicians");
   };
 
+  const handleAppointmentClick = () => {
+    setActiveComponent("appointmentCreate");
+  };
+
   const renderActiveComponent = () => {
     switch (activeComponent) {
       case "pending":
@@ -90,6 +94,8 @@ function ClientLanding() {
         return <ServiceParent user={user} token={token} />;
       case "technicians":
         return <TechnicianParent user={user} token={token} />;
+      case "appointmentCreate":
+        return <AppointmentCreation user={user} token={token} getAppointments={getAppointments} />;
       default:
         return null;
     }
@@ -152,6 +158,14 @@ function ClientLanding() {
                       onClick={handleTechniciansClick}
                     >
                       Technicians
+                    </a>
+                  </li>
+                  <li className="nav-item">
+                    <a
+                      className={`nav-link ${activeComponent === "appointmentCreate" ? "active" : ""}`}
+                      onClick={handleAppointmentClick}
+                    >
+                      Create Appointment
                     </a>
                   </li>
                 </ul>

@@ -1,11 +1,9 @@
 import React, { useState, useEffect } from "react";
-import { AuthContext } from "@galvanize-inc/jwtdown-for-react";
-import { useContext } from "react";
+
 import useUser from "./useUser";
 
-function AppointmentCreation() {
-  const { token } = useContext(AuthContext);
-  const user = useUser(token);
+function AppointmentCreation({ getAppointments, token, user }) {
+
 
   const [services, setServices] = useState([]);
 
@@ -56,6 +54,7 @@ function AppointmentCreation() {
       setDateOfService("");
       setBusinessId("");
       setServiceId("");
+      getAppointments();
     } else {
       console.error("Error creating appointment; Please try again.");
     }

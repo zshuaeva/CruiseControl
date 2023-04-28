@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import TechnicianList from "./ListTechnicians";
+import TechnicianList from "./TechnicianList";
 import TechnicianForm from "./TechnicianForm";
 import TechnicianEdit from "./TechnicianEdit";
 

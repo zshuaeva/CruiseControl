@@ -49,6 +49,7 @@ function TechnicianForm({ getTechnician, token, user }) {
       console.error("Error creating Technician; Please try again");
     }
   };
+
   return (
     <div>
       {token && user?.is_client === true ? (
@@ -57,8 +58,8 @@ function TechnicianForm({ getTechnician, token, user }) {
             <div className="col-12">
               <div className="shadow p-4 mt-4">
                 <h1>Sign Up As Technician</h1>
-                <form onSubmit={handleSubmit} className="row g-10">
-                  <div className="col-md-6">
+                <form onSubmit={handleSubmit}>
+                  <div className="form-floating mb-3">
                     <input
                       type="text"
                       className="form-control"
@@ -68,9 +69,9 @@ function TechnicianForm({ getTechnician, token, user }) {
                       required
                       placeholder="Username"
                     />
-                    <label htmlFor="username"></label>
+                    <label htmlFor="username">Username</label>
                   </div>
-                  <div className="col-md-6">
+                  <div className="form-floating mb-3">
                     <input
                       type="password"
                       className="form-control"
@@ -80,9 +81,9 @@ function TechnicianForm({ getTechnician, token, user }) {
                       onChange={(event) => setPassword(event.target.value)}
                       required
                     />
-                    <label htmlFor="password"></label>
+                    <label htmlFor="password">Password</label>
                   </div>
-                  <div className="col-md-6">
+                  <div className="form-floating mb-3">
                     <input
                       type="text"
                       className="form-control"
@@ -92,9 +93,9 @@ function TechnicianForm({ getTechnician, token, user }) {
                       onChange={(event) => setFirstName(event.target.value)}
                       required
                     />
-                    <label htmlFor="first_name"></label>
+                    <label htmlFor="first_name">First Name</label>
                   </div>
-                  <div className="col-md-6">
+                  <div className="form-floating mb-3">
                     <input
                       type="text"
                       className="form-control"
@@ -104,9 +105,9 @@ function TechnicianForm({ getTechnician, token, user }) {
                       onChange={(event) => setLastName(event.target.value)}
                       required
                     />
-                    <label htmlFor="last_name"></label>
+                    <label htmlFor="last_name">Last Name</label>
                   </div>
-                  <div className="col-md-6">
+                  <div className="form-floating mb-3">
                     <input
                       type="number"
                       className="form-control"
@@ -116,9 +117,9 @@ function TechnicianForm({ getTechnician, token, user }) {
                       onChange={(event) => setEmployeeId(event.target.value)}
                       required
                     />
-                    <label htmlFor="Employee_id"></label>
+                    <label htmlFor="employee_id">Employee Id</label>
                   </div>
-                  <div className="col-md-6">
+                  <div className="form-floating mb-3">
                     <input
                       type="text"
                       className="form-control"
@@ -128,9 +129,9 @@ function TechnicianForm({ getTechnician, token, user }) {
                       onChange={(event) => setEmail(event.target.value)}
                       required
                     />
-                    <label htmlFor="email"></label>
+                    <label htmlFor="email">Email</label>
                   </div>
-                  <div className="col-md-6">
+                  <div className="form-floating mb-3">
                     <input
                       type="text"
                       className="form-control"
@@ -140,9 +141,9 @@ function TechnicianForm({ getTechnician, token, user }) {
                       onChange={(event) => setAddress(event.target.value)}
                       required
                     />
-                    <label htmlFor="address"></label>
+                    <label htmlFor="address">Address</label>
                   </div>
-                  <div className="col-md-6">
+                  <div className="form-floating mb-3">
                     <input
                       type="tel"
                       className="form-control"
@@ -152,18 +153,9 @@ function TechnicianForm({ getTechnician, token, user }) {
                       onChange={(event) => setPhoneNumber(event.target.value)}
                       required
                     />
-                    <label htmlFor="phone_number"></label>
+                    <label htmlFor="phone_number">Phone Number</label>
                   </div>
-                  <div className="btn-group d-md-block">
-                    <button
-                      className="btn btn-primary btn-sm rounded-3 fw-bold fs-5"
-                      data-toggle="tooltip"
-                      data-placement="bottom"
-                      title="This will Create a technician"
-                    >
-                      Create
-                    </button>
-                  </div>
+                  <button className="btn btn-primary">Create</button>
                 </form>
               </div>
             </div>

@@ -9,34 +9,28 @@ function Nav() {
   const user = useUser(token);
   const { logout } = useToken();
 
-  const closeOffcanvas = () => {
-    document.getElementById("offcanvasNavbar").classList.remove("show");
-  };
+  // const closeOffcanvas = () => {
+  //   document.getElementById("offcanvasNavbar").classList.remove("show");
+  // };
 
   return (
     <nav id="nav" className="navbar fixed-top">
       <div className="container-fluid">
-        {user === null || token === null ? (
-          <NavLink className="navbar-brand text-light fw-bold fs-4" to="/">
-            Cruise Control
-          </NavLink>
-        ) : null}
-        {user?.is_client ? (
-          <NavLink
-            className="navbar-brand text-light fw-bold fs-4"
-            to="/clientlanding"
-          >
-            Cruise Control
-          </NavLink>
-        ) : null}
-        {user?.is_technician ? (
-          <NavLink
-            className="navbar-brand text-light fw-bold fs-4"
-            to="/technicianlanding"
-          >
-            Cruise Control
-          </NavLink>
-        ) : null}
+        <NavLink
+          className="navbar-brand navbar-brand-custom fw-bold fs-4"
+          activeclassname="active"
+          to={
+            user === null || token === null
+              ? "/"
+              : user?.is_client
+                ? "/clientlanding"
+                : user?.is_technician
+                  ? "/technicianlanding"
+                  : "/"
+          }
+        >
+          Cruise Control
+        </NavLink>
         <button
           className="navbar-toggler bg-secondary"
           type="button"
@@ -52,7 +46,7 @@ function Nav() {
           id="offcanvasNavbar"
           aria-labelledby="offcanvasNavbarLabel"
         >
-          <div id="offheader" className="offcanvas-header text-capitalize">
+          <div id="offheader" className="offcanvas-header bg-secondary text-capitalize">
             {token && user ? (
               <h1 className="offcanvas-title">Welcome {user.username}</h1>
             ) : null}
@@ -75,6 +69,7 @@ function Nav() {
                     <NavLink
                       className="nav-link fw-bold fs-5"
                       to="/customerAppointmentCreation"
+                    // onClick={closeOffcanvas}
                     >
                       Customer Appointment Creation
                     </NavLink>
