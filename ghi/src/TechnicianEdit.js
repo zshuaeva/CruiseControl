@@ -19,7 +19,7 @@ function TechnicianEdit(props) {
     const data = {};
     data.id = id;
     data.username = username;
-    data.password = password;
+    data.hashed_password = password;
     data.business_id = business_id;
     data.employee_id = employee_id;
     data.first_name = first_name;

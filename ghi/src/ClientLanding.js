@@ -8,6 +8,7 @@ import ServiceParent from "./ServiceParent";
 import TechnicianParent from "./TechParent";
 import ApprovedAppointmentsGraph from "./ApprovedAppointmentsGraph";
 import AppointmentCreation from "./AppointmentCreation";
+import { Link } from "react-router-dom";
 
 function ClientLanding() {
   const { token } = useContext(AuthContext);
@@ -120,7 +121,10 @@ function ClientLanding() {
                 />
               </div>
               <div className="col-md-6">
-                <CalendarComponent appointments={approvedAppointments} token={token} />
+                <CalendarComponent
+                  appointments={approvedAppointments}
+                  token={token}
+                />
               </div>
             </div>
           </div>
@@ -130,7 +134,9 @@ function ClientLanding() {
                 <ul className="nav nav-tabs">
                   <li className="nav-item">
                     <a
-                      className={`nav-link ${activeComponent === "pending" ? "active" : ""}`}
+                      className={`nav-link ${
+                        activeComponent === "pending" ? "active" : ""
+                      }`}
                       onClick={handlePendingClick}
                     >
                       Upcoming Appointments
@@ -138,7 +144,9 @@ function ClientLanding() {
                   </li>
                   <li className="nav-item">
                     <a
-                      className={`nav-link ${activeComponent === "approved" ? "active" : ""}`}
+                      className={`nav-link ${
+                        activeComponent === "approved" ? "active" : ""
+                      }`}
                       onClick={handleApprovedClick}
                     >
                       Approved Appointments
@@ -146,7 +154,9 @@ function ClientLanding() {
                   </li>
                   <li className="nav-item">
                     <a
-                      className={`nav-link ${activeComponent === "services" ? "active" : ""}`}
+                      className={`nav-link ${
+                        activeComponent === "services" ? "active" : ""
+                      }`}
                       onClick={handleServicesClick}
                     >
                       Services
@@ -154,7 +164,9 @@ function ClientLanding() {
                   </li>
                   <li className="nav-item">
                     <a
-                      className={`nav-link ${activeComponent === "technicians" ? "active" : ""}`}
+                      className={`nav-link ${
+                        activeComponent === "technicians" ? "active" : ""
+                      }`}
                       onClick={handleTechniciansClick}
                     >
                       Technicians
@@ -162,7 +174,9 @@ function ClientLanding() {
                   </li>
                   <li className="nav-item">
                     <a
-                      className={`nav-link ${activeComponent === "appointmentCreate" ? "active" : ""}`}
+                      className={`nav-link ${
+                        activeComponent === "appointmentCreate" ? "active" : ""
+                      }`}
                       onClick={handleAppointmentClick}
                     >
                       Create Appointment
@@ -172,23 +186,28 @@ function ClientLanding() {
               </div>
             </div>
 
-            <div className="col mb-4">
-              {renderActiveComponent()}
+            <div className="col mb-4">{renderActiveComponent()}</div>
+            <div>
+              <li>
+                <Link
+                  className="btn btn-primary btn-sm mr-2"
+                  to={"/client/info"}
+                  role="button"
+                >
+                  Account info
+                </Link>
+              </li>
             </div>
-
           </div>
         </div>
         // </div >
-      )
-      }
-      {
-        !token ||
+      )}
+      {!token ||
         (token && user?.is_technician && (
           <div className="alert alert-danger" role="alert">
             This area is off limits.
           </div>
-        ))
-      }
+        ))}
     </>
   );
 }
