@@ -1,4 +1,5 @@
 import { Link } from "react-router-dom";
+import logo from './logo-color.png';
 
 function HeroPage() {
   return (
@@ -25,7 +26,7 @@ function HeroPage() {
         </div>
         <div className="col-md-6">
           <img
-            src="/logo-color.png"
+            src={logo}
             alt="Cruise Control"
             className="img-fluid"
           />
