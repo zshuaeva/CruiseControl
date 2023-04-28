@@ -123,18 +123,6 @@ function ClientSignUpForm() {
             </div>
             <div className="form-floating mb-3">
               <input
-                type="number"
-                className="form-control"
-                id="employee_id"
-                placeholder="Employee Id"
-                value={employee_id}
-                onChange={(event) => setEmployeeId(event.target.value)}
-                required
-              />
-              <label htmlFor="Employee_id">Employee Id</label>
-            </div>
-            <div className="form-floating mb-3">
-              <input
                 type="text"
                 className="form-control"
                 id="email"
