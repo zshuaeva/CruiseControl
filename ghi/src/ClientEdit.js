@@ -1,11 +1,8 @@
 import React, { useState } from "react";
 
 function ClientEdit({ user, token }) {
-  const [id] = useState("");
+  const [id] = useState(user.id);
   const [username, setUsername] = useState("");
-  const [password, setPassword] = useState("");
-  const [business_id] = useState("");
-  const [employee_id, setEmployeeId] = useState("");
   const [first_name, setFirstName] = useState("");
   const [last_name, setLastName] = useState("");
   const [email, setEmail] = useState("");
@@ -17,9 +14,6 @@ function ClientEdit({ user, token }) {
     const data = {};
     data.id = id;
     data.username = username;
-    data.hashed_password = password;
-    data.business_id = business_id;
-    data.employee_id = employee_id;
     data.first_name = first_name;
     data.last_name = last_name;
     data.email = email;
@@ -39,7 +33,7 @@ function ClientEdit({ user, token }) {
     if (response.ok) {
       await response.json();
     } else {
-      console.error("Error Couldnt Update Technician");
+      console.error("Error Couldnt Update Client");
     }
   };
 
@@ -50,7 +44,7 @@ function ClientEdit({ user, token }) {
           <div className="row">
             <div className="col-12">
               <div className="shadow p-4 mt-4">
-                <h1>Edit A Technician</h1>
+                <h1>Update accounts</h1>
                 <form onSubmit={handleSubmit} className="row g-10">
                   <div className="col-md-6">
                     <input
@@ -84,17 +78,6 @@ function ClientEdit({ user, token }) {
                       onChange={(event) => setLastName(event.target.value)}
                     />
                     <label htmlFor="last_name"></label>
-                  </div>
-                  <div className="col-md-6">
-                    <input
-                      type="number"
-                      className="form-control"
-                      id="employee_id"
-                      placeholder="Employee Id"
-                      value={employee_id}
-                      onChange={(event) => setEmployeeId(event.target.value)}
-                    />
-                    <label htmlFor="Employee_id"></label>
                   </div>
                   <div className="col-md-6">
                     <input
@@ -163,4 +146,4 @@ function ClientEdit({ user, token }) {
   );
 }
 
-export default TechnicianEdit;
+export default ClientEdit;
