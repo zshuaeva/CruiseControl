@@ -55,6 +55,13 @@ function HeroPage() {
           </ul>
         </div>
       </div>
+      <Link
+        className="btn btn-primary btn-sm"
+        to="newappoitnment"
+        role="button"
+      >
+        Make an appointment with a Business that uses Cruise Control
+      </Link>
     </div>
   );
 }

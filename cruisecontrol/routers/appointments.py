@@ -49,6 +49,18 @@ def create_appointment(
     return repo.create(info)
 
 
+@router.post("/api/heroappointments", response_model=AppointmentOut)
+def create_appointment(
+    business_id: int,
+    info: AppointmentIn,
+    response: Response,
+    repo: AppointmentQueries = Depends(),
+):
+    info.business_id = business_id
+    print(business_id, info)
+    return repo.create(info)
+
+
 @router.put(
     "/api/appointments/{appointment_id}", response_model=AppointmentOut
 )

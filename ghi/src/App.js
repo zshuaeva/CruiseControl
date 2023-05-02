@@ -22,6 +22,8 @@ import Footer from "./Footer.js";
 
 import ClientInfoParent from "./ClientInfoParent.js";
 
+import HeroAppointmentForm from "./HeroAppointmentForm.js";
+
 
 function App() {
   const appStyle = {
@@ -48,13 +50,13 @@ function App() {
               <Routes>
                 <Route path="/" element={<HeroPage />} />
 
-              <Route path="clientlanding" element={<ClientLanding />} />
+                <Route path="clientlanding" element={<ClientLanding />} />
 
-              <Route
-                path="client/info"
-                element={<ClientInfoParent />}
-              />
-              
+                <Route
+                  path="client/info"
+                  element={<ClientInfoParent />}
+                />
+
 
                 <Route path="technicians" element={<TechnicianParent />} />
 
@@ -84,6 +86,7 @@ function App() {
                   element={<AppointmentCreation />}
                 />
 
+                <Route path="newappoitnment" element={<HeroAppointmentForm />} />
                 <Route path="clientsignup" element={<ClientSignUpForm />} />
                 <Route path="Login" element={<LoginForm />} />
               </Routes>

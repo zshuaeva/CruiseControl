@@ -4,6 +4,8 @@ import useUser from "./useUser";
 
 import AppointmentApprovedList from "./AppointmentApprovedList";
 
+import CalendarComponent from "./CalendarComponent";
+
 function TechnicianLanding() {
 
   const [approvedAppointments, setApprovedAppointments] = useState([]);
@@ -33,6 +35,7 @@ function TechnicianLanding() {
 
   return (
     <div>
+      <CalendarComponent appointments={approvedAppointments} />
       <AppointmentApprovedList appointments={approvedAppointments} />
     </div>
   );
