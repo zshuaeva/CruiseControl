@@ -9,23 +9,13 @@ const Footer = () => {
       <Container>
         <Row>
           <Col className="text-center ">
-            <h5>Cruise Control</h5>
-            <Link
-              className="btn btn-outline-info btn-sm"
-              to="/aboutus"
-              role="button"
-            >
+            <Link to="/" className="navbar-brand fw-bold">
+              <h5>Cruise Control</h5>
+            </Link>
+            <Link className="navbar-brand" to="/aboutus">
               About Us
             </Link>
-            <br />
-            Lee Seaver
-            <br />
-            Joshua Evangelista
-            <br />
-            Nicholas Trevino
-            <br />
-            Ken Wilson
-            <br />
+            <p>est. 2023</p>
           </Col>
         </Row>
       </Container>
