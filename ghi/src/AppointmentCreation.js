@@ -31,7 +31,7 @@ function AppointmentCreation({ getAppointments, token, user }) {
     data.date_of_service = date_of_service;
     data.business_id = user.business_id;
     data.service_id = service_id;
-
+    console.log(data)
     const url = `${process.env.REACT_APP_USER_SERVICE_API_HOST}/api/appointments`;
     const fetchConfig = {
       method: "POST",

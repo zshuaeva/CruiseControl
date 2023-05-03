@@ -20,6 +20,10 @@ import AppointmentDetail from "./AppointmentDetail.js";
 import AppointmentEdit from "./AppointmentUpdate.js";
 import Footer from "./Footer.js";
 
+import ClientInfoParent from "./ClientInfoParent.js";
+
+import HeroAppointmentForm from "./HeroAppointmentForm.js";
+
 function App() {
   const appStyle = {
     display: "flex",
@@ -84,6 +88,10 @@ function App() {
                   element={<AppointmentCreation />}
                 />
 
+                <Route
+                  path="newappoitnment"
+                  element={<HeroAppointmentForm />}
+                />
                 <Route path="clientsignup" element={<ClientSignUpForm />} />
                 <Route path="Login" element={<LoginForm />} />
               </Routes>

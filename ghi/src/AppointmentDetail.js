@@ -41,7 +41,7 @@ function AppointmentDetail() {
 
   const approveAppointment = async (appointmentId) => {
     await fetch(
-      `${process.env.REACT_APP_USER_SERVICE_API_HOST}/${appointmentId}/approve`,
+      `${process.env.REACT_APP_USER_SERVICE_API_HOST}/api/appointments/${appointmentId}/approve`,
       {
         method: "PUT",
         headers: { Authorization: `Bearer ${token}` },
@@ -91,8 +91,8 @@ function AppointmentDetail() {
                 {appointment.is_approved ? "Approved" : "Pending"}
               </li>
             </ul>
-            {token && user?.is_client && (
-              <p className="lead mt-4">
+            {token && user?.is_client ? (
+              <p className="lead mt-2">
                 {!appointment.is_approved && (
                   <button
                     type="button"
@@ -116,6 +116,8 @@ function AppointmentDetail() {
                   Delete
                 </button>
               </p>
+            ) : (
+              <p className="lead mt-2"></p>
             )}
           </div>
         </div>

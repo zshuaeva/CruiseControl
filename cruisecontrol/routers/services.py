@@ -16,6 +16,14 @@ def get_all_services(
     return repo.get_all(repo, business_id)
 
 
+@router.get("/api/heroservices", response_model=List[ServiceOut])
+def get_all_hero_services(
+    business_id: int,
+    repo: ServiceQueries = Depends(),
+):
+    return repo.get_all(repo, business_id)
+
+
 @router.post("/api/services", response_model=ServiceOut)
 def create_service(
     info: ServiceIn,

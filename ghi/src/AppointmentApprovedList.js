@@ -16,7 +16,8 @@ function AppointmentApprovedList({ user, getAppointments, appointments, token })
 
   return (
     <div>
-      <h1 className="text-center">Approved Appointments</h1>
+      {user?.is_client && <h1 className="text-center">Approved Appointments</h1>}
+      {/* {user?.is_technician && <h1 } */}
       <table className="table table-striped">
         <thead className="text-center">
           <tr className="header">
