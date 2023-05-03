@@ -13,9 +13,9 @@ function ApprovedAppointmentsGraph({ lastWeek, weekBeforeLast }) {
                     <div className="col">
                         <div className="progress">
                             <div
-                                className="progress-bar bg-primary"
+                                className="progress-bar"
                                 role="progressbar"
-                                style={{ width: `${lastWeekPercentage}%` }}
+                                style={{ width: `${lastWeekPercentage}%`, backgroundColor: '#0584c4a7' }}
                                 aria-valuenow={lastWeekPercentage}
                                 aria-valuemin="0"
                                 aria-valuemax="100"
@@ -23,16 +23,16 @@ function ApprovedAppointmentsGraph({ lastWeek, weekBeforeLast }) {
                                 {lastWeek}
                             </div>
                         </div>
-                        <div className="text-center mt-2">Last Week</div>
+                        <div className="text-center mt-2">Last 7 Days</div>
                     </div>
                 </div>
                 <div className="row mt-3">
                     <div className="col">
                         <div className="progress">
                             <div
-                                className="progress-bar bg-success"
+                                className="progress-bar"
                                 role="progressbar"
-                                style={{ width: `${weekBeforeLastPercentage}%` }}
+                                style={{ width: `${weekBeforeLastPercentage}%`, backgroundColor: '#05c408a3' }}
                                 aria-valuenow={weekBeforeLastPercentage}
                                 aria-valuemin="0"
                                 aria-valuemax="100"
@@ -40,7 +40,7 @@ function ApprovedAppointmentsGraph({ lastWeek, weekBeforeLast }) {
                                 {weekBeforeLast}
                             </div>
                         </div>
-                        <div className="text-center mt-2">Week Before Last</div>
+                        <div className="text-center mt-2">Previous 7 Days</div>
                     </div>
                 </div>
             </div>

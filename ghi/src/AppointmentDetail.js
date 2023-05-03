@@ -56,7 +56,7 @@ function AppointmentDetail({ appointmentId, onClose, onEdit, user, approveAppoin
               ></button>
             </div>
             <div className="modal-body">
-              <ul className="list-group list-group-flush">
+              <ul className="list-group ">
                 <li className="list-group-item">
                   <strong>Customer Name:</strong> {appointment.customer_name}
                 </li>
@@ -89,10 +89,16 @@ function AppointmentDetail({ appointmentId, onClose, onEdit, user, approveAppoin
                   {appointment.is_approved ? "Approved" : "Pending"}
                 </li>
               </ul>
-            </div>
-            <div className="modal-footer">
               {token && user?.is_client ? (
-                <>
+                <div className="mt-3 btn-group gap-4 d-md-block">
+                  <button
+                    className="btn btn-warning"
+                    onClick={() => {
+                      onEdit();
+                    }}
+                  >
+                    Edit
+                  </button>
                   {!appointment.is_approved && (
                     <button
                       type="button"
@@ -104,14 +110,6 @@ function AppointmentDetail({ appointmentId, onClose, onEdit, user, approveAppoin
                     </button>
                   )}
                   <button
-                    className="btn btn-warning"
-                    onClick={() => {
-                      onEdit();
-                    }}
-                  >
-                    Edit
-                  </button>
-                  <button
                     type="button"
                     onClick={handleDelete}
                     className="btn btn-danger"
@@ -119,7 +117,7 @@ function AppointmentDetail({ appointmentId, onClose, onEdit, user, approveAppoin
                   >
                     {isPending ? "Deleting..." : "Delete"}
                   </button>
-                </>
+                </div>
               ) : null}
             </div>
           </div>

@@ -237,18 +237,21 @@ function AppointmentEdit({ token, user, appointmentId, getAppointments, onClose,
                   />
                   <label htmlFor="notes">Notes</label>
                 </div>
-                <button type="submit" className="btn btn-primary">
-                  Update
-                </button>
-                <button
-                  type="button"
-                  className="btn btn-secondary"
-                  onClick={() => {
-                    setModalContent("details");
-                  }}
-                >
-                  Cancel
-                </button>
+                <div className="btn-group gap-4 d-md-block">
+
+                  <button type="submit" className="btn btn-warning">
+                    Update
+                  </button>
+                  <button
+                    type="button"
+                    className="btn btn-secondary"
+                    onClick={() => {
+                      setModalContent("details");
+                    }}
+                  >
+                    Cancel
+                  </button>
+                </div>
               </form>
             </div>
           </div>

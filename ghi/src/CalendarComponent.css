@@ -57,7 +57,7 @@
 }
 
 .today {
-  background-color: yellow !important;
+  background-color: rgb(167, 167, 166) !important;
 }
 
 .appointment {
@@ -65,13 +65,13 @@
 }
 
 .one-appointment {
-  background-color: orange !important;
+  background-color: #cd6e6ea2 !important;
 }
 
 .two-appointments {
-  background-color: blue !important;
+  background-color: #0584c4a7 !important;
 }
 
 .three-or-more-appointments {
-  background-color: green !important;
+  background-color: #05c408a3 !important;
 }
