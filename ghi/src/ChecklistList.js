@@ -50,22 +50,26 @@ function ChecklistList({
                         </Link>
                       </td>
                       <td>
-                        <button
-                          type="button"
-                          onClick={() => {
-                            toggleEditMode(checklistitem);
-                          }}
-                          className="btn btn-warning"
-                        >
-                          Edit
-                        </button>
-                        <button
-                          type="button"
-                          onClick={() => deleteChecklistItem(checklistitem.id)}
-                          className="btn btn-danger"
-                        >
-                          Delete
-                        </button>
+                        <div className="btn-group gap-4 d-md-block">
+                          <button
+                            type="button"
+                            onClick={() => {
+                              toggleEditMode(checklistitem);
+                            }}
+                            className="btn btn-warning btn-sm"
+                          >
+                            Edit
+                          </button>
+                          <button
+                            type="button"
+                            onClick={() =>
+                              deleteChecklistItem(checklistitem.id)
+                            }
+                            className="btn btn-danger btn-sm"
+                          >
+                            Delete
+                          </button>
+                        </div>
                       </td>
                     </tr>
                   );
