@@ -20,8 +20,6 @@ import AppointmentDetail from "./AppointmentDetail.js";
 import AppointmentEdit from "./AppointmentUpdate.js";
 import Footer from "./Footer.js";
 
-import ClientInfoParent from "./ClientInfoParent.js";
-
 import HeroAppointmentForm from "./HeroAppointmentForm.js";
 import AboutUs from "./AboutUs.js";
 

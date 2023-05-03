@@ -45,7 +45,6 @@ function ClientLanding() {
     if (response.ok) {
       const data = await response.json();
       setAccount(data);
-      console.log(data);
     }
   };
 
