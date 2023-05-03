@@ -381,51 +381,6 @@ class AccountQueries:
                     results.append(Account)
                 return results
 
-    def get_all_clients(
-        self, business_id: int
-    ) -> List[AccountOutWithPassword]:
-        with pool.connection() as conn:
-            with conn.cursor() as db:
-                results = db.execute(
-                    """
-                select id
-                    , username
-                    , hashed_password
-                    , business_id
-                    , employee_id
-                    , first_name
-                    , last_name
-                    , website
-                    , email
-                    , address
-                    , phone_number
-                    , is_client
-                    , is_technician
-                from accounts
-                where business_id = %s AND is_client = true
-                    """,
-                    [business_id],
-                )
-                results = []
-                for record in db:
-                    Account = AccountOutWithPassword(
-                        id=record[0],
-                        username=record[1],
-                        hashed_password=record[2],
-                        business_id=record[3],
-                        employee_id=record[4],
-                        first_name=record[5],
-                        last_name=record[6],
-                        website=record[7],
-                        email=record[8],
-                        address=record[9],
-                        phone_number=record[10],
-                        is_client=record[11],
-                        is_technician=record[12],
-                    )
-                    results.append(Account)
-                return results
-
     def get_client(
         self, user_id: int, business_id: int
     ) -> Optional[AccountOutWithPassword]:

@@ -1,29 +1,58 @@
-import React from "react";
-import { Link } from "react-router-dom";
+import React, { useState } from "react";
+import AppointmentDetail from "./AppointmentDetail";
+import AppointmentEdit from "./AppointmentUpdate";
 
-function AppointmentPendingList({ getAppointments, appointments, token, user }) {
+
+function AppointmentPendingList({ approveAppointment, deleteAppointment, getAppointments, appointments, token, user }) {
+  const [showModal, setShowModal] = useState(false);
+  const [selectedAppointmentId, setSelectedAppointmentId] = useState(null);
+  const [modalContent, setModalContent] = useState("details");
+  const [selectedAppointmentData, setSelectedAppointmentData] = useState(null);
 
 
-  const deleteAppointment = async (id) => {
-    await fetch(
-      `${process.env.REACT_APP_USER_SERVICE_API_HOST}/api/appointments/${id}`,
-      {
-        method: "DELETE",
-        headers: { Authorization: `Bearer ${token}` },
-      }
-    );
-    await getAppointments();
+  const openAppointmentModal = (appointmentId, content, appointmentData) => {
+    setShowModal(true);
+    setSelectedAppointmentId(appointmentId);
+    setModalContent(content);
+    setSelectedAppointmentData(appointmentData);
+
   };
 
-  const approveAppointment = async (id) => {
-    await fetch(
-      `${process.env.REACT_APP_USER_SERVICE_API_HOST}/api/appointments/${id}/approve`,
-      {
-        method: "PUT",
-        headers: { Authorization: `Bearer ${token}` },
-      }
-    );
-    await getAppointments();
+  const closeAppointmentModal = () => {
+    setShowModal(false);
+    setSelectedAppointmentId(null);
+    setSelectedAppointmentData(null);
+
+  };
+
+  const renderModalContent = () => {
+    if (modalContent === "details") {
+      return (
+        <AppointmentDetail
+          appointmentId={selectedAppointmentId}
+          approveAppointment={approveAppointment}
+          deleteAppointment={deleteAppointment}
+          onEdit={() => setModalContent("edit")}
+          onClose={closeAppointmentModal}
+          token={token}
+          user={user}
+        />
+      );
+    } else if (modalContent === "edit") {
+      return (
+        <AppointmentEdit
+          appointmentId={selectedAppointmentId}
+          getAppointments={getAppointments}
+          onClose={() => {
+            setModalContent("details");
+            closeAppointmentModal();
+          }}
+          setModalContent={setModalContent}
+          token={token}
+          user={user}
+        />
+      );
+    }
   };
 
   return (
@@ -54,14 +83,12 @@ function AppointmentPendingList({ getAppointments, appointments, token, user }) 
                       <td>{appointment.date_of_service}</td>
                       <td>{appointment.service_name}</td>
                       <td>
-                        <Link
+                        <button
                           className="btn btn-primary btn-sm mr-2"
-                          to={`/appointment/${appointment.id}`}
-                          role="button"
+                          onClick={() => openAppointmentModal(appointment.id, "details")}
                         >
                           Details
-                        </Link>
-
+                        </button>
                         <button
                           type="button"
                           onClick={() => approveAppointment(appointment.id)}
@@ -82,6 +109,18 @@ function AppointmentPendingList({ getAppointments, appointments, token, user }) 
                 })}
             </tbody>
           </table>
+          {showModal && (
+            <div
+              className="modal show"
+              tabIndex="-1"
+              role="dialog"
+              style={{ display: "block", backgroundColor: "rgba(0,0,0,0.5)" }}
+            >
+              <div className="modal-dialog" role="document">
+                <div className="modal-content">{renderModalContent()}</div>
+              </div>
+            </div>
+          )}
         </>
       ) : null}
       {token && user?.is_technician ? (
