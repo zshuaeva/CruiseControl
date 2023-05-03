@@ -46,7 +46,7 @@ function TechnicianList({
                       <th scope="col" className="col">
                         phone number
                       </th>
-                      <th scope="col" className="col text-warning">
+                      <th scope="col" className="col">
                         Actions
                       </th>
                     </tr>
@@ -63,22 +63,22 @@ function TechnicianList({
                           <td className="col">{technician.address}</td>
                           <td className="col">{technician.phone_number}</td>
                           <td className="col">
-                            <div className="btn-group gap-2">
+                            <div className="btn-group">
                               <button
-                                className="btn btn-success btn-sm rounded-0 me-md-3"
+                                className="btn btn-warning btn-sm mr-2"
                                 data-toggle="tooltip"
                                 title="Edit"
                                 onClick={() => editToggle(technician)}
                               >
-                                <i className="bi bi-pencil-square"></i>
+                                Edit
                               </button>
                               <button
-                                className="btn btn-danger btn-sm rounded-0"
+                                className="btn btn-danger btn-sm mr-2"
                                 data-toggle="tooltip"
                                 title="Delete"
                                 onClick={() => technicianDelete(technician.id)}
                               >
-                                <i className="bi bi-trash3-fill"></i>
+                                Delete
                               </button>
                             </div>
                           </td>
