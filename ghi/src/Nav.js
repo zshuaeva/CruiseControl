@@ -56,18 +56,9 @@ function Nav() {
             {token && user?.is_technician ? (
               <>
                 <li className="d-flex.mr-auto p-2">
-                  <NavLink
-                    className="btn fw-bolder navbar-logging"
-                    to="/technicianlanding"
-                  >
-                    TECHNICIAN Landing
-                  </NavLink>
-                </li>
-                <hr className="nav-divider" />
-                <li className="btn fw-bolder navbar-logging">
                   <NavLink>
                     <button
-                      className="btn btn-lg rounded-0 fw-bolder ms-auto"
+                      className="btn fw-bolder navbar-logging"
                       onClick={logout}
                     >
                       Logout
