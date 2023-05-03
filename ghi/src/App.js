@@ -20,16 +20,14 @@ import AppointmentDetail from "./AppointmentDetail.js";
 import AppointmentEdit from "./AppointmentUpdate.js";
 import Footer from "./Footer.js";
 
-import ClientInfoParent from "./ClientInfoParent.js";
-
 import HeroAppointmentForm from "./HeroAppointmentForm.js";
-
+import AboutUs from "./AboutUs.js";
 
 function App() {
   const appStyle = {
-    display: 'flex',
-    flexDirection: 'column',
-    minHeight: '100vh',
+    display: "flex",
+    flexDirection: "column",
+    minHeight: "100vh",
   };
 
   const mainContentStyle = {
@@ -52,21 +50,24 @@ function App() {
 
                 <Route path="clientlanding" element={<ClientLanding />} />
 
-                <Route
-                  path="client/info"
-                  element={<ClientInfoParent />}
-                />
-
-
                 <Route path="technicians" element={<TechnicianParent />} />
 
-                <Route path="technicianlanding" element={<TechnicianLanding />} />
+                <Route
+                  path="technicianlanding"
+                  element={<TechnicianLanding />}
+                />
 
                 <Route path="appointment">
                   <Route path="all" element={<AppointmentList />} />
                   <Route path="pending" element={<AppointmentPendingList />} />
-                  <Route path="approved" element={<AppointmentApprovedList />} />
-                  <Route path=":appointmentId" element={<AppointmentDetail />} />
+                  <Route
+                    path="approved"
+                    element={<AppointmentApprovedList />}
+                  />
+                  <Route
+                    path=":appointmentId"
+                    element={<AppointmentDetail />}
+                  />
                   <Route
                     path=":appointmentId/edit"
                     element={<AppointmentEdit />}
@@ -86,9 +87,13 @@ function App() {
                   element={<AppointmentCreation />}
                 />
 
-                <Route path="newappoitnment" element={<HeroAppointmentForm />} />
+                <Route
+                  path="newappoitnment"
+                  element={<HeroAppointmentForm />}
+                />
                 <Route path="clientsignup" element={<ClientSignUpForm />} />
                 <Route path="Login" element={<LoginForm />} />
+                <Route path="aboutus" element={<AboutUs />} />
               </Routes>
             </div>
           </div>
