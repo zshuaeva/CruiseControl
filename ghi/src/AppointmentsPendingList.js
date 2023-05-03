@@ -67,6 +67,9 @@ function AppointmentPendingList({ approveAppointment, deleteAppointment, getAppo
                 <th>Vehicle Model</th>
                 <th>Date of Service</th>
                 <th>Service Name</th>
+                <th>
+                  Actions
+                </th>
               </tr>
             </thead>
             <tbody className="text-center">
@@ -83,26 +86,28 @@ function AppointmentPendingList({ approveAppointment, deleteAppointment, getAppo
                       <td>{appointment.date_of_service}</td>
                       <td>{appointment.service_name}</td>
                       <td>
-                        <button
-                          className="btn btn-primary btn-sm mr-2"
-                          onClick={() => openAppointmentModal(appointment.id, "details")}
-                        >
-                          Details
-                        </button>
-                        <button
-                          type="button"
-                          onClick={() => approveAppointment(appointment.id)}
-                          className="btn btn-success btn-sm"
-                        >
-                          Approve
-                        </button>
-                        <button
-                          type="button"
-                          onClick={() => deleteAppointment(appointment.id)}
-                          className="btn btn-danger btn-sm"
-                        >
-                          Delete
-                        </button>
+                        <div className="btn-group gap-4 d-md-block">
+                          <button
+                            className="btn btn-primary btn-sm"
+                            onClick={() => openAppointmentModal(appointment.id, "details")}
+                          >
+                            Details
+                          </button>
+                          <button
+                            type="button"
+                            onClick={() => approveAppointment(appointment.id)}
+                            className="btn btn-success btn-sm"
+                          >
+                            Approve
+                          </button>
+                          <button
+                            type="button"
+                            onClick={() => deleteAppointment(appointment.id)}
+                            className="btn btn-danger btn-sm"
+                          >
+                            Delete
+                          </button>
+                        </div>
                       </td>
                     </tr>
                   );
