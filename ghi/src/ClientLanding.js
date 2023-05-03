@@ -8,13 +8,14 @@ import ServiceParent from "./ServiceParent";
 import TechnicianParent from "./TechParent";
 import ApprovedAppointmentsGraph from "./ApprovedAppointmentsGraph";
 import AppointmentCreation from "./AppointmentCreation";
-import { Link } from "react-router-dom";
+import ClientEdit from "./ClientEdit";
 
 function ClientLanding() {
   const { token } = useContext(AuthContext);
   const user = useUser(token);
+  const [account, setAccount] = useState(null);
   // const [showPending, setShowPending] = useState(true);
-  const [activeComponent, setActiveComponent] = useState("pending")
+  const [activeComponent, setActiveComponent] = useState("pending");
   const [pendingAppointments, setPendingAppointments] = useState([]);
   const [approvedAppointments, setApprovedAppointments] = useState([]);
 
@@ -36,6 +37,18 @@ function ClientLanding() {
     }
   };
 
+  const getClient = async () => {
+    const clientUrl = `${process.env.REACT_APP_USER_SERVICE_API_HOST}/client/${user.id}`;
+    const response = await fetch(clientUrl, {
+      headers: { Authorization: `Bearer ${token}` },
+    });
+    if (response.ok) {
+      const data = await response.json();
+      setAccount(data);
+      console.log(data);
+    }
+  };
+
   const filterAppointmentsByWeek = (appointments, weeksAgo) => {
     const now = new Date();
     const startOfWeek = new Date(
@@ -51,19 +64,26 @@ function ClientLanding() {
 
     return appointments.filter((appointment) => {
       const appointmentDate = new Date(appointment.date_of_service);
-      return (
-        appointmentDate >= startOfWeek && appointmentDate <= endOfWeek
-      );
+      return appointmentDate >= startOfWeek && appointmentDate <= endOfWeek;
     });
   };
-  const lastWeekAppointments = filterAppointmentsByWeek(approvedAppointments, 0);
-  const weekBeforeLastAppointments = filterAppointmentsByWeek(approvedAppointments, 1);
+  const lastWeekAppointments = filterAppointmentsByWeek(
+    approvedAppointments,
+    0
+  );
+  const weekBeforeLastAppointments = filterAppointmentsByWeek(
+    approvedAppointments,
+    1
+  );
 
   useEffect(() => {
     if (token) {
       getAppointments();
     }
-  }, [token]);
+    if (user) {
+      getClient();
+    }
+  }, [token, user]);
 
   const handlePendingClick = () => {
     setActiveComponent("pending");
@@ -85,18 +105,51 @@ function ClientLanding() {
     setActiveComponent("appointmentCreate");
   };
 
+  const handleClientEditClick = () => {
+    setActiveComponent("clientedit");
+  };
+
   const renderActiveComponent = () => {
     switch (activeComponent) {
       case "pending":
-        return <AppointmentPendingList user={user} getAppointments={getAppointments} appointments={pendingAppointments} token={token} />;
+        return (
+          <AppointmentPendingList
+            user={user}
+            getAppointments={getAppointments}
+            appointments={pendingAppointments}
+            token={token}
+          />
+        );
       case "approved":
-        return <AppointmentApprovedList user={user} getAppointments={getAppointments} appointments={approvedAppointments} token={token} />;
+        return (
+          <AppointmentApprovedList
+            user={user}
+            getAppointments={getAppointments}
+            appointments={approvedAppointments}
+            token={token}
+          />
+        );
       case "services":
         return <ServiceParent user={user} token={token} />;
       case "technicians":
         return <TechnicianParent user={user} token={token} />;
       case "appointmentCreate":
-        return <AppointmentCreation user={user} token={token} getAppointments={getAppointments} />;
+        return (
+          <AppointmentCreation
+            user={user}
+            token={token}
+            getAppointments={getAppointments}
+          />
+        );
+      case "clientedit":
+        return (
+          <ClientEdit
+            user={user}
+            token={token}
+            account={account}
+            getclient={getClient}
+          />
+        );
       default:
         return null;
     }
@@ -110,9 +163,11 @@ function ClientLanding() {
               <div className="col-md-6">
                 <div className="card mb-4">
                   <div className="card-body">
-                    <h1 className="text-center text-capitalize text-black">
-                      {user.username}'s Dashboard
-                    </h1>
+                    {account ? (
+                      <h1 className="text-center text-capitalize text-black">
+                        {account.username}'s Dashboard
+                      </h1>
+                    ) : null}
                   </div>
                 </div>
                 <ApprovedAppointmentsGraph
@@ -182,22 +237,20 @@ function ClientLanding() {
                       Create Appointment
                     </a>
                   </li>
+                  <li className="nav-item">
+                    <a
+                      className={`nav-link ${
+                        activeComponent === "clientedit" ? "active" : ""
+                      }`}
+                      onClick={handleClientEditClick}
+                    >
+                      Update Account
+                    </a>
+                  </li>
                 </ul>
               </div>
             </div>
-
             <div className="col mb-4">{renderActiveComponent()}</div>
-            <div>
-              <li>
-                <Link
-                  className="btn btn-primary btn-sm mr-2"
-                  to={"/client/info"}
-                  role="button"
-                >
-                  Account info
-                </Link>
-              </li>
-            </div>
           </div>
         </div>
         // </div >

@@ -22,6 +22,7 @@ import Footer from "./Footer.js";
 
 import ClientInfoParent from "./ClientInfoParent.js";
 
+import HeroAppointmentForm from "./HeroAppointmentForm.js";
 import AboutUs from "./AboutUs.js";
 
 function App() {
@@ -50,8 +51,6 @@ function App() {
                 <Route path="/" element={<HeroPage />} />
 
                 <Route path="clientlanding" element={<ClientLanding />} />
-
-                <Route path="client/info" element={<ClientInfoParent />} />
 
                 <Route path="technicians" element={<TechnicianParent />} />
 
@@ -90,6 +89,10 @@ function App() {
                   element={<AppointmentCreation />}
                 />
 
+                <Route
+                  path="newappoitnment"
+                  element={<HeroAppointmentForm />}
+                />
                 <Route path="clientsignup" element={<ClientSignUpForm />} />
                 <Route path="Login" element={<LoginForm />} />
                 <Route path="aboutus" element={<AboutUs />} />

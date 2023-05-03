@@ -7,7 +7,6 @@ function ClientSignUpForm() {
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
   const [businessName, setBusinessName] = useState("");
-  const [employee_id, setEmployeeId] = useState("");
   const [first_name, setFirstName] = useState("");
   const [last_name, setLastName] = useState("");
   const [email, setEmail] = useState("");
@@ -24,6 +23,11 @@ function ClientSignUpForm() {
     data.username = username;
     data.password = password;
     data.business_name = businessName;
+    data.first_name = first_name;
+    data.last_name = last_name;
+    data.email = email;
+    data.address = address;
+    data.phone_number = phone_number;
     const url = `${process.env.REACT_APP_USER_SERVICE_API_HOST}/api/clientsignup`;
     const fetchConfig = {
       method: "POST",
@@ -40,6 +44,11 @@ function ClientSignUpForm() {
         setUsername("");
         setPassword("");
         setBusinessName("");
+        setFirstName("");
+        setLastName("");
+        setEmail("");
+        setAddress("");
+        setPhoneNumber("");
         navigate("/clientlanding");
       } catch (error) {
         console.error("Error logging in:", error);
