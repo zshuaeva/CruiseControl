@@ -32,9 +32,3 @@ div#root { */
 div.app {
   height: 100%;
 } */
-html,
-div.app,
-div#root,
-body {
-  background-color: #ffffff;
-}

@@ -3,6 +3,7 @@ import useToken, { AuthContext } from "@galvanize-inc/jwtdown-for-react";
 import { useContext } from "react";
 import useUser from "./useUser";
 import "./Nav.css";
+import ColorModeSwitcher from "./ColorModeSwitcher";
 
 function Nav() {
   const { token } = useContext(AuthContext);
@@ -42,6 +43,7 @@ function Nav() {
             {token && user?.is_client === true ? (
               <>
                 <li className="d-flex.mr-auto p-2">
+                  <ColorModeSwitcher />
                   <NavLink>
                     <button
                       className="btn fw-bolder navbar-logging"
@@ -56,6 +58,7 @@ function Nav() {
             {token && user?.is_technician ? (
               <>
                 <li className="d-flex.mr-auto p-2">
+                  <ColorModeSwitcher />
                   <NavLink
                     className="btn fw-bolder navbar-logging"
                     to="/technicianlanding"
@@ -79,6 +82,7 @@ function Nav() {
             {user === null || token === null ? (
               <>
                 <li className="d-flex.mr-auto p-2">
+                  <ColorModeSwitcher />
                   <NavLink to="/clientsignup">
                     <button className="btn fw-bolder navbar-logging">
                       Client Signup
