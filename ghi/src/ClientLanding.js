@@ -13,6 +13,7 @@ import ClientEdit from "./ClientEdit";
 function ClientLanding() {
   const { token } = useContext(AuthContext);
   const user = useUser(token);
+  const [account, setAccount] = useState(null);
   // const [showPending, setShowPending] = useState(true);
   const [activeComponent, setActiveComponent] = useState("pending");
   const [pendingAppointments, setPendingAppointments] = useState([]);
@@ -33,6 +34,18 @@ function ClientLanding() {
         (appointment) => !appointment.is_approved
       );
       setPendingAppointments(pendingAppointments);
+    }
+  };
+
+  const getClient = async () => {
+    const clientUrl = `${process.env.REACT_APP_USER_SERVICE_API_HOST}/client/${user.id}`;
+    const response = await fetch(clientUrl, {
+      headers: { Authorization: `Bearer ${token}` },
+    });
+    if (response.ok) {
+      const data = await response.json();
+      setAccount(data);
+      console.log(data);
     }
   };
 
@@ -67,7 +80,10 @@ function ClientLanding() {
     if (token) {
       getAppointments();
     }
-  }, [token]);
+    if (user) {
+      getClient();
+    }
+  }, [token, user]);
 
   const handlePendingClick = () => {
     setActiveComponent("pending");
@@ -126,7 +142,14 @@ function ClientLanding() {
           />
         );
       case "clientedit":
-        return <ClientEdit user={user} token={token} />;
+        return (
+          <ClientEdit
+            user={user}
+            token={token}
+            account={account}
+            getclient={getClient}
+          />
+        );
       default:
         return null;
     }
@@ -140,9 +163,11 @@ function ClientLanding() {
               <div className="col-md-6">
                 <div className="card mb-4">
                   <div className="card-body">
-                    <h1 className="text-center text-capitalize text-black">
-                      {user.username}'s Dashboard
-                    </h1>
+                    {account ? (
+                      <h1 className="text-center text-capitalize text-black">
+                        {account.username}'s Dashboard
+                      </h1>
+                    ) : null}
                   </div>
                 </div>
                 <ApprovedAppointmentsGraph

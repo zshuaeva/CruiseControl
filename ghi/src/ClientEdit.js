@@ -1,13 +1,13 @@
 import React, { useState } from "react";
 
-function ClientEdit({ user, token }) {
+function ClientEdit({ user, token, account, getClient }) {
   const [id] = useState(user.id);
-  const [username, setUsername] = useState("");
-  const [first_name, setFirstName] = useState("");
-  const [last_name, setLastName] = useState("");
-  const [email, setEmail] = useState("");
-  const [address, setAddress] = useState("");
-  const [phone_number, setPhoneNumber] = useState("");
+  const [username, setUsername] = useState(account.username);
+  const [first_name, setFirstName] = useState(account.first_name);
+  const [last_name, setLastName] = useState(account.last_name);
+  const [email, setEmail] = useState(account.email);
+  const [address, setAddress] = useState(account.address);
+  const [phone_number, setPhoneNumber] = useState(account.phone_number);
 
   const handleSubmit = async (event) => {
     event.preventDefault();
@@ -32,6 +32,7 @@ function ClientEdit({ user, token }) {
     const response = await fetch(url, fetchConfig);
     if (response.ok) {
       await response.json();
+      window.location.reload(true);
     } else {
       console.error("Error Couldnt Update Client");
     }
@@ -121,15 +122,6 @@ function ClientEdit({ user, token }) {
                     >
                       Update
                     </button>
-                    {/* <button
-                      className="btn btn-warning btn-sm rounded-3 fw-bold fs-5"
-                      data-toggle="tooltip"
-                      data-placement="bottom"
-                      title="This will Discard your changes"
-                      onClick={() => props.editToggle()}
-                    >
-                      Cancel
-                    </button> */}
                   </div>
                 </form>
               </div>
