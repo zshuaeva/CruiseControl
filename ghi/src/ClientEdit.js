@@ -115,7 +115,7 @@ function ClientEdit({ user, token, account, getClient }) {
                   </div>
                   <div className="btn-group gap-4 d-md-block">
                     <button
-                      className="btn btn-warning btn-sm mr-2"
+                      className="btn btn-warning mr-2"
                       data-toggle="tooltip"
                       data-placement="bottom"
                       title="This will Submit your changes"

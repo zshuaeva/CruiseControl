@@ -1,8 +1,16 @@
 import React from "react-router-dom";
 import { useState } from "react";
 
-function ChecklistEdit({ getChecklist, token, checklistItem, setIsEditing, serviceId }) {
-  const [checklist_item, setChecklistItem] = useState(checklistItem.checklist_item);
+function ChecklistEdit({
+  getChecklist,
+  token,
+  checklistItem,
+  setIsEditing,
+  serviceId,
+}) {
+  const [checklist_item, setChecklistItem] = useState(
+    checklistItem.checklist_item
+  );
 
   const handleSubmit = async (event) => {
     event.preventDefault();
@@ -21,7 +29,6 @@ function ChecklistEdit({ getChecklist, token, checklistItem, setIsEditing, servi
     };
     const response = await fetch(url, fetchConfig);
     if (response.ok) {
-
       await response.json();
       setChecklistItem("");
       getChecklist(serviceId);
@@ -49,7 +56,7 @@ function ChecklistEdit({ getChecklist, token, checklistItem, setIsEditing, servi
               <label htmlFor="Enter Step">Enter Step Detail</label>
             </div>
 
-            <button className="btn btn-primary">Update</button>
+            <button className="btn btn-warning">Update</button>
           </form>
         </div>
       </div>

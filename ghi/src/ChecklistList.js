@@ -37,8 +37,9 @@ function ChecklistList({
                 .map((checklistitem, index) => {
                   return (
                     <tr
-                      key={`${checklistitem.service_id / checklistitem
-                        }-${index}`}
+                      key={`${
+                        checklistitem.service_id / checklistitem
+                      }-${index}`}
                     >
                       <td>
                         <Link
@@ -55,14 +56,16 @@ function ChecklistList({
                             onClick={() => {
                               toggleEditMode(checklistitem);
                             }}
-                            className="btn btn-warning"
+                            className="btn btn-warning btn-sm"
                           >
                             Edit
                           </button>
                           <button
                             type="button"
-                            onClick={() => deleteChecklistItem(checklistitem.id)}
-                            className="btn btn-danger"
+                            onClick={() =>
+                              deleteChecklistItem(checklistitem.id)
+                            }
+                            className="btn btn-danger btn-sm"
                           >
                             Delete
                           </button>
