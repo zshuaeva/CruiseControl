@@ -4,6 +4,8 @@ import useUser from "./useUser";
 
 import AppointmentApprovedList from "./AppointmentApprovedList";
 
+import CalendarComponent from "./CalendarComponent";
+
 function TechnicianLanding() {
 
   const [approvedAppointments, setApprovedAppointments] = useState([]);
@@ -31,10 +33,33 @@ function TechnicianLanding() {
     }
   }, [token]);
 
+  const approveAppointment = async (id) => {
+    await fetch(
+      `${process.env.REACT_APP_USER_SERVICE_API_HOST}/api/appointments/${id}/approve`,
+      {
+        method: "PUT",
+        headers: { Authorization: `Bearer ${token}` },
+      }
+    );
+    await getAppointments();
+  };
+
+  const deleteAppointment = async (id) => {
+    await fetch(
+      `${process.env.REACT_APP_USER_SERVICE_API_HOST}/api/appointments/${id}`,
+      {
+        method: "DELETE",
+        headers: { Authorization: `Bearer ${token}` },
+      }
+    );
+    await getAppointments();
+  };
+
+
   return (
     <div>
-      <AppointmentApprovedList appointments={approvedAppointments} />
-    </div>
+      <CalendarComponent appointments={approvedAppointments} />
+      <AppointmentApprovedList approveAppointment={approveAppointment} deleteAppointment={deleteAppointment} user={user} getAppointments={getAppointments} appointments={approvedAppointments} token={token} />    </div>
   );
 }
 
