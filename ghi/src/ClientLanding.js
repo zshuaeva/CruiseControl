@@ -36,6 +36,28 @@ function ClientLanding() {
     }
   };
 
+  const approveAppointment = async (id) => {
+    await fetch(
+      `${process.env.REACT_APP_USER_SERVICE_API_HOST}/api/appointments/${id}/approve`,
+      {
+        method: "PUT",
+        headers: { Authorization: `Bearer ${token}` },
+      }
+    );
+    await getAppointments();
+  };
+
+  const deleteAppointment = async (id) => {
+    await fetch(
+      `${process.env.REACT_APP_USER_SERVICE_API_HOST}/api/appointments/${id}`,
+      {
+        method: "DELETE",
+        headers: { Authorization: `Bearer ${token}` },
+      }
+    );
+    await getAppointments();
+  };
+
   const filterAppointmentsByWeek = (appointments, weeksAgo) => {
     const now = new Date();
     const startOfWeek = new Date(
@@ -88,9 +110,9 @@ function ClientLanding() {
   const renderActiveComponent = () => {
     switch (activeComponent) {
       case "pending":
-        return <AppointmentPendingList user={user} getAppointments={getAppointments} appointments={pendingAppointments} token={token} />;
+        return <AppointmentPendingList approveAppointment={approveAppointment} deleteAppointment={deleteAppointment} user={user} getAppointments={getAppointments} appointments={pendingAppointments} token={token} />;
       case "approved":
-        return <AppointmentApprovedList user={user} getAppointments={getAppointments} appointments={approvedAppointments} token={token} />;
+        return <AppointmentApprovedList approveAppointment={approveAppointment} deleteAppointment={deleteAppointment} user={user} getAppointments={getAppointments} appointments={approvedAppointments} token={token} />;
       case "services":
         return <ServiceParent user={user} token={token} />;
       case "technicians":
@@ -134,9 +156,8 @@ function ClientLanding() {
                 <ul className="nav nav-tabs">
                   <li className="nav-item">
                     <a
-                      className={`nav-link ${
-                        activeComponent === "pending" ? "active" : ""
-                      }`}
+                      className={`nav-link ${activeComponent === "pending" ? "active" : ""
+                        }`}
                       onClick={handlePendingClick}
                     >
                       Upcoming Appointments
@@ -144,9 +165,8 @@ function ClientLanding() {
                   </li>
                   <li className="nav-item">
                     <a
-                      className={`nav-link ${
-                        activeComponent === "approved" ? "active" : ""
-                      }`}
+                      className={`nav-link ${activeComponent === "approved" ? "active" : ""
+                        }`}
                       onClick={handleApprovedClick}
                     >
                       Approved Appointments
@@ -154,9 +174,8 @@ function ClientLanding() {
                   </li>
                   <li className="nav-item">
                     <a
-                      className={`nav-link ${
-                        activeComponent === "services" ? "active" : ""
-                      }`}
+                      className={`nav-link ${activeComponent === "services" ? "active" : ""
+                        }`}
                       onClick={handleServicesClick}
                     >
                       Services
@@ -164,9 +183,8 @@ function ClientLanding() {
                   </li>
                   <li className="nav-item">
                     <a
-                      className={`nav-link ${
-                        activeComponent === "technicians" ? "active" : ""
-                      }`}
+                      className={`nav-link ${activeComponent === "technicians" ? "active" : ""
+                        }`}
                       onClick={handleTechniciansClick}
                     >
                       Technicians
@@ -174,9 +192,8 @@ function ClientLanding() {
                   </li>
                   <li className="nav-item">
                     <a
-                      className={`nav-link ${
-                        activeComponent === "appointmentCreate" ? "active" : ""
-                      }`}
+                      className={`nav-link ${activeComponent === "appointmentCreate" ? "active" : ""
+                        }`}
                       onClick={handleAppointmentClick}
                     >
                       Create Appointment

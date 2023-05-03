@@ -33,11 +33,33 @@ function TechnicianLanding() {
     }
   }, [token]);
 
+  const approveAppointment = async (id) => {
+    await fetch(
+      `${process.env.REACT_APP_USER_SERVICE_API_HOST}/api/appointments/${id}/approve`,
+      {
+        method: "PUT",
+        headers: { Authorization: `Bearer ${token}` },
+      }
+    );
+    await getAppointments();
+  };
+
+  const deleteAppointment = async (id) => {
+    await fetch(
+      `${process.env.REACT_APP_USER_SERVICE_API_HOST}/api/appointments/${id}`,
+      {
+        method: "DELETE",
+        headers: { Authorization: `Bearer ${token}` },
+      }
+    );
+    await getAppointments();
+  };
+
+
   return (
     <div>
       <CalendarComponent appointments={approvedAppointments} />
-      <AppointmentApprovedList appointments={approvedAppointments} />
-    </div>
+      <AppointmentApprovedList approveAppointment={approveAppointment} deleteAppointment={deleteAppointment} user={user} getAppointments={getAppointments} appointments={approvedAppointments} token={token} />    </div>
   );
 }
 
