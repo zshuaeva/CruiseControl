@@ -54,27 +54,29 @@ function ServiceList({ services, toggleEditMode, getServices, token, user }) {
                       <td>{service.service_description}</td>
                       <td>{service.service_price}</td>
                       <td>
-                        <button
-                          type="button"
-                          className="btn btn-success"
-                          onClick={() => openChecklistModal(service.id)}
-                        >
-                          Checklist
-                        </button>
-                        <button
-                          type="button"
-                          onClick={() => toggleEditMode(service)}
-                          className="btn btn-warning"
-                        >
-                          Edit
-                        </button>
-                        <button
-                          type="button"
-                          onClick={() => deleteService(service.id)}
-                          className="btn btn-danger"
-                        >
-                          Delete
-                        </button>
+                        <div className="btn-group gap-4 d-md-block">
+                          <button
+                            type="button"
+                            className="btn btn-sm btn-outline-primary"
+                            onClick={() => openChecklistModal(service.id)}
+                          >
+                            Checklist
+                          </button>
+                          <button
+                            type="button"
+                            onClick={() => toggleEditMode(service)}
+                            className="btn btn-sm btn-warning"
+                          >
+                            Edit
+                          </button>
+                          <button
+                            type="button"
+                            onClick={() => deleteService(service.id)}
+                            className="btn btn-sm btn-danger"
+                          >
+                            Delete
+                          </button>
+                        </div>
                       </td>
                     </tr>
                   );

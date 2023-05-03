@@ -46,7 +46,7 @@ function TechnicianList({
                       <th scope="col" className="col">
                         phone number
                       </th>
-                      <th scope="col" className="col text-warning">
+                      <th scope="col" className="col">
                         Actions
                       </th>
                     </tr>

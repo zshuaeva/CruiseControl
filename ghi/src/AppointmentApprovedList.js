@@ -65,6 +65,9 @@ function AppointmentApprovedList({ approveAppointment, deleteAppointment, user, 
             <th>Vehicle Model</th>
             <th>Date of Service</th>
             <th>Service Name</th>
+            <th>
+              Actions
+            </th>
           </tr>
         </thead>
         <tbody className="text-center">
@@ -81,21 +84,24 @@ function AppointmentApprovedList({ approveAppointment, deleteAppointment, user, 
                   <td>{appointment.date_of_service}</td>
                   <td>{appointment.service_name}</td>
                   <td>
-                    <button
-                      className="btn btn-primary btn-sm mr-2"
-                      onClick={() => openAppointmentModal(appointment.id, "details")}
-                    >
-                      Details
-                    </button>
-                    {token && user?.is_client && (
+                    <div className="btn-group gap-4 d-md-block">
+
                       <button
-                        type="button"
-                        onClick={() => deleteAppointment(appointment.id)}
-                        className="btn btn-danger btn-sm"
+                        className="btn btn-primary btn-sm"
+                        onClick={() => openAppointmentModal(appointment.id, "details")}
                       >
-                        Delete
+                        Details
                       </button>
-                    )}
+                      {token && user?.is_client && (
+                        <button
+                          type="button"
+                          onClick={() => deleteAppointment(appointment.id)}
+                          className="btn btn-danger btn-sm"
+                        >
+                          Delete
+                        </button>
+                      )}
+                    </div>
                   </td>
                 </tr>
               );

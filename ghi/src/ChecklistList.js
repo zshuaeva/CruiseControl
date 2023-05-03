@@ -37,9 +37,8 @@ function ChecklistList({
                 .map((checklistitem, index) => {
                   return (
                     <tr
-                      key={`${
-                        checklistitem.service_id / checklistitem
-                      }-${index}`}
+                      key={`${checklistitem.service_id / checklistitem
+                        }-${index}`}
                     >
                       <td>
                         <Link
@@ -50,22 +49,24 @@ function ChecklistList({
                         </Link>
                       </td>
                       <td>
-                        <button
-                          type="button"
-                          onClick={() => {
-                            toggleEditMode(checklistitem);
-                          }}
-                          className="btn btn-warning"
-                        >
-                          Edit
-                        </button>
-                        <button
-                          type="button"
-                          onClick={() => deleteChecklistItem(checklistitem.id)}
-                          className="btn btn-danger"
-                        >
-                          Delete
-                        </button>
+                        <div className="btn-group gap-4 d-md-block">
+                          <button
+                            type="button"
+                            onClick={() => {
+                              toggleEditMode(checklistitem);
+                            }}
+                            className="btn btn-warning"
+                          >
+                            Edit
+                          </button>
+                          <button
+                            type="button"
+                            onClick={() => deleteChecklistItem(checklistitem.id)}
+                            className="btn btn-danger"
+                          >
+                            Delete
+                          </button>
+                        </div>
                       </td>
                     </tr>
                   );
