@@ -8,7 +8,7 @@ const Footer = () => {
     <footer className="footer">
       <Container>
         <Row>
-          <Col className="text-center ">
+          <Col className="cruisecontrol text-center">
             <Link to="/" className="navbar-brand fw-bold">
               <h5>Cruise Control</h5>
             </Link>

@@ -1,5 +1,5 @@
 import { Link } from "react-router-dom";
-import logo from './logo-color.png';
+import logo from "./logo-color.png";
 
 function HeroPage() {
   return (
@@ -16,20 +16,12 @@ function HeroPage() {
             Empower your business to grow by automating tedious tasks,
             streamlining workflows, and enhancing customer satisfaction.
           </p>
-          <Link
-            className="btn btn-primary btn-lg"
-            to="clientsignup"
-            role="button"
-          >
+          <Link className="btn btn-info btn-lg" to="clientsignup" role="button">
             Sign Up For Cruise Control
           </Link>
         </div>
         <div className="col-md-6">
-          <img
-            src={logo}
-            alt="Cruise Control"
-            className="img-fluid"
-          />
+          <img src={logo} alt="Cruise Control" className="img-fluid" />
         </div>
       </div>
       <div className="row mt-5">
