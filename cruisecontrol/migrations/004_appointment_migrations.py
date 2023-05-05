@@ -4,7 +4,7 @@ steps = [
         CREATE TABLE appointments (
             id SERIAL PRIMARY KEY NOT NULL,
             customer_name VARCHAR(50) NOT NULL,
-            customer_phone INTEGER NOT NULL,
+            customer_phone VARCHAR(50) NOT NULL,
             vehicle_make VARCHAR(50),
             vehicle_model VARCHAR(50),
             vehicle_year INTEGER,
