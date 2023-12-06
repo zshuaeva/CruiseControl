@@ -68,30 +68,6 @@ function AboutUs() {
             </Card.Body>
           </Card>
         </Col>
-        <Col>
-          <Card>
-            <Card.Img variant="top" src={ken} />
-            <Card.Body>
-              <Card.Title>Ken Wilson</Card.Title>
-              <Card.Text>
-                "even if I could, it'd all be gray But your picture on my wall
-                It reminds me that it's not so bad"
-              </Card.Text>
-              <Button
-                variant="primary"
-                href="https://gitlab.com/kennethwilson0619"
-              >
-                GitLab
-              </Button>{" "}
-              <Button
-                variant="primary"
-                href="www.linkedin.com/in/kennethwilson0619"
-              >
-                LinkedIn
-              </Button>
-            </Card.Body>
-          </Card>
-        </Col>
       </Row>
       <div>
         <h1 className="text-center my-5">

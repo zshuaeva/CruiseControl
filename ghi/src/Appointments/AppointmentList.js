@@ -1,8 +1,8 @@
-import React, { useEffect, useState } from "react";
-import { AuthContext } from "@galvanize-inc/jwtdown-for-react";
-import { useContext } from "react";
-import useUser from "./useUser";
-import { Link } from "react-router-dom";
+import React, { useEffect, useState } from 'react';
+import { AuthContext } from '@galvanize-inc/jwtdown-for-react';
+import { useContext } from 'react';
+import useUser from '../useUser';
+import { Link } from 'react-router-dom';
 
 function AppointmentList() {
   const { token } = useContext(AuthContext);
@@ -54,7 +54,7 @@ function AppointmentList() {
                       <td>{appointment.vehicle_model}</td>
                       <td>{appointment.date_of_service}</td>
                       <td>{appointment.service_name}</td>
-                      <td>{appointment.is_approved ? "Approved" : "Denied"}</td>
+                      <td>{appointment.is_approved ? 'Approved' : 'Denied'}</td>
                       <td>
                         <Link
                           className="btn btn-primary btn-sm mr-2"

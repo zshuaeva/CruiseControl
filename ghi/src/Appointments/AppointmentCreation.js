@@ -1,22 +1,20 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect } from 'react';
 
-import useUser from "./useUser";
+import useUser from '../useUser';
 
 function AppointmentCreation({ getAppointments, token, user }) {
-
-
   const [services, setServices] = useState([]);
 
-  const [customer_name, setCustomerName] = useState("");
-  const [customer_phone, setCustomerPhone] = useState("");
-  const [vehicle_make, setVehicleMake] = useState("");
-  const [vehicle_model, setVehicleModel] = useState("");
-  const [vehicle_year, setVehicleYear] = useState("");
-  const [vehicle_color, setVehicleColor] = useState("");
-  const [notes, setNotes] = useState("");
-  const [date_of_service, setDateOfService] = useState("");
-  const [business_id, setBusinessId] = useState("");
-  const [service_id, setServiceId] = useState("");
+  const [customer_name, setCustomerName] = useState('');
+  const [customer_phone, setCustomerPhone] = useState('');
+  const [vehicle_make, setVehicleMake] = useState('');
+  const [vehicle_model, setVehicleModel] = useState('');
+  const [vehicle_year, setVehicleYear] = useState('');
+  const [vehicle_color, setVehicleColor] = useState('');
+  const [notes, setNotes] = useState('');
+  const [date_of_service, setDateOfService] = useState('');
+  const [business_id, setBusinessId] = useState('');
+  const [service_id, setServiceId] = useState('');
 
   const handleSubmit = async (event) => {
     event.preventDefault();
@@ -33,29 +31,29 @@ function AppointmentCreation({ getAppointments, token, user }) {
     data.service_id = service_id;
     const url = `${process.env.REACT_APP_USER_SERVICE_API_HOST}/api/appointments`;
     const fetchConfig = {
-      method: "POST",
+      method: 'POST',
       body: JSON.stringify(data),
       headers: {
         Authorization: `Bearer ${token}`,
-        "Content-Type": "application/json",
+        'Content-Type': 'application/json',
       },
     };
     const response = await fetch(url, fetchConfig);
     if (response.ok) {
       await response.json();
-      setCustomerName("");
-      setCustomerPhone("");
-      setVehicleMake("");
-      setVehicleModel("");
-      setVehicleYear("");
-      setVehicleColor("");
-      setNotes("");
-      setDateOfService("");
-      setBusinessId("");
-      setServiceId("");
+      setCustomerName('');
+      setCustomerPhone('');
+      setVehicleMake('');
+      setVehicleModel('');
+      setVehicleYear('');
+      setVehicleColor('');
+      setNotes('');
+      setDateOfService('');
+      setBusinessId('');
+      setServiceId('');
       getAppointments();
     } else {
-      console.error("Error creating appointment; Please try again.");
+      console.error('Error creating appointment; Please try again.');
     }
   };
 
@@ -95,7 +93,7 @@ function AppointmentCreation({ getAppointments, token, user }) {
                       <option value="">Select a Service</option>
                       {services.map((service) => (
                         <option key={service.id} value={service.id}>
-                          {service.service_name} {service.service_type}{" "}
+                          {service.service_name} {service.service_type}{' '}
                           {service.service_price}
                         </option>
                       ))}
