@@ -1,17 +1,17 @@
-import React, { useState, useContext } from "react";
-import { useNavigate } from "react-router-dom";
-import useToken, { AuthContext } from "@galvanize-inc/jwtdown-for-react";
-import useUser from "./useUser";
+import React, { useState, useContext } from 'react';
+import { useNavigate } from 'react-router-dom';
+import useToken, { AuthContext } from '@galvanize-inc/jwtdown-for-react';
+import useUser from '../useUser';
 
 function ClientSignUpForm() {
-  const [username, setUsername] = useState("");
-  const [password, setPassword] = useState("");
-  const [businessName, setBusinessName] = useState("");
-  const [first_name, setFirstName] = useState("");
-  const [last_name, setLastName] = useState("");
-  const [email, setEmail] = useState("");
-  const [address, setAddress] = useState("");
-  const [phone_number, setPhoneNumber] = useState("");
+  const [username, setUsername] = useState('');
+  const [password, setPassword] = useState('');
+  const [businessName, setBusinessName] = useState('');
+  const [first_name, setFirstName] = useState('');
+  const [last_name, setLastName] = useState('');
+  const [email, setEmail] = useState('');
+  const [address, setAddress] = useState('');
+  const [phone_number, setPhoneNumber] = useState('');
   const navigate = useNavigate();
   const { login } = useToken();
   const { token } = useContext(AuthContext);
@@ -30,10 +30,10 @@ function ClientSignUpForm() {
     data.phone_number = phone_number;
     const url = `${process.env.REACT_APP_USER_SERVICE_API_HOST}/api/clientsignup`;
     const fetchConfig = {
-      method: "POST",
+      method: 'POST',
       body: JSON.stringify(data),
       headers: {
-        "Content-Type": "application/json",
+        'Content-Type': 'application/json',
       },
     };
     const response = await fetch(url, fetchConfig);
@@ -41,20 +41,20 @@ function ClientSignUpForm() {
       await response.json();
       try {
         await login(username, password);
-        setUsername("");
-        setPassword("");
-        setBusinessName("");
-        setFirstName("");
-        setLastName("");
-        setEmail("");
-        setAddress("");
-        setPhoneNumber("");
-        navigate("/clientlanding");
+        setUsername('');
+        setPassword('');
+        setBusinessName('');
+        setFirstName('');
+        setLastName('');
+        setEmail('');
+        setAddress('');
+        setPhoneNumber('');
+        navigate('/clientlanding');
       } catch (error) {
-        console.error("Error logging in:", error);
+        console.error('Error logging in:', error);
       }
     } else {
-      console.error("Error creating Client; Please try again");
+      console.error('Error creating Client; Please try again');
     }
   };
 
@@ -62,11 +62,11 @@ function ClientSignUpForm() {
     <>
       <div
         className="container d-flex justify-content-center mt-5"
-        style={{ marginTop: "5rem" }}
+        style={{ marginTop: '5rem' }}
       >
         <div
           className="shadow p-4"
-          style={{ width: "30rem", backgroundColor: "#f8f9fa" }}
+          style={{ width: '30rem', backgroundColor: '#f8f9fa' }}
         >
           <h1>Sign Up For Cruise Control</h1>
           <form onSubmit={handleSubmit}>
