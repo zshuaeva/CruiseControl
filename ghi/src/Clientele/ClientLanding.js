@@ -1,21 +1,21 @@
-import React, { useContext, useState, useEffect } from "react";
-import { AuthContext } from "@galvanize-inc/jwtdown-for-react";
-import useUser from "./useUser";
-import CalendarComponent from "./CalendarComponent";
-import AppointmentPendingList from "./AppointmentsPendingList";
-import AppointmentApprovedList from "./AppointmentApprovedList";
-import ServiceParent from "./ServiceParent";
-import TechnicianParent from "./TechParent";
-import ApprovedAppointmentsGraph from "./ApprovedAppointmentsGraph";
-import AppointmentCreation from "./AppointmentCreation";
-import ClientEdit from "./ClientEdit";
+import React, { useContext, useState, useEffect } from 'react';
+import { AuthContext } from '@galvanize-inc/jwtdown-for-react';
+import useUser from '../useUser';
+import CalendarComponent from './CalendarComponent';
+import AppointmentPendingList from './AppointmentsPendingList';
+import AppointmentApprovedList from './AppointmentApprovedList';
+import ServiceParent from '../ServiceParent';
+import TechnicianParent from '../TechParent';
+import ApprovedAppointmentsGraph from './ApprovedAppointmentsGraph';
+import AppointmentCreation from './AppointmentCreation';
+import ClientEdit from './ClientEdit';
 
 function ClientLanding() {
   const { token } = useContext(AuthContext);
   const user = useUser(token);
   const [account, setAccount] = useState(null);
   // const [showPending, setShowPending] = useState(true);
-  const [activeComponent, setActiveComponent] = useState("pending");
+  const [activeComponent, setActiveComponent] = useState('pending');
   const [pendingAppointments, setPendingAppointments] = useState([]);
   const [approvedAppointments, setApprovedAppointments] = useState([]);
 
@@ -52,7 +52,7 @@ function ClientLanding() {
     await fetch(
       `${process.env.REACT_APP_USER_SERVICE_API_HOST}/api/appointments/${id}/approve`,
       {
-        method: "PUT",
+        method: 'PUT',
         headers: { Authorization: `Bearer ${token}` },
       }
     );
@@ -63,7 +63,7 @@ function ClientLanding() {
     await fetch(
       `${process.env.REACT_APP_USER_SERVICE_API_HOST}/api/appointments/${id}`,
       {
-        method: "DELETE",
+        method: 'DELETE',
         headers: { Authorization: `Bearer ${token}` },
       }
     );
@@ -107,40 +107,58 @@ function ClientLanding() {
   }, [token, user]);
 
   const handlePendingClick = () => {
-    setActiveComponent("pending");
+    setActiveComponent('pending');
   };
 
   const handleApprovedClick = () => {
-    setActiveComponent("approved");
+    setActiveComponent('approved');
   };
 
   const handleServicesClick = () => {
-    setActiveComponent("services");
+    setActiveComponent('services');
   };
 
   const handleTechniciansClick = () => {
-    setActiveComponent("technicians");
+    setActiveComponent('technicians');
   };
 
   const handleAppointmentClick = () => {
-    setActiveComponent("appointmentCreate");
+    setActiveComponent('appointmentCreate');
   };
 
   const handleClientEditClick = () => {
-    setActiveComponent("clientedit");
+    setActiveComponent('clientedit');
   };
 
   const renderActiveComponent = () => {
     switch (activeComponent) {
-      case "pending":
-        return <AppointmentPendingList approveAppointment={approveAppointment} deleteAppointment={deleteAppointment} user={user} getAppointments={getAppointments} appointments={pendingAppointments} token={token} />;
-      case "approved":
-        return <AppointmentApprovedList approveAppointment={approveAppointment} deleteAppointment={deleteAppointment} user={user} getAppointments={getAppointments} appointments={approvedAppointments} token={token} />;
-      case "services":
+      case 'pending':
+        return (
+          <AppointmentPendingList
+            approveAppointment={approveAppointment}
+            deleteAppointment={deleteAppointment}
+            user={user}
+            getAppointments={getAppointments}
+            appointments={pendingAppointments}
+            token={token}
+          />
+        );
+      case 'approved':
+        return (
+          <AppointmentApprovedList
+            approveAppointment={approveAppointment}
+            deleteAppointment={deleteAppointment}
+            user={user}
+            getAppointments={getAppointments}
+            appointments={approvedAppointments}
+            token={token}
+          />
+        );
+      case 'services':
         return <ServiceParent user={user} token={token} />;
-      case "technicians":
+      case 'technicians':
         return <TechnicianParent user={user} token={token} />;
-      case "appointmentCreate":
+      case 'appointmentCreate':
         return (
           <AppointmentCreation
             user={user}
@@ -148,7 +166,7 @@ function ClientLanding() {
             getAppointments={getAppointments}
           />
         );
-      case "clientedit":
+      case 'clientedit':
         return (
           <ClientEdit
             user={user}
@@ -196,8 +214,9 @@ function ClientLanding() {
                 <ul className="nav nav-tabs">
                   <li className="nav-item">
                     <a
-                      className={`nav-link ${activeComponent === "pending" ? "active" : ""
-                        }`}
+                      className={`nav-link ${
+                        activeComponent === 'pending' ? 'active' : ''
+                      }`}
                       onClick={handlePendingClick}
                     >
                       Upcoming Appointments
@@ -205,8 +224,9 @@ function ClientLanding() {
                   </li>
                   <li className="nav-item">
                     <a
-                      className={`nav-link ${activeComponent === "approved" ? "active" : ""
-                        }`}
+                      className={`nav-link ${
+                        activeComponent === 'approved' ? 'active' : ''
+                      }`}
                       onClick={handleApprovedClick}
                     >
                       Approved Appointments
@@ -214,8 +234,9 @@ function ClientLanding() {
                   </li>
                   <li className="nav-item">
                     <a
-                      className={`nav-link ${activeComponent === "services" ? "active" : ""
-                        }`}
+                      className={`nav-link ${
+                        activeComponent === 'services' ? 'active' : ''
+                      }`}
                       onClick={handleServicesClick}
                     >
                       Services
@@ -223,8 +244,9 @@ function ClientLanding() {
                   </li>
                   <li className="nav-item">
                     <a
-                      className={`nav-link ${activeComponent === "technicians" ? "active" : ""
-                        }`}
+                      className={`nav-link ${
+                        activeComponent === 'technicians' ? 'active' : ''
+                      }`}
                       onClick={handleTechniciansClick}
                     >
                       Technicians
@@ -232,8 +254,9 @@ function ClientLanding() {
                   </li>
                   <li className="nav-item">
                     <a
-                      className={`nav-link ${activeComponent === "appointmentCreate" ? "active" : ""
-                        }`}
+                      className={`nav-link ${
+                        activeComponent === 'appointmentCreate' ? 'active' : ''
+                      }`}
                       onClick={handleAppointmentClick}
                     >
                       Create Appointment
@@ -241,8 +264,9 @@ function ClientLanding() {
                   </li>
                   <li className="nav-item">
                     <a
-                      className={`nav-link ${activeComponent === "clientedit" ? "active" : ""
-                        }`}
+                      className={`nav-link ${
+                        activeComponent === 'clientedit' ? 'active' : ''
+                      }`}
                       onClick={handleClientEditClick}
                     >
                       Update Account
