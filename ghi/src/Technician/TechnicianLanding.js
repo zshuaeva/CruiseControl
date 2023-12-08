@@ -1,13 +1,12 @@
-import React, { useContext, useState, useEffect } from "react";
-import { AuthContext } from "@galvanize-inc/jwtdown-for-react";
-import useUser from "./useUser";
+import React, { useContext, useState, useEffect } from 'react';
+import { AuthContext } from '@galvanize-inc/jwtdown-for-react';
+import useUser from '../useUser';
 
-import AppointmentApprovedList from "./AppointmentApprovedList";
+import AppointmentApprovedList from '../Appointments/AppointmentApprovedList';
 
-import CalendarComponent from "./CalendarComponent";
+import CalendarComponent from '../Calendar/CalendarComponent';
 
 function TechnicianLanding() {
-
   const [approvedAppointments, setApprovedAppointments] = useState([]);
   const { token } = useContext(AuthContext);
   const user = useUser(token);
@@ -23,8 +22,7 @@ function TechnicianLanding() {
         (appointment) => appointment.is_approved
       );
       setApprovedAppointments(approvedAppointments);
-
-    };
+    }
   };
 
   useEffect(() => {
@@ -37,7 +35,7 @@ function TechnicianLanding() {
     await fetch(
       `${process.env.REACT_APP_USER_SERVICE_API_HOST}/api/appointments/${id}/approve`,
       {
-        method: "PUT",
+        method: 'PUT',
         headers: { Authorization: `Bearer ${token}` },
       }
     );
@@ -48,18 +46,25 @@ function TechnicianLanding() {
     await fetch(
       `${process.env.REACT_APP_USER_SERVICE_API_HOST}/api/appointments/${id}`,
       {
-        method: "DELETE",
+        method: 'DELETE',
         headers: { Authorization: `Bearer ${token}` },
       }
     );
     await getAppointments();
   };
 
-
   return (
     <div>
       <CalendarComponent appointments={approvedAppointments} />
-      <AppointmentApprovedList approveAppointment={approveAppointment} deleteAppointment={deleteAppointment} user={user} getAppointments={getAppointments} appointments={approvedAppointments} token={token} />    </div>
+      <AppointmentApprovedList
+        approveAppointment={approveAppointment}
+        deleteAppointment={deleteAppointment}
+        user={user}
+        getAppointments={getAppointments}
+        appointments={approvedAppointments}
+        token={token}
+      />{' '}
+    </div>
   );
 }
 
