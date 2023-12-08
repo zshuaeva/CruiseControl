@@ -1,14 +1,14 @@
 import React, { useContext, useState, useEffect } from 'react';
 import { AuthContext } from '@galvanize-inc/jwtdown-for-react';
 import useUser from '../useUser';
-import CalendarComponent from './CalendarComponent';
-import AppointmentPendingList from './AppointmentsPendingList';
-import AppointmentApprovedList from './AppointmentApprovedList';
-import ServiceParent from '../ServiceParent';
-import TechnicianParent from '../TechParent';
-import ApprovedAppointmentsGraph from './ApprovedAppointmentsGraph';
-import AppointmentCreation from './AppointmentCreation';
-import ClientEdit from './ClientEdit';
+import CalendarComponent from '../Calendar/CalendarComponent';
+import AppointmentPendingList from '../Appointments/AppointmentsPendingList';
+import AppointmentApprovedList from '../Appointments/AppointmentApprovedList';
+import ServiceParent from '../ServiceComponents/ServiceParent';
+import TechnicianParent from '../Technician/TechParent';
+import ApprovedAppointmentsGraph from '../Appointments/ApprovedAppointmentsGraph';
+import AppointmentCreation from '../Appointments/AppointmentCreation';
+import ClientEdit from '../Clientele/ClientEdit';
 
 function ClientLanding() {
   const { token } = useContext(AuthContext);

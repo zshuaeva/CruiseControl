@@ -1,33 +1,32 @@
-import { BrowserRouter, Routes, Route } from "react-router-dom";
-import ClientSignUpForm from "./ClientSignUp.js";
-import { AuthProvider } from "@galvanize-inc/jwtdown-for-react";
-import LoginForm from "./Login.js";
-import HeroPage from "./HeroPage.js";
-import ClientLanding from "./ClientLanding.js";
-import TechnicianLanding from "./TechnicianLanding.js";
-import Nav from "./Nav.js";
-import "bootstrap-icons/font/bootstrap-icons.css";
-import TechnicianParent from "./TechParent.js";
-import ServiceParent from "./ServiceParent.js";
-import ServiceChecklist from "./ServiceChecklist.js";
+import { BrowserRouter, Routes, Route } from 'react-router-dom';
+import ClientSignUpForm from './Clientele/ClientSignUp.js';
+import { AuthProvider } from '@galvanize-inc/jwtdown-for-react';
+import LoginForm from './Login.js';
+import HeroPage from './HeroPage.js';
+import ClientLanding from './Clientele/ClientLanding.js';
+import TechnicianLanding from './Technician/TechnicianLanding.js';
+import Nav from './Nav.js';
+import 'bootstrap-icons/font/bootstrap-icons.css';
+import TechnicianParent from './Technician/TechParent.js';
+import ServiceParent from './ServiceComponents/ServiceParent.js';
+import ServiceChecklist from './ServiceComponents/ServiceChecklist.js';
 
-import AppointmentList from "./AppointmentList.js";
-import AppointmentCreation from "./AppointmentCreation.js";
-import AppointmentPendingList from "./AppointmentsPendingList.js";
-import AppointmentApprovedList from "./AppointmentApprovedList.js";
-import AppointmentDetail from "./AppointmentDetail.js";
+import AppointmentList from './Appointments/AppointmentList.js';
+import AppointmentCreation from './Appointments/AppointmentCreation.js';
+import AppointmentPendingList from './Appointments/AppointmentsPendingList.js';
+import AppointmentApprovedList from './Appointments/AppointmentApprovedList.js';
+import AppointmentDetail from './Appointments/AppointmentDetail.js';
+import AppointmentEdit from './Appointments/AppointmentUpdate.js';
+import Footer from './Footer.js';
 
-import AppointmentEdit from "./AppointmentUpdate.js";
-import Footer from "./Footer.js";
-
-import HeroAppointmentForm from "./HeroAppointmentForm.js";
-import AboutUs from "./AboutUs.js";
+import HeroAppointmentForm from './HeroAppointmentForm.js';
+import AboutUs from './AboutUs.js';
 
 function App() {
   const appStyle = {
-    display: "flex",
-    flexDirection: "column",
-    minHeight: "100vh",
+    display: 'flex',
+    flexDirection: 'column',
+    minHeight: '100vh',
   };
 
   const mainContentStyle = {
@@ -35,7 +34,7 @@ function App() {
   };
 
   const domain = /https:\/\/[^/]+/;
-  const basename = process.env.PUBLIC_URL.replace(domain, "");
+  const basename = process.env.PUBLIC_URL.replace(domain, '');
   return (
     <BrowserRouter basename={basename}>
       <AuthProvider

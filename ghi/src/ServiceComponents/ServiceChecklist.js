@@ -1,9 +1,9 @@
-import React, { useState, useContext, useEffect, useCallback } from "react";
-import { AuthContext } from "@galvanize-inc/jwtdown-for-react";
-import ChecklistCreation from "./ChecklistCreation";
-import ChecklistList from "./ChecklistList";
-import ChecklistEdit from "./ChecklistEdit";
-import useUser from "./useUser";
+import React, { useState, useContext, useEffect, useCallback } from 'react';
+import { AuthContext } from '@galvanize-inc/jwtdown-for-react';
+import ChecklistCreation from '../Checklist/ChecklistCreation';
+import ChecklistList from '../Checklist/ChecklistList';
+import ChecklistEdit from '../Checklist/ChecklistEdit';
+import useUser from '../useUser';
 
 function ServiceChecklist({ serviceId, closeModal }) {
   const { token } = useContext(AuthContext);
@@ -19,10 +19,10 @@ function ServiceChecklist({ serviceId, closeModal }) {
     async (serviceId) => {
       const url = `${process.env.REACT_APP_USER_SERVICE_API_HOST}/services/${serviceId}/checklist`;
       const fetchConfig = {
-        method: "GET",
+        method: 'GET',
         headers: {
           Authorization: `Bearer ${token}`,
-          "Content-Type": "application/json",
+          'Content-Type': 'application/json',
         },
       };
       const response = await fetch(url, fetchConfig);
@@ -37,8 +37,6 @@ function ServiceChecklist({ serviceId, closeModal }) {
       fetchServiceChecklistEntry(serviceId);
     }
   }, [token, serviceId, fetchServiceChecklistEntry]);
-
-
 
   return (
     <>
