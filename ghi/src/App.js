@@ -1,11 +1,11 @@
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import ClientSignUpForm from './Clientele/ClientSignUp.js';
 import { AuthProvider } from '@galvanize-inc/jwtdown-for-react';
-import LoginForm from './Login.js';
-import HeroPage from './HeroPage.js';
+import LoginForm from './Login/Login.js';
+import HeroPage from './Hero/HeroPage.js';
 import ClientLanding from './Clientele/ClientLanding.js';
 import TechnicianLanding from './Technician/TechnicianLanding.js';
-import Nav from './Nav.js';
+import Nav from './Navigation/Nav.js';
 import 'bootstrap-icons/font/bootstrap-icons.css';
 import TechnicianParent from './Technician/TechParent.js';
 import ServiceParent from './ServiceComponents/ServiceParent.js';
@@ -17,9 +17,9 @@ import AppointmentPendingList from './Appointments/AppointmentsPendingList.js';
 import AppointmentApprovedList from './Appointments/AppointmentApprovedList.js';
 import AppointmentDetail from './Appointments/AppointmentDetail.js';
 import AppointmentEdit from './Appointments/AppointmentUpdate.js';
-import Footer from './Footer.js';
+import Footer from './Footer/Footer.js';
 
-import HeroAppointmentForm from './HeroAppointmentForm.js';
+import HeroAppointmentForm from './Hero/HeroAppointmentForm.js';
 import AboutUs from './AboutUs.js';
 
 function App() {

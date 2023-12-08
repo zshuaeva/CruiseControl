@@ -1,8 +1,8 @@
-import { NavLink } from "react-router-dom";
-import useToken, { AuthContext } from "@galvanize-inc/jwtdown-for-react";
-import { useContext } from "react";
-import useUser from "./useUser";
-import "./Nav.css";
+import { NavLink } from 'react-router-dom';
+import useToken, { AuthContext } from '@galvanize-inc/jwtdown-for-react';
+import { useContext } from 'react';
+import useUser from '../useUser';
+import './Nav.css';
 
 function Nav() {
   const { token } = useContext(AuthContext);
@@ -20,12 +20,12 @@ function Nav() {
           className="navbar-brand navbar-brand-custom fw-bold"
           to={
             user === null || token === null
-              ? "/"
+              ? '/'
               : user?.is_client
-              ? "/clientlanding"
+              ? '/clientlanding'
               : user?.is_technician
-              ? "/technicianlanding"
-              : "/"
+              ? '/technicianlanding'
+              : '/'
           }
         >
           Cruise Control

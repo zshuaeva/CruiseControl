@@ -1,5 +1,5 @@
-import { Link } from "react-router-dom";
-import logo from "./logo-color.png";
+import { Link } from 'react-router-dom';
+import logo from '../logo-color.png';
 
 function HeroPage() {
   return (
