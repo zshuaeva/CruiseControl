@@ -1,11 +1,11 @@
-import { useState, useContext, useEffect } from "react";
-import useToken, { AuthContext } from "@galvanize-inc/jwtdown-for-react";
-import useUser from "./useUser";
-import { useNavigate } from "react-router-dom";
+import { useState, useContext, useEffect } from 'react';
+import useToken, { AuthContext } from '@galvanize-inc/jwtdown-for-react';
+import useUser from '../useUser';
+import { useNavigate } from 'react-router-dom';
 
 const LoginForm = () => {
-  const [username, setUsername] = useState("");
-  const [password, setPassword] = useState("");
+  const [username, setUsername] = useState('');
+  const [password, setPassword] = useState('');
   const { login } = useToken();
   const navigate = useNavigate();
   const { token } = useContext(AuthContext);
@@ -17,26 +17,26 @@ const LoginForm = () => {
       await login(username, password);
       e.target.reset();
     } catch (error) {
-      console.error("Error logging in:", error);
+      console.error('Error logging in:', error);
     }
   };
 
   useEffect(() => {
     if (user && user.is_client) {
-      navigate("/clientlanding");
+      navigate('/clientlanding');
     } else if (user && user.is_technician) {
-      navigate("/technicianlanding");
+      navigate('/technicianlanding');
     }
   }, [user, navigate]);
 
   return (
     <div
       className="container d-flex justify-content-center mt-5"
-      style={{ marginTop: "5rem" }}
+      style={{ marginTop: '5rem' }}
     >
       <div
         className="shadow p-4"
-        style={{ width: "30rem", backgroundColor: "#f8f9fa" }}
+        style={{ width: '30rem', backgroundColor: '#f8f9fa' }}
       >
         <h1>Log Into Cruise Control</h1>
         <form onSubmit={(e) => handleSubmit(e)}>
